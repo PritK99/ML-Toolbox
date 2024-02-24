@@ -24,8 +24,22 @@ The most specific hypothesis can be ```(None, None, None)``` which implies no an
 
 These hypotheses illustrate the extreme ends of the spectrum of possible classifications for the concept of a bird. The true nature of the concept might lie somewhere in between these two extremes, for example, (?, True, True) can be a possible hypothesis for the concept of bird.
 
-## FIND-S Algorithm
+## FIND-S & Candidate Elimination Algorithm
 
-FIND-S Algorithm tries to learn the best hypothesis 
+FIND-S Algorithm and Candidate Elimination both take different approaches in order to find the best hypothesis for a concept. Find-S starts very specific and gets broader, while Candidate Elimination starts broad and specific and refines both sides. Imagine a detective trying to identify a specific type of criminal.
 
-Imagine learning the concept of what an ideal day might be for picnic, 
+According to FIND-S Algorithm,
+
+* we start with a very precise description (For example, "tall, blonde woman wearing a red jacket").
+* As we interview witnesses, we adjust wer description to include everyone who matches the criminals they saw, even if that makes the description less specific. (For example, we might conclude that the criminal was atleast a tall woman by talking to all witnesses).
+* we ignore people who didn't see the criminal at all.
+
+Thus, we try to get a general view of the criminal by considering all the positive witnesses. This is first approach to understand who the criminal can be.
+
+Accoridng to Candidate Elimination,
+
+* we start with two descriptions: one very specific, one very general (e.g., "A tall blonde woman between 5'5" and 6', with gold wristwatch" and "anyone wearing red").
+* As we interview witnesses, we refine both descriptions:
+    * If someone saw the criminal and they don't match the specific description, we make that description less specific.
+    * If someone didn't see the criminal but they match the general description, we make that description more specific. (That is we consider the negative examples as well)
+* we keep adjusting both descriptions until we find one that fits all the witnesses who saw the criminal and excludes everyone who didn't.
