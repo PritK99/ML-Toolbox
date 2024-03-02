@@ -1,4 +1,24 @@
-# Data Exploration
+# Data Exploration & Scrubbing
+
+## Data Exploration
+
+## Data Scrubbing
+
+Data Scrubbing is the process of refining the dataset. This can involve modifying and sometimes removing incomplete, incorrectly formatted, irrelevant or duplicated data. It can also entail converting text-based data to numerical values and the redesigning of features. 
+
+Some of the most common data scrubbing techniques are:
+
+* Feature Selection
+* Row Compression
+
+
+
+
+
+
+
+
+
 
 The choice of hypothesis space ```H``` heavily relies on the assumptions made about the data. A common mistake is to favor a particular type of function, such as Neural Networks, without considering the characteristics of the data. Each machine learning algorithm operates under different assumptions about the data, and these assumptions influence the probability it generates. Therefore, it's essential to select the algorithm that best aligns with the assumptions inherent in the data. By understanding these underlying assumptions and choosing the appropriate algorithm accordingly, we increase the likelihood of constructing a model that accurately captures the data's patterns and produces reliable predictions.
 
