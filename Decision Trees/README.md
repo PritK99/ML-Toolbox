@@ -40,7 +40,7 @@ A good split in a decision tree occurs when it increases our certainty about the
 
 <img src="../assets/id3.png" alt="id3">
 
-Either Gini Impurity & Gini Index or Entropy & Information Gain can be used to measure the uncertainty and choose the best split index.
+Either Gini Impurity or Entropy can be used to measure the uncertainty in a given subset S, and Gini Index or Information Gain can be used to choose the best split index.
 
 #### Gini Impurity & Gini Index
 
