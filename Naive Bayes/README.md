@@ -38,6 +38,6 @@ Calculating P(Y) is easy - just count how many examples you have for each class 
 
 In a perfect world where all features are totally unrelated, Naive Bayes would be super accurate. But in reality, if features are connected, it might make errors. That's why Naive Bayes works best when features don't depend too much on each other.
 
-<img src = "../assets/naive-bayes-intution.jpeg" alt="naive-bayes-intution">
+<img src = "../assets/naive-bayes-intuition.jpeg" alt="naive-bayes-intuition">
 
 ## Algorithm
