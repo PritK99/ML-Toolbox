@@ -41,3 +41,34 @@ In a perfect world where all features are totally unrelated, Naive Bayes would b
 <img src = "../assets/naive-bayes-intuition.jpeg" alt="naive-bayes-intuition">
 
 ## Algorithm
+
+When working with Naive Bayes, we typically encounter calculating probabilities for three types of scenarios:
+
+* Categorical
+* Multinomial
+* Continuous
+
+### Categorical
+
+```P (Xa = A | Y = c) = (# number of samples with class c and feature Xa as A) / (# total number of samples in class)```
+
+### Multinomial
+
+```P(Xa | Y = c) = (# number of times feature X appears in instances of class c)/(# total occurrences of all features for class c)```
+
+### Continuous
+
+In the case of continuous features, such as numerical data, the probability density function (PDF) is often assumed to follow a specific distribution, commonly the Gaussian (normal) distribution due to its simplicity and wide applicability. The Gaussian distribution is characterized by its mean (μ) and variance (σ²).
+
+For each class c, the Naive Bayes classifier estimates the parameters of the Gaussian distribution for each feature. Let's denote the feature as  x. Then, the probability density function (PDF) of x given class c can be expressed as:
+
+<img src = "../assets/gaussian-formula.png" alt="gaussian-formula">
+
+## Naive Bayes as a linear classifier
+
+Naive Bayes learns the underlying probability distribution rather than learning how to separate these distributions. This is different from the idea of perceptron which tries to separate two classes from each other by drawing a decision boundary. Thus, Naive Bayes is a generative model while Perceptron is a discriminative model. However, in some cases, the way naive Bayes learns the underlying probability resembles a linear classifier.
+
+<img src="../assets/naive-bayes-linear-1.jpeg" alt="naive-bayes-linear-1">
+<img src="../assets/naive-bayes-linear-2.jpeg" alt="naive-bayes-linear-2">
+
+## Fundamental idea behind logistic regression
