@@ -1,2 +1,0 @@
-# Mumbai House Price Prediction
-
