@@ -37,3 +37,13 @@ The primary aim is to find the probability distribution or function ```f(x)```. 
 In addition to the train and test datasets, we also utilize a validation dataset. The rationale behind incorporating a validation dataset is to adhere to the principle of only utilizing a given test set once. Iteratively refining a model based on feedback from the test set is discouraged, as it can lead to overfitting. The validation set serves the purpose of fine-tuning hyperparameters or even altering the type of function employed. However, once the model is evaluated using the test set, the reported accuracy should reflect the final performance. This practice safeguards against overfitting to the test dataset, ensuring that the estimated probability remains as close as possible to the true probability distribution.
 
 The choice of hypothesis space ```H``` heavily relies on the assumptions made about the data. A common mistake is to favor a particular type of function, such as Neural Networks, without considering the characteristics of the data. Each machine learning algorithm operates under different assumptions about the data, and these assumptions influence the probability it generates. Therefore, it's essential to select the algorithm that best aligns with the assumptions inherent in the data. By understanding these underlying assumptions and choosing the appropriate algorithm accordingly, we increase the likelihood of constructing a model that accurately captures the data's patterns and produces reliable predictions.
+
+
+Pending:
+
+FIND S README
+LINEAR README
+LOGISTIC README
+NAIVE BAYES README
+KNN README AND REORGANIZATION
+DECISION TREE CODE AND README
