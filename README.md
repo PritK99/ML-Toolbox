@@ -39,6 +39,11 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┣ 📄knn.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂Perceptron
+ ┃ ┣ 📂data
+ ┃ ┃ ┣ 📄boys.txt
+ ┃ ┃ ┣ 📄girls.txt
+ ┃ ┣ 📄perceptron.ipynb
+ ┃ ┣ 📄README.md
  ┣ 📂Naive Bayes
  ┃ ┣ 📂data
  ┃ ┃ ┣ 📄boys.txt
@@ -67,3 +72,4 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 * NAIVE BAYES README
 * KNN README AND REORGANIZATION
 * DECISION TREE CODE AND README
+* Perceptron
