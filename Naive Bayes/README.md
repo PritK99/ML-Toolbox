@@ -86,3 +86,7 @@ Logistic Regression, a discriminative model, assumes a parametric form of class 
 Under certain assumptions, the Gaussian Naive Bayes classifier is equivalent to a linear model with the log-likelihood loss function. Both of them are learning the same boundary.
 
 Proof for the same can be found <a href="https://appliedmachinelearning.wordpress.com/2019/09/30/equivalence-of-gaussian-naive-bayes-and-logistic-regression-an-explanation/">here</a>.
+
+## Results
+
+The above results show that number of misclassification in boys name is slightly greater than in girls name. We achieve 80% accuracy for test dataset and 86.7 for train data. This is maybe because girls name are recognizable by sounds.
