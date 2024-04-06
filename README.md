@@ -34,17 +34,24 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┣ 📄find-s.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂K Nearest Neighbors 
+ ┃ ┣ 📂data
+ ┃ ┃ ┣ 📄mumbai_house_prices.csv
+ ┃ ┣ 📄knn.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂Perceptron
  ┣ 📂Naive Bayes
-
+ ┃ ┣ 📂data
+ ┃ ┃ ┣ 📄boys.txt
+ ┃ ┃ ┣ 📄girls.txt
+ ┃ ┣ 📄naive bayes.ipynb
  ┃ ┣ 📄README.md
- ┣ 📄model.py                          // Transformer Architecture
- ┣ 📄train.py                          // Training loop
- ┣ 📄dataset.py                        // Loading & Preprocessing Dataset  
- ┣ 📄config.py 
- ┣ 📂visualization                     // Contains other visualizations
- ┃ ┣ 📄embedding.py
+ ┣ 📂Logistic Regression
+ ┃ ┣ 📄logistic regression.ipynb
+ ┃ ┣ 📄README.md
+ ┣ 📂Linear Regression
+ ┃ ┣ 📂data
+ ┃ ┃ ┣ 📄mumbai_house_prices.csv
+ ┃ ┣ 📄linear regression.ipynb
  ┃ ┣ 📄README.md
  ┣ 📄README.md
 ``` 
@@ -56,9 +63,7 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 
 ## Pending
 
-* FIND S README
 * LINEAR README
-* LOGISTIC README
 * NAIVE BAYES README
 * KNN README AND REORGANIZATION
 * DECISION TREE CODE AND README
