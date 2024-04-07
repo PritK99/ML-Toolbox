@@ -72,4 +72,3 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 * NAIVE BAYES README
 * KNN README AND REORGANIZATION
 * DECISION TREE CODE AND README
-* Perceptron
