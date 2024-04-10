@@ -68,7 +68,6 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 
 ## Pending
 
-* LINEAR README
-* NAIVE BAYES README
-* KNN README AND REORGANIZATION
-* DECISION TREE CODE AND README
+* Decision Trees
+* Naive Bayes
+* SVMs
