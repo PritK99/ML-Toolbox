@@ -6,11 +6,11 @@
 
 Traditional Programming is based on the idea of writing a program, giving it an input and getting an output. This works well for all the tasks where the rules can be clearly defined. Consider the problem of classifying a number as odd or even. This can be done by a simple if-else program.
 
-<img src = "assets/Traditional CS.png" alt="ML">
+<img src = "assets/img/Traditional CS.png" alt="ML">
 
 For problems where the rules can not be clearly defined, we use Machine Learning to generate these rules for us. Consider the problem of classifying an image as cat or dog. Writing a program for this would be very difficult. Machine Learning is the idea where we provide the computer with data and corresponding outputs and get the program. This phase is called training. Now we use these program, along with new data like traditional programming to get an output. This phase is called Testing.
 
-<img src = "assets/ML.png" alt="ML">
+<img src = "assets/img/ML.png" alt="ML">
 
 ### Core Idea behind Machine Learning
 

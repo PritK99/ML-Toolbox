@@ -1,6 +1,6 @@
 # Perceptron
 
-<img src="../assets/perceptron-visualization.png" alt="perceptron-visualization">
+<img src="../assets/img/perceptron-visualization.png" alt="perceptron-visualization">
 
 ## Assumptions
 
@@ -12,7 +12,7 @@ In a perceptron, we define a hyperplane using a weight vector `w` (normal to the
 
 A hyperplane is like a flat sheet, one dimension lower than the feature space. For instance, in 2D, it's a line. Instead of characterizing it with both `w` and `b`, we extend it to 3D and draw a plane passing through the origin, removing the need for an extra bias term.
 
-<img src = "../assets/perceptron.jpeg" alt="Perceptron Algorithm">
+<img src = "../assets/img/perceptron.jpeg" alt="Perceptron Algorithm">
 
 During inference, we look at the direction of the point relative to the hyperplane using `W.T @ x` and classify based on the sign of the result. If `W.T @ x > 0`, it's in the positive class, and vice versa.
 

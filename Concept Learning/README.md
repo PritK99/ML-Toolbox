@@ -6,7 +6,7 @@ Formally, in the context of machine learning, the function ```f(x)``` represents
 
 ## Introduction to Concept Learning
 
-<img src="../assets/birds-concept.png" alt="birds-concept">
+<img src="../assets/img/birds-concept.png" alt="birds-concept">
 
 Imagine we want to learn to identify birds from a group of animals. We can start by looking at different birds and try to understand the features which make them different from other animals. We might look at a sparrow and derive that if the animal has wings, feathers, brown colour, a short tail etc. then it is a bird. However by looking at other birds, we might realize that colour has nothing to do with a bird, and we can come to generalized idea that if it has feathers or wings, it is a bird.
 
@@ -24,7 +24,7 @@ However, while FIND-S is a basic way to learn from examples, it's not very pract
 
 ### Algorithm
 
-<img src="../assets/find-s.png" alt="find-s">
+<img src="../assets/img/find-s.png" alt="find-s">
 
 ### Results
 

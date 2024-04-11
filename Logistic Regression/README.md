@@ -1,6 +1,6 @@
 # Logistic Regression
 
-<img src="../assets/logistic-regression.png" alt="Logistic Regression">
+<img src="../assets/img/logistic-regression.png" alt="Logistic Regression">
 
 ## Introduction
 
@@ -12,11 +12,11 @@ Consider the example of classification between cats and dogs. A generative model
 
 Every discriminative algorithm assumes a certain parametric form over ```P(Y|X)``` and tries to learn the parameters for this directly by maximum likelihood (MLE) or Maximum A Posteriori (MAP) estimation. This parameteric form represents the sigmoid function.
 
-<img src="../assets/logistic-parametric.png" alt="logistic-parametric">
+<img src="../assets/img/logistic-parametric.png" alt="logistic-parametric">
 
 MLE tries to maximize the probability of distribution given the data, that is it tries to maximize `P(D|θ)`. MAP on other hand places a prior probability over parameters `P(θ)` and tries to maximize the probability of parameters given the data, that is `P(θ|D)` which is nothing but `P(D|θ)P(θ)`. This involvement of extra term `P(θ)` helps prevent overfitting by introducting regularization term.
 
-<img src="../assets/MLE-and-MAP-logistic.jpg" alt="MLE-and-MAP-logistic">
+<img src="../assets/img/MLE-and-MAP-logistic.jpg" alt="MLE-and-MAP-logistic">
 
 For both MLE and MAP, we arrive at a step which does not have a closed form solution. However, one of the nice properties of this function is that it is convex, continuous, and differentiable in nature. This implies we can use algorithms based on Hill Climb Search such as Gradient Descent or Newtons Method to find the argmin.
 

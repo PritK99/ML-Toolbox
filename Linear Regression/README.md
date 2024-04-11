@@ -1,6 +1,6 @@
 # Linear Regression
 
-<img src="../assets/linear-regression.gif" alt="linear-regression">
+<img src="../assets/img/linear-regression.gif" alt="linear-regression">
 
 ## Introduction
 
@@ -12,7 +12,7 @@ Linear regression makes two core assumptions about the data. First, it assumes a
 
 Thus, we can formalize these assumptions as `y = WX + b + ε` where `ε` is the gaussian distributed error or noise, that is `ε ~ N(0, σ2)` where `σ2` is the variance of the noise.
 
-<img src = "../assets/linear-gaussian.jpg" alt="linear-gaussian">
+<img src = "../assets/img/linear-gaussian.jpg" alt="linear-gaussian">
 
 In simpler terms, this equation also implies that `y` itself follows a normal distribution with a mean of `WX + b` and a variance of `σ^2`. We can represent this as: `y ~ N(WX + b, σ^2)`
 
@@ -24,7 +24,7 @@ MLE tries to maximize the probability of distribution given the data, that is it
 
 <a href="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote08.html">Click Here</a> to view the derivation of estimation of `W` and `b`. This shows how we obtain the Ordinary Least Squares (OLS) loss function and regularization term.
 
-<img src="../assets/linear-loss-func.jpg" alt="linear loss function">
+<img src="../assets/img/linear-loss-func.jpg" alt="linear loss function">
 
 Unlike logistic regression which uses a complex loss function, linear regression utilizes the Ordinary Least Squares (OLS) loss function. Because the OLS loss function is a parabola, it has a closed-form solution. This means we can theoretically find the optimal W and b in one step using methods like Newton's method. However, for problems with high dimensionality (many independent variables), calculating the Hessian matrix required by Newton's method becomes computationally expensive. Therefore, iterative optimization algorithms like gradient descent are preferred in practice.
 

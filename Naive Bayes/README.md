@@ -1,9 +1,5 @@
 # Naive Bayes
 
-```
-Every true genius is bound to be naive.
-```
-
 ## Introduction
 
 The whole idea of learning classifiers based on Bayes Rule is that these are generative models. The goal of generative models is to learn the underlying distribution of data. This idea is different from discriminative models like perceptron which learn how to distinguish the different classes by learning a decision boundary. In simpler terms, learning classifiers based on Bayes Rule doesn't directly model the probability of a class (Y) given the data (X) which is ```(P(Y | X))```. Instead, it focuses on the probability of the data (X) given a specific class (Y) which is ```(P(X | Y))```. This essentially represents the likelihood of encountering a particular data point considering its class membership.
@@ -42,7 +38,7 @@ Calculating P(Y) is easy - just count how many examples you have for each class 
 
 In a perfect world where all features are totally unrelated, Naive Bayes would be super accurate. But in reality, if features are connected, it might make errors. That's why Naive Bayes works best when features don't depend too much on each other.
 
-<img src = "../assets/naive-bayes-intuition.jpeg" alt="naive-bayes-intuition">
+<img src = "../assets/img/naive-bayes-intuition.jpeg" alt="naive-bayes-intuition">
 
 ## Algorithm
 
@@ -66,14 +62,14 @@ In the case of continuous features, such as numerical data, the probability dens
 
 For each class c, the Naive Bayes classifier estimates the parameters of the Gaussian distribution for each feature. Let's denote the feature as  x. Then, the probability density function (PDF) of x given class c can be expressed as:
 
-<img src = "../assets/gaussian-formula.png" alt="gaussian-formula">
+<img src = "../assets/img/gaussian-formula.png" alt="gaussian-formula">
 
 ## Naive Bayes as a linear classifier
 
 Naive Bayes learns the underlying probability distribution rather than learning how to separate these distributions. This is different from the idea of perceptron which tries to separate two classes from each other by drawing a decision boundary. Thus, Naive Bayes is a generative model while Perceptron is a discriminative model. However, in some cases, the way naive Bayes learns the underlying probability resembles a linear classifier.
 
-<img src="../assets/naive-bayes-linear-1.jpeg" alt="naive-bayes-linear-1">
-<img src="../assets/naive-bayes-linear-2.jpeg" alt="naive-bayes-linear-2">
+<img src="../assets/img/naive-bayes-linear-1.jpeg" alt="naive-bayes-linear-1">
+<img src="../assets/img/naive-bayes-linear-2.jpeg" alt="naive-bayes-linear-2">
 
 ## Relationship Between Naive Bayes Classifiers and Logistic Regression
 

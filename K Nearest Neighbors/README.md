@@ -1,7 +1,7 @@
 # K Nearest Neighbors (KNNs)
 
-<img src="../assets/knn1.webp" alt="KNN">
-<img src="../assets/knn2.webp" alt="KNN">
+<img src="../assets/img/knn1.webp" alt="KNN">
+<img src="../assets/img/knn2.webp" alt="KNN">
 
 ## Introduction
 
@@ -19,7 +19,7 @@ KNN algorithm is only as good as its distance metric. The distance metric should
 
 1. Minkowski Distance: This is a generalized distance metric that includes Manhattan (p=1), Euclidean (p=2) and Chebyshev (p=infinity) as special cases. It is defined as:
 
-<img src="../assets/minkowski-distance.png" alt="Minkowski Distance">
+<img src="../assets/img/minkowski-distance.png" alt="Minkowski Distance">
 
 The choice of distance metric depends on the amount of penalty one wants to assign to differences in each dimension. If p is lower, say 1, then the metric is less sensitive to outliers and treats each dimension equally. If p is higher, say infinity, then it is sensitive to outliers in any single dimension.
 
