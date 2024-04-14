@@ -8,9 +8,9 @@ Formally, in the context of machine learning, the function ```f(x)``` represents
 
 <img src="../assets/img/birds-concept.png" alt="birds-concept">
 
-Imagine we want to learn to identify birds from a group of animals. We can start by looking at different birds and try to understand the features which make them different from other animals. We might look at a sparrow and derive that if the animal has wings, feathers, brown colour, a short tail etc. then it is a bird. However by looking at other birds, we might realize that colour has nothing to do with a bird, and we can come to generalized idea that if it has feathers or wings, it is a bird.
+Imagine we want to learn to identify birds from a group of animals. We can start by looking at different birds and try to understand the features which make them different from other animals. We might look at a sparrow and derive that if the animal has wings, feathers, brown color, a short tail, etc. then it is a bird. However, by looking at other birds, we might realize that color has nothing to do with a bird, and we can come to a generalized idea that if it has feathers or wings, it is a bird.
 
-Here, bird becomes a Concept, which we want to learn. Concept Learning was the idea a boolean function defined over a set of all possible animal whicht returns true only if a given object is a member of a bird. The problem of inducing general functions from specific training examples is central to concept learning.
+Here, bird becomes a Concept, which we want to learn. Concept Learning is a boolean function defined over a set of all possible animals which returns true only if a given object is a member of a bird. The problem of inducing general functions from specific training examples is central to concept learning.
 
 ## FIND-S Algorithm
 

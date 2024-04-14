@@ -68,6 +68,6 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 
 ## Pending
 
-* Decision Trees
-* Naive Bayes
-* SVMs
+* Naive Bayes readme & code
+* SVMs code
+* front readme

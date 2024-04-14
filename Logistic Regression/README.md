@@ -8,6 +8,10 @@ Logistic regression is a linear classifier and discriminative counterpart of Nai
 
 Consider the example of classification between cats and dogs. A generative model like naive bayes tries to understand what features makes an animal dog. Thus it tries to draw an image of what a dog might be. Discriminative model on the other hand tries to find the features which can distinguish a dog from cat. To put it simply, Generative model tries to understand what makes an animal a dog or a cat, while Discriminative model focuses on pinpointing the key features that tell them apart.
 
+## Assumption
+
+Logistic regression is comparatively more flexible and does not make any strict assumptions about the data. It generally works well for data drawn from exponential family distribution. The exponential family consists of several common probability distributions, including the normal (Gaussian), exponential, Poisson, binomial, and gamma distributions, among others. 
+
 ## Algorithm
 
 Every discriminative algorithm assumes a certain parametric form over ```P(Y|X)``` and tries to learn the parameters for this directly by maximum likelihood (MLE) or Maximum A Posteriori (MAP) estimation. This parameteric form represents the sigmoid function.
@@ -34,4 +38,4 @@ Given all the assumptions hold, Naive Bayes converges faster than Logistic Regre
 
 ## Results
 
-In our binary classification task for digit recognition using logistic regression, our model achieves an accuracy of approximately 97% on the test dataset. Additionally, by printing the loss at each iteration, we can observe how the algorithm tries to reach the minima.
+The logistic regression model trained on the gender dataset achieves an accuracy of approximately `86.2%` on the test set. Guessing gender from names is little tricky, even for humans, because names vary a lot and can be confusing. So the model does a decent job in predicting genders from names alone. We can also consider features such as trigrams from names to potentially improve the accuracy.
