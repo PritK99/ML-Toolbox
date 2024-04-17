@@ -44,7 +44,7 @@ All the training points which are on the margin, are called Support Vectors. Onl
 
 The above formulation works well when data is linearly separable. However, in real-world scenarios, data is rarely perfectly separated by a straight line. Noise or outliers can make it messy. To handle this, we introduce the concept of "slack variables" `ξi`. These slack variables allow some data points to deviate from the ideal separation line, either by being on the wrong side of the margin or by being within the margin. We do this by penalizing these deviations proportionally, and this penalty is controlled by a parameter called C.
 
-<img src="" alt="soft-svm-formulation1">
+<img src="../assets/img/soft-svm-formulation1.jpeg" alt="soft-svm-formulation1">
 
 When C is large, the penalty for deviations is high. So, the model tries hard to find a separation line that includes almost all points, even if this means a very narrow margin. Conversely, when C is small, the penalty for deviations is low. This results in a wider margin, allowing more points to be on the wrong side or very close to the separation line.
 
@@ -52,6 +52,10 @@ When C is large, the penalty for deviations is high. So, the model tries hard to
 
 The formulation can be rephrased as:
 
-<img src="" alt="soft-svm-formulation2">
+<img src="../assets/img/soft-svm-formulation2.jpeg" alt="soft-svm-formulation2">
 
 This is very similar to logistic regression, except we use hinge loss instead of logistic loss. A lot of machine learning algorithms end up with this idea of minimizing a function which is a combination of loss function and regularization term. Regularization term keeps the model simple by penalizing complexity of model, like norm of weights. Loss function measures error on data, like hinge loss here The goal is to minimize this objective function to find the optimal hyperplane Regularization term is a function of parameters, and is independent of data points, while loss term is a function of both parameters and data. This allows us to keep the model simple as well as fit the data well.
+
+## Results
+
+SVMs for Gender Prediction using first names provide an accuracy of `85.5%` on the test set. We can observe how to accuracy increases over training set as we increase our value of C from `0.01` to `1`. A large value of C would mean that we are increasingly penalizing the incorrect classifications. This would increase the accuracy at the cost of margin. A small value of C would lead to more errors on the training set but provide a bigger margin. Hence we try to choose an optimum value of C, which we found to be around `0.1`.
