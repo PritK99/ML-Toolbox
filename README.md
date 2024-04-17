@@ -27,47 +27,40 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 ## File Structure
 ```
 👨‍💻ML-Toolbox
- ┣ 📂assets                            // Contains all the reference gifs, images
- ┣ 📂Concept Learning
- ┃ ┣ 📂data
+ ┣ 📂assets                                   
+ ┃ ┣ 📂data                                 // datasets  
  ┃ ┃ ┣ 📄titanic.csv
- ┃ ┣ 📄find-s.ipynb
+ ┃ ┃ ┣ 📄mumbai_house_price.csv
+ ┃ ┃ ┣ 📄gender.csv
+ ┃ ┣ 📂img                     
+ ┣ 📂Concept Learning                       // Classification
+ ┃ ┣ 📄titanic survival prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂K Nearest Neighbors 
- ┃ ┣ 📂data
- ┃ ┃ ┣ 📄mumbai_house_prices.csv
- ┃ ┣ 📄knn.ipynb
+ ┣ 📂K Nearest Neighbors                    // Classification & Regression
+ ┃ ┣ 📄gender prediction.ipynb
+ ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂Perceptron
- ┃ ┣ 📂data
- ┃ ┃ ┣ 📄boys.txt
- ┃ ┃ ┣ 📄girls.txt
- ┃ ┣ 📄perceptron.ipynb
+ ┣ 📂Perceptron                             // Classification
+ ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂Naive Bayes
- ┃ ┣ 📂data
- ┃ ┃ ┣ 📄boys.txt
- ┃ ┃ ┣ 📄girls.txt
- ┃ ┣ 📄naive bayes.ipynb
+ ┣ 📂Naive Bayes                            // Classification
+ ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂Logistic Regression
- ┃ ┣ 📄logistic regression.ipynb
+ ┣ 📂Logistic Regression                    // Classification
+ ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂Linear Regression
- ┃ ┣ 📂data
- ┃ ┃ ┣ 📄mumbai_house_prices.csv
- ┃ ┣ 📄linear regression.ipynb
+ ┣ 📂Linear Regression                      // Regression
+ ┃ ┣ 📄house price prediction.ipynb
+ ┃ ┣ 📄README.md
+ ┣ 📂Support Vector Machine                 // Classification
+ ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄README.md
  ┣ 📄README.md
 ``` 
+
+## Pending Work
 
 ## References
  
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
-
-## Pending
-
-* Naive Bayes readme & code
-* SVMs code
-* front readme
