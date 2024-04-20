@@ -58,4 +58,6 @@ This is very similar to logistic regression, except we use hinge loss instead of
 
 ## Results
 
-SVMs for Gender Prediction using first names provide an accuracy of `85.5%` on the test set. We can observe how to accuracy increases over training set as we increase our value of C from `0.01` to `1`. A large value of C would mean that we are increasingly penalizing the incorrect classifications. This would increase the accuracy at the cost of margin. A small value of C would lead to more errors on the training set but provide a bigger margin. Hence we try to choose an optimum value of C, which we found to be around `0.1`.
+SVMs for Gender Prediction using first names provide an accuracy of `88.46%` on the test set. This is higher than `86.15%` obtained using Perceptron. This reason behind this can be the fact that SVM chooses the optimal hyperplane. Unlike Perceptron where we need to consider last character, bigrams and trigrams to converge, we just required last character and bigrams for SVMs. 
+
+Additionally we can observe how to accuracy increases over training set as we increase our value of C from `0.01` to `1`. A larger value of C means that we are increasingly penalizing the incorrect classifications. This would increase the accuracy at the cost of margin. A small value of C would not penalize so heavily and would hence allow more error on the training set, but it will provide a bigger margin. Hence we try to choose an optimum value of C using validation set and found it to be around `0.1`.
