@@ -73,4 +73,4 @@ Proof for the same can be found <a href="https://appliedmachinelearning.wordpres
 
 ## Results
 
-We use naive bayes to predict the gender given the first name. The model achieved an accuracy of `82.3%` on train data.
+We use naive bayes to predict the gender given the first name. The model achieved an accuracy of `82.31%` on train data.
