@@ -26,4 +26,4 @@ If the points are linearly separable (can be perfectly separated by a line or hy
 
 ## Results
 
-Perceptron algorithm for Gender Classification failed to converge due to 2 missclassifications. Using First Names, the model achieved an accuracy of 85% on the test data. This observation highlights the effectiveness of the perceptron in higher dimensions, where it can better separate classes. We tried to increase the feature space by using quadgrams, but the algorithm failed to converge for that case as well.
+The Perceptron algorithm for Gender Classification converges in 58 steps when we consider features such as the last character, bigrams, and trigrams from the name. It achieves an accuracy of `86.15%` on the test data. However, when we simplify the features to only include the last character and bigrams, the algorithm struggles to converge. This indicates that the Perceptron excels in higher dimensions, where it can more effectively distinguish between classes.
