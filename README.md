@@ -58,9 +58,9 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┣ 📄README.md
 ``` 
 
-## Pending Work
-
 ## References
+
+* `Bias Variance Tradeoff` by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html">The Stanford NLP Group</a>.
  
 ## License
 [MIT License](https://opensource.org/licenses/MIT)

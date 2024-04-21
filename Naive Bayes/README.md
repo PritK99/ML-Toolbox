@@ -73,4 +73,4 @@ Proof for the same can be found <a href="https://appliedmachinelearning.wordpres
 
 ## Results
 
-We use naive bayes to predict the gender given the first name. The model achieved an accuracy of `82.31%` on train data.
+We extract features such as last character, bigrams and trigrams from the first name to construct probabilities. Naive Bayes achives an accuracy of `88.46%` on the test data which is slightly higher than `86.92%` by logistic regression. Naive Bayes might be better for gender prediction task because the size of dataset available is small.
