@@ -55,12 +55,16 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┣ 📂Support Vector Machine                 // Classification
  ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄README.md
+ ┣ 📂Kernels
+ ┃ ┣ 📄README.md
  ┣ 📄README.md
 ``` 
 
 ## References
 
-* `Bias Variance Tradeoff` by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html">The Stanford NLP Group</a>.
+* Bias Variance Tradeoff by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf" target="_blank">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html" target="_blank">The Stanford NLP Group</a>.
+
+* Additional resources to understand <a href="https://ml-course.github.io/master/notebooks/03%20-%20Kernelization.html">kernelizations</a>.
  
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
