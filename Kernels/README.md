@@ -14,15 +14,13 @@ Imagine a dataset with two features, say, weight and height, used to classify in
 
 <img src="../assets/img/kernel-viz1.png" alt="kernel-viz1">
 
-Kernels essentially transform the original data from a lower-dimensional space (e.g., 2D for weight and height) into a higher-dimensional space where the data becomes linearly separable. In our example, we might create a new feature like "body mass index (BMI)" derived from weight and height. This new, 3D space might allow a straight line to effectively separate athletic from non-athletic individuals.
+Kernels essentially transform the original data from a lower-dimensional space (e.g., 2D for weight and height) into a higher-dimensional space where the data becomes linearly separable. This higher dimensional spcae tries to capture the non linear interactions among the features. In our example, we might create a new feature like "body mass index (BMI)" derived from weight and height. This new, 3D space might allow a straight line to effectively separate athletic from non-athletic individuals.
 
 <img src="../assets/img/kernel-viz2.png" alt="kernel-viz2">
 
-The problem with simply mapping to a higher dimension is that it can get computationally very expensive. The higher dimension might consist of so many features that it is no longer feasible to store these vectors or perform computations on them.
+The problem with simply mapping to a higher dimension is that it can get computationally very expensive. The higher dimension might consist of so many features that it is no longer feasible to store these vectors or perform computations on them. This is where kernelization makes use of the kernel trick. It's a clever way to work with the higher-dimensional space without explicitly doing any of the calculations in that higher space. 
 
-This is where kernelization makes use of the kernel trick. It's a clever way to work with the higher-dimensional space without explicitly doing any of the calculations in that higher space. 
-
-This function operates on the original data points and calculates a similarity measure in the higher-dimensional space, without explicitly performing the mapping itself. It essentially acts as a bridge, allowing the linear classifier to function in its familiar lower-dimensional world while considering the non-linear relationships present in the higher-dimensional space. Essentially, we map our features to a higher dimension and fit a classifier in that higher dimension, but we never perform a single calculation in this higher dimension. The calculations are still performed on the original space where calculations over the feature vector are feasible. 
+This function operates on the original data points, and calculates a similarity measure in the higher-dimensional space, without explicitly performing the mapping itself. We fit a linear classifier in higher dimension, but we never perform a single calculation in this higher dimension. The calculations are only performed on the original space.
 
 ## Mathematics behind Kernel Functions
 
@@ -30,25 +28,53 @@ Consider the following example of mapping feature vector to higher dimension.
 
 <img src="../assets/img/feature-expansion.png" alt="feature-expansion">
 
-## Part I: Linear Classifiers & Inner Products
+### Part I: Linear Classifiers & Inner Products
 
 In a linear classifier, we aim to find a decision boundary that separates different classes in the feature space. This decision boundary is represented by a hyperplane. raditionally, in linear classifiers like Support Vector Machines (SVMs) or logistic regression, we represent the decision boundary using a weights `w` and bias `b`.
 
-The decision function for a linear classifier can be expressed as  `𝑓(𝑥) = 𝑤𝑇.𝑥 + 𝑏`. We can express the decision function solely in terms of inner products between feature vectors. The proof for the same can be found <a href="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote13.html">here</a>.
+The decision function for a linear classifier is expressed as  `𝑓(𝑥) = 𝑤𝑇.𝑥 + 𝑏`. We can express the decision function solely in terms of inner products between feature vectors. The proof for the same can be found <a href="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote13.html">here</a>.
 
-What this shows us that the only information we ever need in order to learn a hyper-plane classifier is inner-products between all pairs of data vectors. By this, we eliminate the need for `w` matrix, and instead require matrix of alphas.
+What this shows us that the only information we ever need in order to learn a hyper-plane classifier is inner-products between all pairs of data vectors. Thus, if we are able to precompute the inner products and store them in a matrix `K`, all we need to do during training and testing time is to refer this matrix `K`. This idea is similar to the idea of memoization in Dynamic Programming. This matrix `K` is called as Kernel Matrix `K`. By this, we eliminate the need for `w` matrix, and instead require matrix of alphas.
 
-## Part II: Kernel Trick
+### Part II: Kernel Trick
 
 For some of these feature mappings, we can find the inner product between these two vectors `ϕ(x)` and `ϕ(z)` very cheaply. 
 
 <img src="../assets/img/kernel-trick.png" alt="kernel-trick">
 
-Here, instead of calculating inner product on `ϕ(x)` and `ϕ(z)` which would have involved `2^d` computations, we calculate inner products for `x` and `z` which require `d` computations.
+Here, instead of calculating inner product on `ϕ(x)` and `ϕ(z)` which would have involved `2^d` computations, we calculate inner products for `x` and `z` which require `d` computations. This kernel trick allows us to use all the advantages of higher dimensions, but by keeping the computation costs of our original space. Thus even though we learn our classifier in higher dimension, we never compute even once in this space.
 
-This kernel trick allows us to use all the advantages of higher dimensions, but by keeping the computation costs of our original space.
+Some common kernel functions are as follows:
 
+<img src="../assets/img/common-kernel-functions.png" alt="common-kernel-functions">
+
+A linear kernel performs same as the linear model, but instead of storing `W`, now we store `aplha`. When there are lots of dimensions but not many training examples, using a linear kernel can be faster and more efficient. For eg. Datasets involving DNA or  genetics.
+
+Now, the Radial Basis Function (RBF) kernel works differently. It puts Gaussian (bell-shaped) curves around each data point and finds the closest points based on these curves. Think of it like how K-Nearest Neighbors (KNN) works, but instead of using a fixed number of neighbors, the RBF kernel adjusts the number of neighbors based on these Gaussian curves. This makes it smarter than KNN because it adapts to the data better. It's interesting to see that when we try to make a linear classifier understand more complex relationships, we end up with ideas which are similar to KNN.
 
 ## Algorithm
 
+Any linear classifier can be kernelized using two steps.
+
+* Step I: We need to show that the the classifier can be expressed solely in terms of inner products of feature vector.
+
+### Kernelizing Perceptron
+
+<img src="../assets/img/perceptron-kernel-algorithm.png" alt="svm-kernel-algorithm">
+
+### Kernelizing Linear Regression
+
+<img src="../assets/img/linear-regression-kernel-algorithm.png" alt="svm-kernel-algorithm">
+
+### Kernelizing SVMs
+
 <img src="../assets/img/svm-kernel-algorithm.png" alt="svm-kernel-algorithm">
+
+## Results
+
+One of the ways to debug kernelized implementations is to use a linear kernel and ensure that the results are same as what they were without using kernel approach. For eg. if we consider trigrams as features and use linear kernel in perceptron, we get exact same results as perceptron
+
+### Perceptron
+
+The kernelized perceptron uses features such as last charachter and bigrams along with RBF Kernel to converge in 166 steps and provides an accuracy of 90% over the test dataset. The normal preceptron requires additional 26*26*26 features due to trigrams in order to converge. However, kernelized perceptron does not require trigrams to converge. 
+
