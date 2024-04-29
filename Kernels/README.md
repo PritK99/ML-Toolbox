@@ -72,11 +72,11 @@ Any linear classifier can be kernelized using two steps.
 
 ## Results
 
-One way to debug kernelized implementations is to use a linear kernel and ensure that the results match those obtained without using kernel methods. For instance, when using trigrams as features and applying a linear kernel in perceptron algorithms, the results are exactly same as those obtained without using kernels.
+One way to debug kernelized implementations is to use a linear kernel and ensure that the results match those obtained without using kernel methods. For instance, if include trigrams as feature and apply a linear kernel in kernel perceptron, we get exactly same results as those obtained without using kernels.
 
 ### Perceptron
 
-In the kernelized perceptron, we use features like the last character and bigrams, along with an RBF Kernel. This approach converges in 166 steps and achieves a `86.15%`accuracy on the test dataset. Unlike the standard perceptron, which requires additional features for trigrams to converge, the kernelized perceptron achieves convergence without relying on trigrams.
+The Kernelized Perceptron converges in 12 steps when we consider features such as last character and bigrams from a name. Unlike regular Perceptron Algorithm whih required trigrams as a feature, Kernelized Perceptron are able to converge by just using last character and bigrams. It achieves an accuracy of `90%` on the training set which is significantly higher than `86.15%` by regular Perceptron. We use the Radial Basis Function Kernel for the same.
 
 ### Linear Regression
 
