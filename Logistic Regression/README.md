@@ -38,6 +38,6 @@ Given all the assumptions hold, Naive Bayes converges faster than Logistic Regre
 
 ## Results
 
-The logistic regression model trained on the gender dataset achieves an accuracy of approximately `86.92%` on the test set. Guessing gender from names is little tricky, even for humans, because names vary a lot and can be confusing. So the model does a decent job in predicting genders from names alone. We can also consider features such as trigrams, quadgrams from names to potentially improve the accuracy.
+The logistic regression model trained on the gender dataset achieves an accuracy of approximately `89.23%` on the test set. Guessing gender from names is little tricky, even for humans, because names vary a lot and can be confusing. So the model does a decent job in predicting genders from names alone. We can also consider features such as trigrams, quadgrams from names to potentially improve the accuracy.
 
-The accuracy obtained is slightly lower than `88.46%` by Naive Bayes. This might be because of the size of dataset.
+The accuracy obtained is slightly higher than `88.46%` by Naive Bayes. This might be because of the flexibility of Logistic Regression over Naive Bayes in terms of the assumptions made over data distribution.
