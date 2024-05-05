@@ -65,13 +65,30 @@ Group 9:
 [11 'Dunn' 'Male' 15 'C' 100 93 87 81]
 [179 'Val' 'Male' 13 'B' 95 73 91 61]
 Centroid: [ 1.   0.5  1.5 97.5 83.  89.  71. ]
-
-Group 27: 
-[24 'Valma' 'Female' 14 'C' 48 83 79 95]
-[79 'Rosalynd' 'Male' 13 'C' 27 96 89 49]
-[147 'Jaquenette' 'Male' 15 'C' 33 75 98 84]
-[209 'Zenia' 'Female' 14 'C' 59 94 94 47]
-Centroid: [ 0.5  0.5  2.  41.8 87.  90.  68.8]
 ```
 
-Here we can observe that there is a decent consistency among all groups, especially in terms of section and their performance.
+Here we can observe that there is a decent consistency among all groups. Also by modifying the distance function, we can group students based on specific parameters. Considering only maths and science performance, we obtain the following results:
+
+```
+Group 0: 
+[73 'Lorrie' 'Male' 13 'A' 72 78 40 78]
+[102 'Alvin' 'Female' 13 'B' 80 28 53 67]
+[120 'Alyse' 'Male' 14 'A' 80 34 85 71]
+[125 'Fredric' 'Male' 14 'B' 68 20 21 81]
+[145 'Alis' 'Male' 15 'A' 76 53 32 69]
+[158 'Aldin' 'Female' 13 'C' 72 24 83 62]
+[185 'Purcell' 'Male' 14 'B' 75 14 54 68]
+Centroid: [ 0.7  0.4  0.7 74.7 35.9 52.6 70.9]
+
+Group 9: 
+[43 'Brandie' 'Male' 15 'B' 43 2 17 78]
+[84 'Eugine' 'Male' 13 'C' 34 18 39 94]
+[98 'Silvia' 'Male' 14 'A' 40 61 63 80]
+[104 'Woodie' 'Male' 15 'A' 37 57 48 75]
+[147 'Jaquenette' 'Male' 15 'C' 33 75 98 84]
+[155 'Emlyn' 'Male' 14 'C' 32 3 69 96]
+[171 'Fran' 'Female' 15 'B' 34 74 83 81]
+Centroid: [ 0.9  0.7  1.1 36.1 41.4 59.6 84. ]
+```
+
+Group 0 consists of all students with great performance in both maths and science, while group 9 consists of students with great performance in Maths and average performance in Science.
