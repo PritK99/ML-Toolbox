@@ -32,6 +32,7 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄titanic.csv
  ┃ ┃ ┣ 📄mumbai_house_price.csv
  ┃ ┃ ┣ 📄gender.csv
+ ┃ ┃ ┣ 📄student_marksheet.csv
  ┃ ┣ 📂img                     
  ┣ 📂Concept Learning                       // Classification
  ┃ ┣ 📄titanic survival prediction.ipynb
@@ -60,8 +61,9 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📂Linear Regression
  ┃ ┃ ┣ 📄house price prediction.ipynb
- ┃ ┣ 📂Support Vector Machine
- ┃ ┃ ┣ 📄gender prediction.ipynb
+ ┃ ┣ 📄README.md
+ ┣ 📂Neural Networks                     
+ ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂K Means Clustering                     // Clustering
  ┃ ┣ 📄grouping students.ipynb
@@ -71,10 +73,11 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 
 ## References
 
-* Cornell CS4780 <a href="">Machine Learning for Intelligent Systems</a> by Prof. Kilian Weinberger.
+* Big thanks to Prof. Kilian Weinberger for creating the fantastic Cornell CS4780 course, <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a>. It is truly one of the best machine learning courses.
 * MIT 6.036 <a href="https://www.youtube.com/playlist?list=PLxC_ffO4q_rW0bqQB80_vcQB09HOA3ClV">Machine Learning</a> by Prof. Tamara Broderick.
 * Bias Variance Tradeoff by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf" target="_blank">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html" target="_blank">The Stanford NLP Group</a>.
 * Additional resources to understand <a href="https://ml-course.github.io/master/notebooks/03%20-%20Kernelization.html">kernelizations</a>.
+* <a href="http://neuralnetworksanddeeplearning.com/index.html">Neural Networks and Deep Learning</a> Online Book by Michael Nielsen.
  
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
