@@ -13,7 +13,7 @@ import pandas as pd
 import random
 import geocoder
 
-API_KEY = "Aid9ssLQ4RtJbVretXJ1QQFGxhv-6ZM27nltnH8_Ix1LmmMoElbc5xIyR7KFhx2p"
+API_KEY = "<API KEY>"
 
 # Read the input CSV file
 data = "../data/mumbai_house_prices.csv"

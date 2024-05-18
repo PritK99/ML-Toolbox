@@ -33,7 +33,9 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄mumbai_house_price.csv
  ┃ ┃ ┣ 📄gender.csv
  ┃ ┃ ┣ 📄student_marksheet.csv
- ┃ ┣ 📂img                     
+ ┃ ┣ 📂img 
+ ┃ ┣ 📂scripts 
+ ┃ ┃ ┣ 📄house price dataset.py                  
  ┣ 📂Concept Learning                       // Classification
  ┃ ┣ 📄titanic survival prediction.ipynb
  ┃ ┣ 📄README.md
