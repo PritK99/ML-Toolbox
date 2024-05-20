@@ -73,6 +73,14 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┣ 📄README.md
 ``` 
 
+## Pending
+
+* Implementation & Verification of Kernels
+* Implementation of Neural Networks
+* Mid Term Review
+* Video lectures from 25 - 34
+* Multiclass implementation
+
 ## References
 
 * Big thanks to Prof. Kilian Weinberger for creating the fantastic Cornell CS4780 course, <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a>. It is truly one of the best machine learning courses.
