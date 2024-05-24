@@ -29,19 +29,22 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 👨‍💻ML-Toolbox
  ┣ 📂assets                                   
  ┃ ┣ 📂data                                 // datasets  
- ┃ ┃ ┣ 📄titanic.csv
- ┃ ┃ ┣ 📄mumbai_house_price.csv
+ ┃ ┃ ┣ 📄articles.csv
  ┃ ┃ ┣ 📄gender.csv
+ ┃ ┃ ┣ 📄modified_mumbai_house_price.csv
+ ┃ ┃ ┣ 📄mumbai_house_price.csv
  ┃ ┃ ┣ 📄student_marksheet.csv
+ ┃ ┃ ┣ 📄titanic.csv
  ┃ ┣ 📂img 
  ┃ ┣ 📂scripts 
  ┃ ┃ ┣ 📄house price dataset.py                  
  ┣ 📂Concept Learning                       // Classification
  ┃ ┣ 📄titanic survival prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂K Nearest Neighbors                    // Classification & Regression
+ ┣ 📂K Nearest Neighbors                    // Classification, Regression & Retrieval
  ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄house price prediction.ipynb
+ ┃ ┣ 📄article retrieval.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂Perceptron                             // Classification
  ┃ ┣ 📄gender prediction.ipynb
@@ -80,6 +83,7 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 * Mid Term Review
 * Video lectures from 25 - 34
 * Multiclass implementation
+* Articles for clustering
 
 ## References
 

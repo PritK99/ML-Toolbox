@@ -59,3 +59,20 @@ Since that didn't work, we decided comparing the names directly as text. We used
 K-Nearest Neighbors (KNN) is often called "lazy learning" because it doesn't really build a model; it just remembers all the training data. When we look at the average errors over mumbai house price prediction task, we see that KNN has a score of `0.38 Cr`, but weighted KNN, where we use the inverse distances as weights, has a lower error of `0.31 Cr`.
 
 This is quite lower error compared to linear regression. This is maybe because of features such as latitude and longitude. In places like Mumbai, where location strongly affects prices, linear regression falls short because it can't handle non-linear relationships like those between prices and coordinates. Also, by converting nominal and ordinal features such as age, type, and status to appropriate numeric values, we were able to improve accuracy. We use absolute distance as a metric for finding the nearest neighbour. This absolute distance represents median value and hence is more effective than linear regression which predicts the mean. While predicting quantities such as property prices or average salary, outliers can easily skew the mean but not the median. Hence median becomes a better estimate than mean in this case.
+
+## Retrival
+
+While KNN is commonly used in supervised learning for classification and regression tasks, it can also be applied in unsupervised settings such as clustering. We use the idea of Nearest Neighbors for article retrieval. Each article is represented using TF-IDF representation. 
+
+For example, if the user is currently reading article: `The dollar slipped broadly on Friday as traders booked profits after recent gains but the U.S. currency remained well-placed for further advances, supported by strong U.S. economic data that has prompted markets to dial back expectations for interest rate cuts.`, The following recommendations are generated:
+
+```
+You might also like:
+
+Recommendation 1: Dollar Rises on the Interest Rate Plays  NEW YORK (Reuters) - The dollar rose on Thursday as  traders, short of dollars after relentlessly selling them for  weeks, looked to the growing yield advantage of U.S. assets as  a reason to buy back the currency before the end of the year.
+
+Recommendation 2: Dollar's Gains Cut as Fed Raises Rates  NEW YORK (Reuters) - The dollar's gains were clipped  on  Tuesday as the Federal Reserve raised interest rates for the  fifth time this year, as expected, but quashed hopes for more  aggressive rate tightening.
+
+```
+
+We observe that the top articles recommended are close to the topic which user is currently reading. The TF-IDF representation allow us to focus on key words which are common locally but rare globally.
