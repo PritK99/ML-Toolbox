@@ -41,10 +41,10 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┣ 📂Concept Learning                       // Classification
  ┃ ┣ 📄titanic survival prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂K Nearest Neighbors                    // Classification, Regression & Retrieval
+ ┣ 📂K Nearest Neighbors                    // Classification, Regression & Recommendation
  ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄house price prediction.ipynb
- ┃ ┣ 📄article retrieval.ipynb
+ ┃ ┣ 📄article recommendation.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂Perceptron                             // Classification
  ┃ ┣ 📄gender prediction.ipynb
@@ -66,12 +66,18 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📂Linear Regression
  ┃ ┃ ┣ 📄house price prediction.ipynb
+ ┃ ┣ 📂Support Vector Machine
+ ┃ ┣ 📄gender prediction.ipynb
+ ┃ ┣ 📄README.md
+ ┣ 📂Gaussian Processes                    // Regression
+ ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📄README.md
  ┣ 📂Neural Networks                     
  ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂K Means Clustering                     // Clustering
+ ┣ 📂K Means Clustering                     // Clustering & Recommendation
  ┃ ┣ 📄grouping students.ipynb
+ ┃ ┣ 📄article recommendation.ipynb
  ┃ ┣ 📄README.md
  ┣ 📄README.md
 ``` 
@@ -84,6 +90,7 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 * Video lectures from 25 - 34
 * Multiclass implementation
 * Articles for clustering
+* Gaussian Processes
 
 ## References
 
@@ -92,6 +99,7 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 * Bias Variance Tradeoff by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf" target="_blank">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html" target="_blank">The Stanford NLP Group</a>.
 * Additional resources to understand <a href="https://ml-course.github.io/master/notebooks/03%20-%20Kernelization.html">kernelizations</a>.
 * <a href="http://neuralnetworksanddeeplearning.com/index.html">Neural Networks and Deep Learning</a> Online Book by Michael Nielsen.
+* <a href="https://www.kaggle.com/">Kaggle</a> for providing several datasets used in this repository.
  
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
