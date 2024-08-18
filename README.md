@@ -8,7 +8,7 @@ Traditional Programming is based on the idea of writing a program, giving it an 
 
 <img src = "assets/img/Traditional CS.png" alt="ML">
 
-For problems where the rules can not be clearly defined, we use Machine Learning to generate these rules for us. Consider the problem of classifying an image as cat or dog. Writing a program for this would be very difficult. Machine Learning is the idea where we provide the computer with data and corresponding outputs and get the program. This phase is called training. Now we use these program, along with new data like traditional programming to get an output. This phase is called Testing.
+For problems where the rules can not be clearly defined, we use Machine Learning to generate these rules for us. Consider the problem of classifying an image as cat or dog. Writing a program for this would be very difficult. Machine Learning is the idea where we provide the computer with data and corresponding outputs and get the program. This phase is called training. Now we use these program, along with new data like traditional programming to get an output. This phase is called inference.
 
 <img src = "assets/img/ML.png" alt="ML">
 
@@ -88,13 +88,12 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 * Implementation of Neural Networks
 * Mid Term Review
 * Video lectures from 25 - 34
-* Multiclass implementation
 * Articles for clustering
 * Gaussian Processes
 
 ## References
 
-* Big thanks to Prof. Kilian Weinberger for creating the fantastic Cornell CS4780 course, <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a>. It is truly one of the best machine learning courses.
+* Big thanks to Prof. Kilian Weinberger for creating the fantastic Cornell CS4780 course, <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a>. Majority of the content in this repository is inspired from the lectures. It is truly one of the best machine learning courses.
 * MIT 6.036 <a href="https://www.youtube.com/playlist?list=PLxC_ffO4q_rW0bqQB80_vcQB09HOA3ClV">Machine Learning</a> by Prof. Tamara Broderick.
 * Bias Variance Tradeoff by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf" target="_blank">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html" target="_blank">The Stanford NLP Group</a>.
 * Additional resources to understand <a href="https://ml-course.github.io/master/notebooks/03%20-%20Kernelization.html">kernelizations</a>.

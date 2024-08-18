@@ -18,9 +18,17 @@ In simpler terms, this equation also implies that `y` itself follows a normal di
 
 ## Algorithm
 
-Given `y ~ N(WX + b, σ^2)`, the goal of linear regression is to estimate the parameters `W` and `b`  by maximum likelihood (MLE) or Maximum A Posteriori (MAP) estimation. 
+Given `y ~ N(WX + b, σ^2)`, the goal of linear regression is to estimate the parameters `W` and `b`. This can be done either by maximum likelihood (MLE) or Maximum A Posteriori (MAP) estimation. 
 
-MLE tries to maximize the probability of distribution given the data, that is it tries to maximize `P(D|θ)`. MAP on the other hand places a prior probability over parameters `P(θ)` and tries to maximize the probability of parameters given the data, that is `P(θ|D)` which is nothing but `P(D|θ)P(θ)`. This involvement of the extra term `P(θ)` helps prevent overfitting by introducing a regularization term.
+### MLE vs MAP
+
+Imagine you find popcorn on your living room floor. There are three possible scenarios: watching a movie, playing board games, or sleeping. MLE aims to find the scenario that is most likely to result in popcorn on the floor. So, it maximizes the probability of popcorn given each scenario and selects the one with the highest likelihood. Watching a movie in living room is more likely to lead to popcorn on the floor, and hence MLE would pick that event.
+
+MLE works by maximizing the likelihood of the model given the data, that is it tries to maximize `P(D|θ)`. It's like fitting a line to the data points in such a way that it maximizes the chance of observing those data points. This idea gives us the Ordinary Least Squares (OLS) loss function. OLS minimizes the squared differences between the predicted and actual values, increasing the likelihood of the model fitting the data.
+
+However, MLE might not always give the most sensible answer. For instance, if we introduce another event like a popcorn throwing competition, MLE might wrongly suggest that this event is most likely to cause popcorn on the floor. This is where MAP comes in. MAP considers prior probabilities of events. It factors in our prior knowledge or beliefs about the likelihood of each event. So, even if a popcorn throwing competition could theoretically lead to popcorn on the floor, our prior belief that watching a movie in living room is much more common helps us choose the more likely event.
+
+MAP places a prior probability over parameters `P(θ)` and tries to maximize the probability of parameters given the data, that is `P(θ|D)` which is nothing but `P(D|θ)P(θ)`. It combines the likelihood of the data given the parameters (as in MLE) with the prior probability of the parameters. This involvement of the extra term `P(θ)` helps prevent overfitting by introducing a regularization term.
 
 <a href="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote08.html">Click Here</a> to view the derivation of estimation of `W` and `b`. This shows how we obtain the Ordinary Least Squares (OLS) loss function and regularization term.
 
