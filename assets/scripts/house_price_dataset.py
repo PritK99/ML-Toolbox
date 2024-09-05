@@ -3,9 +3,9 @@ Script Description:
 This script processes a data/mumbai_house_prices.csv and performs preprocessing on the data. The new dataset is saved to data/modified_mumbai_house_prices.csv
 
 Preprocessing steps:
-1. Uses "price" and "price_unit" to convert the price from different units to Crores only.
-2. Retrieves latitude and longitude for each unique combination of "locality" and "region" using the Bing Maps API.
-3. Converts nominal and ordinal data (type, age, status) to numerical values.
+1. Use "price" and "price_unit" to convert the price from different units to Crores only.
+2. Retrieves latitude and longitude for each unique combination of "locality" and "region" using the Bing Maps API. We observe that Geocoder incorrectly maps locations such as "Khar, Mumbai, India" and "Belapur, Mumbai, India". Hence for these locations, we manually set the latitude and longitude.
+3. Converts ordinal data (type, age, status) to numerical values.
 4. Drops unnecessary columns like price_unit, locality, and region.
 """
 
@@ -13,7 +13,7 @@ import pandas as pd
 import random
 import geocoder
 
-API_KEY = "<API KEY>"
+API_KEY = "Aid9ssLQ4RtJbVretXJ1QQFGxhv-6ZM27nltnH8_Ix1LmmMoElbc5xIyR7KFhx2p"
 
 # Read the input CSV file
 data = "../data/mumbai_house_prices.csv"
@@ -28,7 +28,7 @@ for i in range(len(house_price)):
 # Step 2: Obtain unique locations
 unique_locations = set()
 for i in range(len(house_price)):
-    location = house_price.loc[i, "locality"] + ", " + house_price.loc[i, "region"] + ", Mumbai"
+    location = house_price.loc[i, "region"] + ", Mumbai, India" 
     unique_locations.add(location)
 print("Total number of unique locations: ", len(unique_locations))
 
@@ -38,6 +38,19 @@ unknown_locations = []
 
 count = 0  # To keep track of processed locations
 for location in unique_locations:
+
+    if (location == "Khar, Mumbai, India"):
+        latitude = 19.07555
+        longitude = 72.83206
+        lat_long_dict[location] = [latitude, longitude]
+        continue
+    
+    if (location == "Belapur, Mumbai, India"):
+        latitude = 19.574869
+        longitude = 74.645897
+        lat_long_dict[location] = [latitude, longitude]
+        continue
+
     g = geocoder.bing(location, key=API_KEY, timeout=20)
     results = g.json
 
@@ -46,6 +59,17 @@ for location in unique_locations:
     else:
         latitude = results['lat']
         longitude = results['lng']
+
+        if (latitude > 20 or latitude < 18):
+            print(location)
+            unknown_locations.append(location)
+            continue
+
+        if (longitude < 72 or longitude > 74):
+            print(location)
+            unknown_locations.append(location)
+            continue
+
         lat_long_dict[location] = [latitude, longitude]
 
     count += 1
@@ -57,7 +81,7 @@ print(f'Total {len(unknown_locations)} locations are unknown: {unknown_locations
 # Step 4: Assign latitude and longitude to the dataset
 del_idx = []
 for i in range(len(house_price)):
-    location = house_price.loc[i, "locality"] + ", " + house_price.loc[i, "region"] + ", Mumbai"
+    location = house_price.loc[i, "region"] + ", Mumbai, India"
 
     if location in unknown_locations:
         del_idx.append(i)
@@ -74,7 +98,7 @@ house_price.reset_index(drop=True, inplace=True)
 house_price.drop(['price_unit', 'locality', 'region'], axis=1, inplace=True)
 
 # Step 6: Convert nominal and ordinal data to numerical values
-type_mapping = {"Studio Apartment": 0, "Apartment": 0.2, "Independent House": 0.4, "Villa": 0.6, "Penthouse": 1}
+type_mapping = {"Studio Apartment": 0, "Apartment": 0.25, "Independent House": 0.5, "Villa": 0.75, "Penthouse": 1}
 age_mapping = {"Resale": 0, "Unknown": 0.5, "New": 1}
 status_mapping = {"Under Construction": 0, "Ready to move": 1}
 
