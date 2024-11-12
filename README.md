@@ -20,7 +20,7 @@ At the heart of machine learning is the quest to find a function `f(x)` that clo
 
 ## Introduction to ML-Toolbox
 
-The ML-Toolbox is like a toolkit full of different machine learning methods, each offering its own form of`f(x)`. The trick is picking the right one for the job, which is kind of like choosing a setting on a tool – it depends on what we are trying to do. Neural networks are popular, but they're just one tool in the box, giving us outputs in the form of weights and biases.
+The ML-Toolbox is like a toolkit full of different machine learning methods, each offering its own form of `f(x)`. The trick is picking the right one for the job, which is kind of like choosing a setting on a tool – it depends on what we are trying to do. Neural networks are popular, but they're just one tool in the box, giving us outputs in the form of weights and biases.
 
 The core concept behind the ML-Toolbox is to grasp the diverse range of algorithms capable of generating forms of `f(x)`. Some widely used algorithms include Decision Trees, Neural Networks, Support Vector Machines, Random Forests, and K-Nearest Neighbors. The goal isn't to say which method is the best. Instead, it's about knowing when each method works well and when it might struggle. It's like knowing when to use a screwdriver versus a hammer.
 
@@ -84,21 +84,24 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 
 ## Pending
 
+The following tasks are still in progress:
+
 * Implementation & Verification of Kernels
 * Implementation of Neural Networks
+* Implementation of Decision Trees
+* Implementation of Association Rule Mining
 * Mid Term Review
-* Video lectures from 25 - 34
-* Articles for clustering
+* Video lectures 25 - 34 of Cornell CS4780
 * Gaussian Processes
 
 ## References
 
-* Big thanks to Prof. Kilian Weinberger for creating the fantastic Cornell CS4780 course, <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a>. Majority of the content in this repository is inspired from the lectures. It is truly one of the best machine learning courses.
+* Big thanks to Prof. Kilian Weinberger for the Cornell CS4780 course, <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a>. Majority of the content in this repository is inspired from the lectures.
 * MIT 6.036 <a href="https://www.youtube.com/playlist?list=PLxC_ffO4q_rW0bqQB80_vcQB09HOA3ClV">Machine Learning</a> by Prof. Tamara Broderick.
 * Bias Variance Tradeoff by <a href="https://ocw.mit.edu/courses/15-097-prediction-machine-learning-and-statistics-spring-2012/dec694eb34799f6bea2e91b1c06551a0_MIT15_097S12_lec04.pdf" target="_blank">MIT OpenCourseware</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/the-bias-variance-tradeoff-1.html" target="_blank">The Stanford NLP Group</a>.
 * Additional resources to understand <a href="https://ml-course.github.io/master/notebooks/03%20-%20Kernelization.html">kernelizations</a>.
 * <a href="http://neuralnetworksanddeeplearning.com/index.html">Neural Networks and Deep Learning</a> Online Book by Michael Nielsen.
 * <a href="https://www.kaggle.com/">Kaggle</a> for providing several datasets used in this repository.
- 
+
 ## License
 [MIT License](https://opensource.org/licenses/MIT)

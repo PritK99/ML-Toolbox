@@ -17,7 +17,9 @@ The whole idea of learning classifiers based on Bayes Rule is that these are gen
 Consider a simple feature vector ```X``` with n features, where each feature is a boolean value, and 2 classes ```{+1, -1}```; we need to estimate approximately ```2^(n+1)``` parameters. Even for such a simple scenario, the parameters scale exponentially with the number of features. It just becomes impractical to estimate these parameters from data. This whole idea of conditional independence allows us to reduce parameters from ```2^(n+1)``` to ```2n```. This is the key to Naive Bayes. This also simplifies the math to:
 
 ```
-P(X|Y) = [P(x1|Y) * P(x2|Y) * ... * P(xn|Y)] * P(Y) / P(X)
+P(X|Y) = [P(x1|Y) * P(x2|Y) * ... * P(xn|Y)]
+
+P(Y|X) = [P(x1|Y) * P(x2|Y) * ... * P(xn|Y)] * P(Y) / P(X)
 ```
 
 Calculating P(Y) is easy - just count how many examples you have for each class and make sure they all add up to one. As for P(X), it's like a constant that doesn't really change our guess. The big change comes when we break down ```P(x1|Y) * P(x2|Y) * ... * P(xn|Y)``` instead of directly dealing with ```P(X|Y)```. It's like shifting from searching in many dimensions to just one, which is much easier.

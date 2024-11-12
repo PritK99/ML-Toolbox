@@ -56,7 +56,7 @@ Since that didn't work, we decided comparing the names directly as text. We used
 
 ## Regression
 
-K-Nearest Neighbors (KNN) is often called "lazy learning" because it doesn't really build a model; it just remembers all the training data. When we look at the average errors over mumbai house price prediction task, we see that KNN has a score of `0.38 Cr`, but weighted KNN, where we use the inverse distances as weights, has a lower error of `0.31 Cr`.
+K-Nearest Neighbors (KNN) is often called "lazy learning" because it doesn't really build a model; it just remembers all the training data. When we look at the average errors over mumbai house price prediction task, we see that KNN has a score of `0.38 Cr`, but weighted KNN, where we use the inverse distances as weights, has a lower error of `0.30 Cr`.
 
 This is quite lower error compared to linear regression. This is maybe because of features such as latitude and longitude. In places like Mumbai, where location strongly affects prices, linear regression falls short because it can't handle non-linear relationships like those between prices and coordinates. Also, by converting nominal and ordinal features such as age, type, and status to appropriate numeric values, we were able to improve accuracy. We use absolute distance as a metric for finding the nearest neighbour. This absolute distance represents median value and hence is more effective than linear regression which predicts the mean. While predicting quantities such as property prices or average salary, outliers can easily skew the mean but not the median. Hence median becomes a better estimate than mean in this case.
 
