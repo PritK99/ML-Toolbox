@@ -1,8 +1,24 @@
+# ML-Toolbox
+
 <p align="center">
     <img src="assets/img/logo.png" alt="logo">
 </p>
 
-# ML-Toolbox
+## Table of Contents
+
+- [Project](#ml-toolbox)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [Introduction to Machine Learning](#introduction-to-machine-learning)
+    - [Traditional Programming vs Machine Learning](#traditional-programming-vs-machine-learning)
+    - [Core Idea behind Machine Learning](#core-idea-behind-machine-learning)
+  - [Introduction to ML-Toolbox](#introduction-to-ml-toolbox)
+  - [File Structure](#file-structure)
+  - [Pending Section](#pending-section)
+  - [References](#references)
+  - [License](#license)
+
+## About
 
 Every machine learning algorithm comes with its own set of assumptions about the data. The goal of the ML Toolbox is to understand these assumptions, and make an informed decision when selecting the best model for a given problem. By aligning the right algorithm with the characteristics of the data, we can optimize performance and achieve better results.
 
@@ -41,9 +57,11 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄mumbai_house_price.csv
  ┃ ┃ ┣ 📄student_marksheet.csv
  ┃ ┃ ┣ 📄titanic.csv
+ ┃ ┃ ┣ 📄un_voting.csv
  ┃ ┣ 📂img 
  ┃ ┣ 📂scripts 
- ┃ ┃ ┣ 📄house price dataset.py                  
+ ┃ ┃ ┣ 📄house price dataset.py    
+ ┃ ┣ 📂notes              
  ┣ 📂Concept Learning                       // Classification
  ┃ ┣ 📄titanic survival prediction.ipynb
  ┃ ┣ 📄README.md
@@ -75,9 +93,6 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┣ 📂Support Vector Machine
  ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄README.md
- ┣ 📂Gaussian Processes                    // Regression
- ┃ ┣ 📄house price prediction.ipynb
- ┃ ┣ 📄README.md
  ┣ 📂Neural Networks                     
  ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📄README.md
@@ -88,7 +103,7 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┣ 📄README.md
 ``` 
 
-## Pending
+## Pending Section
 
 The following tasks are still in progress:
 
@@ -97,7 +112,6 @@ The following tasks are still in progress:
 * Implementation of Decision Trees
 * Implementation of Association Rule Mining
 * Mid Term Review
-* Video lectures 25 - 34 of Cornell CS4780
 * Gaussian Processes
 
 ## References
