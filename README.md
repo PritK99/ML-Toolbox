@@ -1,6 +1,8 @@
-# ML-Toolbox
+<p align="center">
+    <img src="assets/img/logo.png" alt="logo">
+</p>
 
-<img src="assets/img/logo.png" alt="logo">
+# ML-Toolbox
 
 Every machine learning algorithm comes with its own set of assumptions about the data. The goal of the ML Toolbox is to understand these assumptions, and make an informed decision when selecting the best model for a given problem. By aligning the right algorithm with the characteristics of the data, we can optimize performance and achieve better results.
 
