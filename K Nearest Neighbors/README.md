@@ -1,7 +1,6 @@
 # K Nearest Neighbors (KNNs)
 
 <img src="../assets/img/knn1.webp" alt="KNN">
-<img src="../assets/img/knn2.webp" alt="KNN">
 
 ## Introduction
 
