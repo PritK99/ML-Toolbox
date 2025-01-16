@@ -1,12 +1,12 @@
-# Neural Networks & Deep Learning
+# Neural Networks / Deep Learning / Multilayer Perceptrons
 
 <img src="../assets/img/neural networks.png" alt="neural networks">
 
 ## Introduction
 
-Neural Networks, also known as Multilayer Perceptrons (MLP), represent a type of supervised machine learning model. Neural Networks aim to capture non-linear relationships, in contrast to perceptrons, which function as linear classifiers.
+Neural Networks are a type of supervised machine learning model, which aim to capture non-linear relationships. This is in contrast to perceptrons, which function as linear classifiers.
 
-## Algorithm
+## Intuition
 
 The perceptron aims to learn a linear classifier represented by the equation `Wx + b`. In kernelization, the goal is to transform `x` into a higher-dimensional space `ϕ(x)`, making the data linearly separable. Thus, in kernelized perceptron, the equation becomes `W⋅ϕ(x) + b`. However, it is important to note that for `ϕ(x)`, we need to craft a well defined inner product. Thus we need to define a transformation and the algorithm learns the classifier.
 
@@ -14,13 +14,9 @@ Neural networks, unlike kernels, learn a transformation and classifier simultane
 
 <img src="../assets/img/neural-network-intuition-1.jpeg" alt="neural-network-intuition-1">
 
-Details about the algorithm can be found <a href="https://developer.nvidia.com/blog/a-data-scientists-guide-to-gradient-descent-and-backpropagation-algorithms/">here</a>
-
-## Intuition
-
 <img src="../assets/img/gradient-descent.gif" alt="gradient-descent">
 
-Consider a neural network with one hidden layer and ReLU activation function. Let's say we want to learn the function `y = 0.9(x^2) + 2`.
+Consider a neural network with one hidden layer and ReLU activation function. Let's say we want to learn the function `y = 0.9((x-0.5)^2) + 2.5`.
 
 <img src="../assets/img/nn-true.png" alt="true function">
 
@@ -38,19 +34,65 @@ Neuron 3 might learn `y = max(x + 2, 0)`
 
 The output layer combines the outputs of these neurons by weighting and adding them up. Thus, the final neural network output can be represented as:
 
-`y = max(0.8 * max(-2x + 1, 0) + 0.9 * max(0.8x - 5, 0) + 1.6 * max(x + 2, 0), 0)`
+`y = 0.95 * max(-2x + 1, 0) + 1.25 * max(0.8x - 5, 0) + 0.95 * max(x + 2, 0), 0)`
 
 <img src="../assets/img/final-nn.png" alt="final-nn">
 
-The green line here represents the function learned by our network, while the black line represents the true function. By combining these piecewise functions, the network starts to resemble the true function more closely. Adding more neurons to the hidden layer, i.e., incorporating more piecewise functions, allows us to better replicate the true function.
+The blue line here represents the function learned by our network, while the black line represents the true function. By combining these piecewise functions, the network starts to resemble the true function more closely. Adding more neurons to the hidden layer, i.e., incorporating more piecewise functions, allows us to better replicate the true function.
 
 Increasing the number of hidden layers permits more intricate transformations. Each subsequent layer combines the outputs of preceding layers, allowing the network to acquire increasingly sophisticated mappings. While theoretically, a single layer with large neurons could suffice, it would require a substantial number of neurons in the hidden layer. Therefore, increasing depth yields comparable outcomes with fewer neurons.
 
-Essentially, this is what deep learning does. It constructs low-level representations and subsequently employs these representations to construct progressively complex ones. 
+Essentially, this is what deep learning does. It learns low-level representations and subsequently employs these representations to learns progressively complex ones.
+
+<img src="../assets/img/nn-plane-eg.webp" alt="nn-plane-eg">
 
 To visualize how ReLU functions combine to yield a close prediction, these graphs can be plotted on Desmos. <a href="https://www.desmos.com/calculator">Click here</a> to access Desmos.
 
 For a visualization of how deep learning operates, you can watch the amazing playlist by 3Blue1Brown on <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks</a>.
 
+## Activation Functions
+
+The main reason neural networks are able to capture non-linear relationships is due to activation functions. It is crucial that the activation function is non-linear, as this enables the network to model complex patterns.
+
+Consider the example above with identity function as the activation function instead of ReLU.
+
+<div style="display: flex; justify-content: space-around;">
+    <img src="../assets/img/hidden4.png" alt="hidden4" style="width: 30%;">
+    <img src="../assets/img/hidden5.png" alt="hidden5" style="width: 30%;">
+    <img src="../assets/img/hidden6.png" alt="hidden6" style="width: 30%;">
+</div>
+
+By weighting and adding these outputs, we get, 
+
+`y = 0.95 * (-2x + 1) + 1.25 * (0.8x - 5) + 0.95 * (x + 2)`
+
+Simplifying this expression results in: `y = 0.05x - 3.40`, which is essentially a straight line.
+
+<img src="../assets/img/nn-without-activation.png" alt="nn-without-activation">
+
+Without a non-linear activation function, the network is limited to learning only linear relationships, essentially just fitting a hyperplane or a linear classifier.
+
+However, by introducing a non-linear activation function like ReLU, we enable the network to learn more complex, curved relationships.
+
+## Algorithm
+
+<img src="../assets/img/nn-algorithm.jpeg" alt="phases in neural networks">
+
+### Backpropogation
+
+One of the best explanation for Backpropogation can be found in <a href="http://neuralnetworksanddeeplearning.com/chap2.html">Neural Networks and Deep Learning (Chapter 2)</a>  by Michael Nielsen. 
+
+<img src="../assets/img/backprop1.jpeg" alt="backprop1">
+<img src="../assets/img/backprop2.jpeg" alt="backprop2">
+<img src="../assets/img/backprop3.jpeg" alt="backprop3">
+<img src="../assets/img/backprop4.jpeg" alt="backprop4">
 
 ### Stochastic Gradient Descent
+
+The cost function in deep learning is a Non-Convex function. While methods such such as Gradient Descent or Newton's Method work well for regression, where the cost function is convex, they do not work well for non-convex functions. Thus, we require methods like Stochastic Gradient Descent (SGD).
+
+<img src="../assets/img/non-convex.png" alt="convex vs non-convex">
+
+Due to this non-convex nature, even initialization of the parameters in nerual network matter a lot. This did not matter for linear regression because we were suce that we can reach the minimum from any given point. Additionally, initialization using a constant in neural networks will lead to all neurons learning the same thing and not break the symmetry.
+
+An explanation for different initialization techniques can be found in <a href="https://www.deeplearning.ai/ai-notes/initialization/index.html#:~:text=Initializing%20all%20the%20weights%20with,scheme%20will%20perform%20very%20poorly.">AI Notes</a> by DeepLearning.AI
