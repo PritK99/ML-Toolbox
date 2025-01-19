@@ -89,9 +89,11 @@ One of the best explanation for Backpropogation can be found in <a href="http://
 
 ### Stochastic Gradient Descent
 
-The cost function in deep learning is a Non-Convex function. While methods such such as Gradient Descent or Newton's Method work well for regression, where the cost function is convex, they do not work well for non-convex functions. Thus, we require methods like Stochastic Gradient Descent (SGD).
-
 <img src="../assets/img/non-convex.png" alt="convex vs non-convex">
+
+The cost function in deep learning is a Non-Convex function. While methods such such as Gradient Descent or Newton's Method work well for regression, where the cost function is convex, they do not work well for non-convex functions. Thus, we require methods like Stochastic Gradient Descent (SGD). SGD is so noisy that it does not converge to local minima. It is this nature of SGD that makes it not suitable for convex optimization, but very suitable for non convex optimization.
+
+<img src="../assets/img/sgd.png" alt="SGD">
 
 Due to this non-convex nature, even initialization of the parameters in nerual network matter a lot. This did not matter for linear regression because we were suce that we can reach the minimum from any given point. Additionally, initialization using a constant in neural networks will lead to all neurons learning the same thing and not break the symmetry.
 
