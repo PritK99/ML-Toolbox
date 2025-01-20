@@ -14,6 +14,7 @@
     - [Core Idea behind Machine Learning](#core-idea-behind-machine-learning)
   - [Introduction to ML-Toolbox](#introduction-to-ml-toolbox)
   - [File Structure](#file-structure)
+  - [Results](#results)
   - [Pending Section](#pending-section)
   - [References](#references)
   - [License](#license)
@@ -50,41 +51,32 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
 ```
 👨‍💻ML-Toolbox
  ┣ 📂assets                                   
- ┃ ┣ 📂data                                 // datasets  
+ ┃ ┣ 📂data                                 // datasets 
  ┃ ┃ ┣ 📄articles.csv
  ┃ ┃ ┣ 📄gender.csv
  ┃ ┃ ┣ 📄modified_mumbai_house_price.csv
  ┃ ┃ ┣ 📄mumbai_house_price.csv
  ┃ ┃ ┣ 📄student_marksheet.csv
  ┃ ┃ ┣ 📄titanic.csv
- ┃ ┃ ┣ 📄un_voting.csv
+ ┃ ┃ ┣ 📄un_voting.csv 
  ┃ ┣ 📂img 
- ┃ ┣ 📂scripts 
- ┃ ┃ ┣ 📄house price dataset.py    
+ ┃ ┣ 📂scripts    
  ┃ ┣ 📂notes              
- ┣ 📂Concept Learning                       // Classification
- ┃ ┣ 📄titanic survival prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂K Nearest Neighbors                    // Classification, Regression & Recommendation
+ ┣ 📂Concept Learning  
+ ┃ ┣ 📄titanic survival prediction.ipynb                     
+ ┣ 📂K Nearest Neighbors                    
  ┃ ┣ 📄gender prediction.ipynb
  ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📄article recommendation.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂Perceptron                             // Classification
+ ┣ 📂Perceptron                             
  ┃ ┣ 📄gender prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂Naive Bayes                            // Classification
+ ┣ 📂Naive Bayes
+ ┣ 📂Logistic Regression
  ┃ ┣ 📄gender prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂Logistic Regression                    // Classification
- ┃ ┣ 📄gender prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂Linear Regression                      // Regression
+ ┣ 📂Linear Regression     
  ┃ ┣ 📄house price prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂Support Vector Machine                 // Classification
+ ┣ 📂Support Vector Machine
  ┃ ┣ 📄gender prediction.ipynb
- ┃ ┣ 📄README.md
  ┣ 📂Kernels
  ┃ ┣ 📂Perceptron
  ┃ ┃ ┣ 📄gender prediction.ipynb
@@ -92,27 +84,28 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📂Support Vector Machine
  ┃ ┣ 📄gender prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂Neural Networks                     
+ ┣ 📂Neural Networks     
+ ┃ ┣ 📄gender prediction.ipynb                
  ┃ ┣ 📄house price prediction.ipynb
- ┃ ┣ 📄README.md
- ┣ 📂K Means Clustering                     // Clustering & Recommendation
+ ┣ 📂K Means Clustering      
  ┃ ┣ 📄grouping students.ipynb
  ┃ ┣ 📄article recommendation.ipynb
- ┃ ┣ 📄README.md
  ┣ 📄README.md
 ``` 
 
+## Results
+
 ## Pending Section
 
-The following tasks are still in progress:
+The following sections are still in progress:
 
-* Implementation & Verification of Kernels
-* Implementation of Neural Networks
-* Implementation of Decision Trees
-* Implementation of Association Rule Mining
-* Mid Term Review
+* Kernels
+* Neural Networks
+* Decision Trees
+* Association Rule Mining
+* KD Trees
 * Gaussian Processes
+* Notes
 
 ## References
 
