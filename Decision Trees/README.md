@@ -67,11 +67,29 @@ Training a decision tree is different from other ML models because it doesn't re
 
 <img src="../assets/img/build-decision.png" alt="build-algorithm">
 
-### Better approach to building a decision tree
+### Better approach to find the best splits
+
+Currently, we require `O(dim*(N*log(N) + K*(N^2)))` in order to calculate the best split for a given node. This is because, there are `dim` features in the dataset. Thus, we need to iterate over each dim. Now, for each dim we have `N` data points. Sorting them requires `N*log(N)`, and then we need to traverse the whole sorted row. While traversing, we need to calculate split at each `[i]` and `[i+1]` point. This takes overall of `O(N^2)` time complexity. For each split, we need to calculate entropy for `K` classes and hence even K appears in the complexity.
+
+Thus, the time complexity can be given as `O(dim*K*(N^2))`, because `N^2` dominates `N*log(N)`. However, this quadratic complexity is dangerous, as it scales badly with large datasets. Hence we try to find a better spliting approach by storing the values from previous computation.
+
+For instance, consider the data as `[5, 7, 3, 2]`. Now for a regression tree, we use Mean Squared Error (MSE). But, we can expand the formula of MSE and look at individual terms used in MSE.
+
+<img src="../assets/img/decision-optimization.jpg" alt="optimization">
+
+Now our complexity becomes linear, which is `O(dim*K*N)`. This complexity makes decision trees cheap to compute, and hence we can afford to perform bagging and boosting over trees.
 
 ## Results
 
 ### Classification
+
+The decision tree model trained on the gender dataset achieves an validation accuracy of `89.92`, and a test accuracy of `86.15%` on the test set. This is slightly less than the accuracy achieved by logistic regression and KNNs. We use a tree with depth `4` and min_instances as `5`. 
+
+However, decision tree are interpretable in nature and thus they reveal an interesting pattern about names. If we visualize the tree for gender classification, we obtain a diagram as follows.
+
+<img src="../assets/img/decision-gender-output.jpg" alt="decision-gender-output">
+
+We also run two samples `Preet` and `Sita` and traverse through the tree. Note that while traversing the tree, we should only compare unigrams with last letter of name, and bigrams with full name. For instance, while name `Mahendra` consists of `A`, since it is not the last character, it will go to the left of tree. For bigrams, we can compare it with any bigram obtained from name. For instance, `Mahendra` consists of bigram `EN`.
 
 ### Regression
 

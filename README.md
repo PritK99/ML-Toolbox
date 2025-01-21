@@ -84,6 +84,9 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄house price prediction.ipynb
  ┃ ┣ 📂Support Vector Machine
  ┃ ┣ 📄gender prediction.ipynb
+ ┣ 📂Decision Trees     
+ ┃ ┣ 📄gender prediction.ipynb                
+ ┃ ┣ 📄house price prediction.ipynb
  ┣ 📂Neural Networks     
  ┃ ┣ 📄gender prediction.ipynb                
  ┃ ┣ 📄house price prediction.ipynb
