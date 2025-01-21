@@ -89,7 +89,7 @@ However, decision tree are interpretable in nature and thus they reveal an inter
 
 <img src="../assets/img/decision-gender-output.jpg" alt="decision-gender-output">
 
-We also run two samples `Preet` and `Sita` and traverse through the tree. Note that while traversing the tree, we should only compare unigrams with last letter of name, and bigrams with full name. For instance, while name `Mahendra` consists of `A`, since it is not the last character, it will go to the left of tree. For bigrams, we can compare it with any bigram obtained from name. For instance, `Mahendra` consists of bigram `EN`.
+We also run two samples `Preet` and `Sita` and traverse through the tree. Note that while traversing the tree, we should only compare unigrams with last letter of name, and bigrams with full name. For instance, while name `Parul` consists of `A`, since it is not the last character, it will go to the left of tree. For bigrams, we can compare it with any bigram obtained from name. For instance, `Mahendra` consists of bigram `EN`.
 
 ### Regression
 
