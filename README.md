@@ -104,11 +104,11 @@ The following sections are still in progress:
 
 * Kernels
 * Neural Networks
-* Decision Trees
 * Association Rule Mining
 * KD Trees
 * Gaussian Processes
-* Notes
+* Bagging
+* Boosting
 
 ## References
 

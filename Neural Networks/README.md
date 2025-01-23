@@ -98,3 +98,21 @@ The cost function in deep learning is a Non-Convex function. While methods such 
 Due to this non-convex nature, even initialization of the parameters in nerual network matter a lot. This did not matter for linear regression because we were suce that we can reach the minimum from any given point. Additionally, initialization using a constant in neural networks will lead to all neurons learning the same thing and not break the symmetry.
 
 An explanation for different initialization techniques can be found in <a href="https://www.deeplearning.ai/ai-notes/initialization/index.html#:~:text=Initializing%20all%20the%20weights%20with,scheme%20will%20perform%20very%20poorly.">AI Notes</a> by DeepLearning.AI
+
+## Results
+
+### Classification
+
+For the task of gender prediction, we use a neural network with a single hidden layer consisting of `100` nodes. The architecture of the network is `[702, 200, 1]`, where:
+
+1) `702` represents the input layer size (the length of the input vector),
+2) `200` represents the number of nodes in the hidden layer,
+3) `1` represents the output layer size (binary classification: girl 0 or boy 1).
+
+We use the sigmoid activation function in the output layer since this is a binary classification problem. The model achieves a validation accuracy of `87.60%` and a test accuracy of `86.15%`. 
+
+It is worth noting that the performance of the neural network is highly dependent on the weight initializations. As a result, you may observe variations in accuracy each time you run the code. Roughly the accuracy lies between `80%` to `90%`. During multiple runs, the highest test accuracy recorded was `89.40%`.
+
+One clear observation from the Stochastic Gradient Descent (SGD) graph is its noisy nature. This behavior is expected due to the inherent randomness in SGD, as it updates weights based on individual data points rather than the entire dataset at once.
+
+### Regression
