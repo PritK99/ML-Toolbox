@@ -18,12 +18,22 @@ During inference, we look at the direction of the point relative to the hyperpla
 
 However, if the data isn't linearly separable, the algorithm will keep trying indefinitely. To avoid this, we can set a limit on the number of iterations.
 
+### Geometric Intuition
+
+<img src="../assets/img/perceptron-working.jpeg" alt="perceptron-working">
+
 ## Proof that Perceptron will always converge
 
 If the points are linearly separable (can be perfectly separated by a line or hyperplane), the Perceptron will converge to a solution (though not necessarily the best one). But if they're not separable, it will loop forever.
 
-<a href="https://www.youtube.com/watch?v=fHDouTKwfXw">Click Here</a> for proof that the Perceptron will always converge if the data fits our assumption.
+<img src="../assets/img/perceptron-proof1.jpeg" alt="perceptron proof">
+
+<img src="../assets/img/perceptron-proof2.jpeg" alt="perceptron proof">
+
+<img src="../assets/img/perceptron-proof3.jpeg" alt="perceptron proof">
+
+<a href="https://www.youtube.com/watch?v=fHDouTKwfXw">Click Here</a> for video explanation of proof that the Perceptron will always converge if the data fits our assumption.
 
 ## Results
 
-The Perceptron algorithm for Gender Classification converges in 58 steps when we consider features such as the last character, bigrams, and trigrams from the name. It achieves an accuracy of `86.15%` on the test data. However, when we simplify the features to only include the last character and bigrams, the algorithm struggles to converge. This indicates that the Perceptron excels in higher dimensions, where it can more effectively distinguish between classes.
+The Perceptron algorithm for Gender Classification converges in 58 steps when we consider features such as the last character, bigrams, and trigrams from the name. It achieves an accuracy of `85.38%` on the test data. However, when we simplify the features to only include the last character and bigrams, the algorithm struggles to converge. This indicates that the Perceptron excels in higher dimensions, where it can more effectively distinguish between classes.
