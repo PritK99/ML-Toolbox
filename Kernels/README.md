@@ -77,7 +77,3 @@ One way to debug kernelized implementations is to use a linear kernel and ensure
 ### Perceptron
 
 The Kernelized Perceptron converges in 12 steps when we consider features such as last character and bigrams from a name. Unlike regular Perceptron Algorithm whih required trigrams as a feature, Kernelized Perceptron are able to converge by just using last character and bigrams. It achieves an accuracy of `90%` on the training set which is significantly higher than `86.15%` by regular Perceptron. We use the Radial Basis Function Kernel for the same.
-
-### Linear Regression
-
-### Support Vector Machine

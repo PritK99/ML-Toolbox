@@ -36,4 +36,4 @@ If the points are linearly separable (can be perfectly separated by a line or hy
 
 ## Results
 
-The Perceptron algorithm for Gender Classification converges in 58 steps when we consider features such as the last character, bigrams, and trigrams from the name. It achieves an accuracy of `85.38%` on the test data. However, when we simplify the features to only include the last character and bigrams, the algorithm struggles to converge. This indicates that the Perceptron excels in higher dimensions, where it can more effectively distinguish between classes.
+The Perceptron algorithm for Gender Classification converges in `52` steps when we consider features such as the last character, bigrams, and trigrams from the name. It achieves an accuracy of `85.38%` on the test data. However, when we simplify the features to only include the last character and bigrams, the algorithm struggles to converge. This indicates that the Perceptron excels in higher dimensions, where it can more effectively distinguish between classes.
