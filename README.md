@@ -14,46 +14,45 @@
     - [Core Idea Behind Machine Learning](#core-idea-behind-machine-learning)
   - [Introduction to ML-Toolbox](#introduction-to-ml-toolbox)
   - [File Structure](#file-structure)
-  - [Results](#results)
-  - [Pending Section](#pending-section)
   - [References](#references)
   - [License](#license)
 
 ## About
 
-Machine learning is closely related to statistics and optimization. Each ML algorithm makes certain assumptions about the data, has a theory behind it, and comes with its own set of advantages and disadvantages. In this repository, I aim to understand the intuition, implement algorithms from scratch, and derive the proofs and theories behind them. By understanding the theory behind an algorithm and the characteristics of the data, we can optimize performance and achieve better results.
+Each machine learning algorithm is based on certain assumptions about the data, has an underlying theoretical foundation, and comes with its own set of advantages and disadvantages. In this repository, I aim to build intuition, implement algorithms from scratch, and derive the theoretical foundations and proofs behind them. By understanding both the theory behind an algorithm and the characteristics of the data, we can make more informed choices, improve performance, and achieve better results.
 
 ## Introduction to Machine Learning
 
 ### Traditional Programming vs Machine Learning
 
-Traditional programming is based on the idea of writing a program, providing it with an input, and receiving an output. This works well for all tasks where the rules can be clearly defined. Consider the problem of classifying a number as odd or even. This can be done by a simple if-else program.
+Traditional programming is based on the idea of writing a program, providing it with input, and receiving an output. This approach works well for tasks where the rules can be clearly defined. For example, classifying a number as odd or even can be easily handled by a simple if-else program.
 
 <img src = "assets/img/Traditional CS.png" alt="ML">
 
-For problems where the rules cannot be clearly defined, we use Machine Learning to generate these rules for us. Consider the problem of classifying an image as cat or dog. Writing a program for this would be very difficult. Machine Learning is the idea where we provide the computer with data and corresponding outputs and get the program. This phase is called training. Now we use these program, along with new data like traditional programming to get an output. This phase is called inference.
+However, for problems where the rules cannot be clearly defined, we turn to machine learning to automatically generate these rules from data. Consider the problem of classifying an image as a cat or a dog. Writing a rule-based program for this would be extremely difficult. Machine Learning is the process in which we provide a computer with data and corresponding outputs (labels), and it learns a function to map inputs to outputs. This phase is called training. Once trained, we can use the model on new data to make predictions, much like traditional programming. This phase is known as inference.
 
 <img src = "assets/img/ML.png" alt="ML">
 
 ### Core Idea behind Machine Learning
 
-Machine Learning is a subset of Artificial Intelligence (AI). While AI aims to imitate human thinking, Machine Learning focuses on using statistics to uncover patterns in data. For instance, in games like chess, AI uses strategies like minimax, similar to how humans strategize, while Machine Learning methods such as Linear Regression aim to draw the best-fitting line through data points, relying on statistics and pattern recognition rather than directly mimicking human thought processes.
+Machine Learning is a subset of Artificial Intelligence (AI). While AI broadly aims to mimic human intelligence and decision-making, ML focuses on using statistics to uncover patterns in data. For example, in games like chess, traditional AI might use algorithms like minimax, mimicking strategic human thinking. In contrast, ML methods such as linear regression use statistical techniques focusing on data-driven pattern recognition rather than explicitly imitating human strategies.
 
 <img src="assets/img/ml-idea.jpg" alt="ml-idea">
 
-The main goal of ML is to use observations or data to find the true function `f(x)` or probability distribution `P(x,y)` that closely approximates the relationship between inputs and outputs in the real world. Unlike traditional programming, where functions are manually defined, machine learning algorithms learn from data to automatically derive the most suitable function or model for a given task.
+he main goal of ML is to discover the underlying (but unknown) process that generates the observed data. We often model this as a probability distribution `P(x, y)`, which captures the relationship between inputs (`x`) and outputs (`y`) in the real world.
 
 ## Introduction to ML-Toolbox
 
-The ML-Toolbox is like a toolkit full of different machine learning methods, each offering its own form of `f(x)`. The trick is picking the right one for the job, which is kind of like choosing a setting on a tool – it depends on what we are trying to do. Neural networks are popular, but they're just one tool in the box, giving us outputs in the form of weights and biases.
+The ML-Toolbox is like a toolkit of various machine learning methods, each offering its own approach to modeling a function `f(x)`. The key is choosing the right tool for the task at hand, depending on the problem we're trying to solve. While neural networks are widely used, they’re just one tool in the box which produce outputs in the form of weights and biases.
 
-The core concept behind the ML-Toolbox is to grasp the diverse range of algorithms capable of generating forms of `f(x)`. Some widely used algorithms include Decision Trees, Neural Networks, Support Vector Machines, Random Forests, and K-Nearest Neighbors. The goal isn't to determine which method is the best; instead, it's about knowing when each method works well and when it might struggle. It's analogous to knowing when to use a screwdriver instead of a hammer.
+The core idea behind the ML-Toolbox is to develop an understanding of a broad range of algorithms, including Decision Trees, Neural Networks, Support Vector Machines, Random Forests, and K-Nearest Neighbors. The goal isn’t to declare one method as the best, but rather to understand the strengths and weaknesses of each. It's like knowing when to use a screwdriver instead of a hammer.
 
 ## File Structure
+
 ```
-👨‍💻ML-Toolbox
- ┣ 📂assets                                   
- ┃ ┣ 📂data                                 // datasets 
+ML-Toolbox/
+ ┣ 📂assets/                                 # Supporting resources
+ ┃ ┣ 📂data/                                 # Datasets used in experiments and examples
  ┃ ┃ ┣ 📄articles.csv
  ┃ ┃ ┣ 📄gender.csv
  ┃ ┃ ┣ 📄modified_mumbai_house_price.csv
@@ -61,41 +60,25 @@ The core concept behind the ML-Toolbox is to grasp the diverse range of algorith
  ┃ ┃ ┣ 📄student_marksheet.csv
  ┃ ┃ ┣ 📄titanic.csv
  ┃ ┃ ┣ 📄un_voting.csv 
- ┃ ┣ 📂img 
- ┃ ┣ 📂scripts    
- ┃ ┣ 📂notes              
- ┣ 📂Concept Learning                  
- ┣ 📂K Nearest Neighbors                    
- ┣ 📂Perceptron                             
- ┣ 📂Naive Bayes
- ┣ 📂Logistic Regression
- ┣ 📂Linear Regression     
- ┣ 📂Support Vector Machine
- ┣ 📂Kernels
- ┃ ┣ 📂Perceptron
- ┃ ┣ 📂Linear Regression
- ┃ ┣ 📂Support Vector Machine
- ┣ 📂Decision Trees     
- ┣ 📂Neural Networks     
- ┣ 📂K Means Clustering      
- ┣ 📄README.md
-``` 
-
-<img src="assets/img/model-vs-tasks.png" alt="models-vs-tasks">
-
-## Results
-
-## Pending Section
-
-The following sections are still in progress:
-
-* Kernels
-* Neural Networks
-* Association Rule Mining
-* KD Trees
-* Gaussian Processes
-* Bagging
-* Boosting
+ ┃ ┣ 📂img/                                  # Images used in documentation or notebooks
+ ┃ ┣ 📂scripts/                              # Utility or preprocessing scripts
+ ┃ ┣ 📂notes/                                # Theoretical notes and derivations, 
+ ┣ 📂Concept Learning/                       # Implementations and theory behind concept learning
+ ┣ 📂K Nearest Neighbors/
+ ┣ 📂Perceptron/
+ ┣ 📂Naive Bayes/
+ ┣ 📂Logistic Regression/
+ ┣ 📂Linear Regression/
+ ┣ 📂Support Vector Machine/
+ ┣ 📂Kernels/                                # Kernelized versions of various algorithms
+ ┃ ┣ 📂Perceptron/
+ ┃ ┣ 📂Linear Regression/
+ ┃ ┣ 📂Support Vector Machine/
+ ┣ 📂Decision Trees/
+ ┣ 📂Neural Networks/
+ ┣ 📂K Means Clustering/
+ ┣ 📄README.md                               # Project overview
+```
 
 ## References
 

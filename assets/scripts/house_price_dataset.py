@@ -1,6 +1,6 @@
 """
 Script Description:
-This script processes a data/mumbai_house_prices.csv and performs preprocessing on the data. The new dataset is saved to data/modified_mumbai_house_prices.csv
+This script performs preprocessing on data/mumbai_house_prices.csv and saves the modified dataset to data/modified_mumbai_house_prices.csv
 
 Preprocessing steps:
 1. Use "price" and "price_unit" to convert the price from different units to Crores only.
@@ -10,10 +10,9 @@ Preprocessing steps:
 """
 
 import pandas as pd
-import random
 import geocoder
 
-API_KEY = "Aid9ssLQ4RtJbVretXJ1QQFGxhv-6ZM27nltnH8_Ix1LmmMoElbc5xIyR7KFhx2p"
+API_KEY = ""
 
 # Read the input CSV file
 data = "../data/mumbai_house_prices.csv"

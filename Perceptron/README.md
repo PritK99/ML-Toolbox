@@ -20,6 +20,8 @@ However, if the data isn't linearly separable, the algorithm will keep trying in
 
 ### Geometric Intuition
 
+Adding `yx` of incorrectly classified example to weights `W` fixes the issue of misclassifciation because we add (if `Y = +1`) or subtract (if `Y = -1`) the data point vector to normal vector which fixes the issue.
+
 <img src="../assets/img/perceptron-working.jpeg" alt="perceptron-working">
 
 ## Proof that Perceptron will always converge

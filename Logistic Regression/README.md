@@ -6,8 +6,6 @@
 
 Logistic regression is a linear classifier and discriminative counterpart of Naive Bayes. It tries to learn `P(Y | X)` directly. This is different from Naive Bayes which learns `P(X | Y)` and `P(Y)`. 
 
-Consider the example of classification between cats and dogs. A generative model like naive bayes tries to understand what features makes an animal dog. Thus it tries to draw an image of what a dog might be. Discriminative model on the other hand tries to find the features which can distinguish a dog from cat. To put it simply, Generative model tries to understand what makes an animal a dog or a cat, while Discriminative model focuses on pinpointing the key features that tell them apart.
-
 ## Assumption
 
 Logistic regression is comparatively more flexible and does not make any strict assumptions about the data. It generally works well for data drawn from exponential family distribution. The exponential family consists of several common probability distributions, including the normal (Gaussian), exponential, Poisson, binomial, and gamma distributions, among others. 
