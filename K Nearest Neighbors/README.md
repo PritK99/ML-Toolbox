@@ -2,15 +2,11 @@
 
 <img src="../assets/img/knn1.webp" alt="KNN">
 
-## Introduction
-
-K Nearest Neighbors (KNNs) is a supervised machine learning algorithm that can be used for both classification and regression tasks. 
-
 ## Assumptions
 
-KNN operates under the assumption that instances that are close to each other in the feature space are likely to be similar. In other words, points that are similar to each other also tend to have similar target values. Thus the target value of a new instance is likely to be the same as its nearest neighbors.
+KNN assumes that data points that are close to each other in the feature space are likely to have similar labels. So when we get a new point, we find its nearest neighbors and give it a similar label.
 
-However, this assumption may not always hold, especially in datasets where the relationship between features and target values is not strictly dependent on proximity. For instance, consider a dataset concerning customer preferences, where features such as age and income are considered. Customers with similar ages and incomes may still have vastly different preferences.
+But this assumption does not always work. In some datasets, the relationship between features and target values is not based on how close the points are. For example, in geopolitics, neighboring countries often do not share the same interests. They might even be opposed to each other. In this case, the KNN idea that countries in the same region are similar does not hold.
 
 ## Algorithm
 

@@ -1,44 +1,83 @@
 # K Means Clustering
 
-<img src = "../assets/img/K-means-clustering.png" alt="k-means-clustering">
+<p align="center">
+  <img src="../assets/img/clustering.png" alt="../assets/img/clustering.png">
+  <br>
+  <small><i>Image source: https://developers.google.com/machine-learning/clustering/overview</i></small>
+</p>
 
-## Introduction
-
-### Unsupervised Learning
-
-Unsupervised learning is a method in machine learning where algorithms are employed to identify patterns in data without the need for labels. In simpler terms, it works with unlabeled data. The main aim of such methods is to uncover similarities, differences, or the underlying structure of the data.
-
-### Clustering
-
-Clustering is a technique within unsupervised machine learning that focuses on grouping similar data points. The idea is to partition the data into distinct and exhaustive groups, or "clusters." 
-
-Clustering can be posed as a Constrained Optimization problem, where we try to find a `C` such that it leads to minimum dissimilarity. This is subject to the constraint that we can have at most `K` clusters.
-
-<img src = "../assets/img/cluster-optimization.png" alt="cluster-optimization">
-
-This is called as K-means objective function. Hierarchical clustering and K-means clustering are algorithms used to find locally optimum solutions to the clustering problem.
-
-### Hierarchical vs K-Means Clustering
-
-Hierarchical clustering builds a hierarchy of clusters by either starting with individual data points as clusters and iteratively merging them or starting with all data points in one cluster and iteratively splitting them. This results in a tree-like structure called a dendrogram. Hierarchical clustering doesn't require specifying the number of clusters beforehand, which can be advantageous in certain scenarios. However, it can be computationally expensive for large datasets.
-
-On the other hand, K-means clustering is an iterative algorithm that partitions the data into a pre-defined number of clusters (K) by minimizing the sum of squared distances between data points and their respective cluster centroids. K-means is computationally efficient and works well with large datasets, but it requires specifying the number of clusters beforehand and is sensitive to the initial choice of centroids.
-
-### Clustering vs Classification
-
-The classification relies on labeled data for training. It learns from these labeled examples and then categorizes new instances based on what it has learned. In contrast, clustering works with unlabeled data. The clusters it generates represent partitions of the data, but these clusters don't carry semantic meaning as labels in classification do. Instead, they simply indicate similarities or patterns in the data.
+Clustering is an unsupervised learning technique where the primary goal is to discover groups or clusters within the data.
 
 ## Assumptions
 
-Similar to K-nearest neighbors (KNN), K-means clustering operates under the assumption that instances close to each other in the feature space are likely to be similar. In essence, K-means seeks to partition the data into clusters where points within each cluster are more similar to each other than to points in other clusters. This assumption is fundamental to the algorithm's effectiveness.
+K-Means Clustering makes three assumptions about the data:
 
-Additionally, K-means assumes that the variance of the distribution of each attribute (variable) is spherical. This means that the clusters formed by K-means tend to be globular or spherical, and the algorithm performs optimally when the clusters have similar sizes and densities.
+1) The data should have well-separated clusters.
 
-David Robinson's article <a href="http://varianceexplained.org/r/kmeans-free-lunch/#:~:text=k%2Dmeans%20assume%20the%20variance,then%20k%2Dmeans%20will%20fail.">K-means clustering is not a free lunch</a> provides an intuitive explanation of why these assumptions are crucial.
+2) The clusters should be spherical in shape. This assumption arises if we use Euclidean distance in clustering. In general, the shape of the clusters can vary depending on the distance metric used. For example, with Manhattan distance, the clusters are expected to be diamond-shaped.
+
+3) The clusters should be approximately the same size.
 
 ## Algorithm
 
-<img src="../assets/img/k-means-algorithm.png" alt="k-means-algorithm">
+The K-Means Clustering Algorithm is an iterative method consisting of two main steps. It begins by randomly selecting K initial centroids. The first step assigns each data point to the nearest centroid. In the second step, the centroids are updated to be the mean of the points assigned to them. These two steps are repeated until there are no further updates in the assignments or the centroids i.e. until the algorithm converges.
+
+<p align="center">
+  <img src="../assets/img/k-means-algorithm.jpeg" alt="../assets/img/k-means-algorithm.jpeg">
+</p>
+
+This formulation allows us to interpret K-Means as a form of coordinate descent. In the first step, we fix the centroids and determine the optimal cluster assignments for the data points. In the second step, we fix the assignments and update the centroids accordingly. This alternating optimization of fixing one part of the problem while optimizing the other is the essence of coordinate descent.
+
+
+
+## Choices
+
+The algorithm involves selecting 3 crucial things:
+
+1) The value of K
+2) Initialization of K mean points
+3) The distance Metric
+
+### How to choose K?
+
+The parameter `K` in clustering represents how many groups we want to divide our data into. As the value of `K` increases, the 
+
+
+We can sometimes figure out K if we know our data well. For example, if we want to 
+
+
+
+The elbow method involves trying different K values and plotting how compact the clusters are. We look for where adding more clusters doesn't make much difference, forming an "elbow" shape in the plot. That's usually a good K value.
+
+### How to initialize the K mean points?
+
+### How to choose the distance metric?
+
+
+## Extra Notes
+
+1) K-Means clustering requires that all features are scaled properly. For example, if only one feature is normalized while others are left unscaled, the resulting clusters may become elliptical or skewed. This violates the assumption of spherical clusters and will lead to inccorect clusters.
+
+2) K-Means relies on the notions of similarity and distance metrics. Therefore, it is affected by the curse of dimensionality. When the data is high-dimensional, distances between points become less meaningful, which can degrade clustering performance. In such cases, it is advisable to apply dimensionality reduction techniques before using K-Means.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Initialization
 
