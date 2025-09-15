@@ -65,6 +65,23 @@ Formally, the primary goal of machine learning is to discover the underlying (bu
 
 ## File Structure
 
+Phase II:
+
+```
+ML-Toolbox
+ ┣ 📂assets                               # Supporting resources
+ ┃ ┣ 📂data                               # Datasets used in experiments and examples
+ ┃ ┃ ┣ 📄customer_dataset.csv 
+ ┃ ┣ 📂img                                
+ ┣ 📂KNNs
+ ┣ 📂Linear Regression
+ ┣ 📂K Means Clustering
+ ┣ 📂GMMs
+ ┣ 📄README.md                              
+```
+
+Phase I:
+
 ```
 ML-Toolbox/
  ┣ 📂assets/                                 # Supporting resources
