@@ -12,6 +12,13 @@ A Gaussian Mixture Model (GMM) is a specific type of mixture model where the und
 
 Similar to clustering, GMMs is an unsupervised learning technique where the primary goal is to discover groups or clusters within the data. The only difference between clustering and GMMs is that GMMs take a probabilistic approach (soft assignment). This means that data points can belong to multiple clusters with different probabilities.
 
+The below GIF represents a sample output of fitting a GMM model for image segmentation.
+
+<p align="center">
+  <img src="../assets/img/fitting_gmms.gif" alt="../assets/img/fitting_gmms.gif">
+</p>
+
+
 ## Assumptions
 
 By definition, GMM assumes that each component (cluster) in the mixture is modeled by a multivariate Gaussian distribution with a mean vector <i>μ<sub>k</sub></i> and a covariance matrix <i>Σ<sub>k</sub></i>.
