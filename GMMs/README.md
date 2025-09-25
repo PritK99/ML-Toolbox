@@ -65,3 +65,17 @@ Using EM doesn't guarantee global optimum, and hence we need to run it a few tim
 2) If we cannot closed-form updates for the M step in EM algorithm, we could take a Newton or gradient step instead.
 
 ## Results
+
+We use GMMs for customer analysis and image segmentation tasks.
+
+### Image Segmentation
+
+Here, we know the value of `K = 3`. This is because we need to form clusters for urban region, water bodies and vegetation. This is an example of problem where we know the value of K.
+
+<p align="center">
+  <img src="../assets/img/gmm_segmented_image_1.png" alt="../assets/data/satellite_1.png">
+</p>
+
+<p align="center">
+  <img src="../assets/img/gmm_segmented_image_2.png" alt="../assets/data/satellite_2.png">
+</p>

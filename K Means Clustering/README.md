@@ -45,20 +45,23 @@ The parameter `K` in clustering represents how many groups we want to divide our
 
 We can sometimes figure out K if we know our data well. For example, if we want to 
 
-
-
 The elbow method involves trying different K values and plotting how compact the clusters are. We look for where adding more clusters doesn't make much difference, forming an "elbow" shape in the plot. That's usually a good K value.
 
 ### How to initialize the K mean points?
 
 ### How to choose the distance metric?
 
+For K-Means, we generally choose Euclidean distance. This is because with Euclidean distance, we can guarantee that K-Means will converge. While this does not mean that K-Means with manhattan will lead to bad results, but we can not provide a gaurantee that it will converge. Thus for K-Means, using Euclidean distance is the ideal choice. For K-Median, using Manhattan distance is the ideal choice for convergence.
 
 ## Extra Notes
 
 1) K-Means clustering requires that all features are scaled properly. For example, if only one feature is normalized while others are left unscaled, the resulting clusters may become elliptical or skewed. This violates the assumption of spherical clusters and will lead to inccorect clusters.
 
 2) K-Means relies on the notions of similarity and distance metrics. Therefore, it is affected by the curse of dimensionality. When the data is high-dimensional, distances between points become less meaningful, which can degrade clustering performance. In such cases, it is advisable to apply dimensionality reduction techniques before using K-Means.
+
+3) K-Means algorithm is guaranteed to converge. The proof for the same can be found <a href="https://www.youtube.com/watch?v=5geXmawaImk">here</a>. The basic idea behind proof is that for a dataset of `n` items and `k` clusters, there can be a maximum of <i>n<sup>k</sup></i> partitions possible, and such that each partition is associated with a score. This is a finite number of partitions. Additionally, using means at each iteration to reduce the sum of squared error (Euclidean distance) is always optimal. Hence, we are sure that if we are at a partion `p` and choose to go to partition `p+1`, the sum of squared errors will always be lesser. Hence, we can never revisit partition `p` again, because it's score would be strictly higher than where we are right now.
+
+4) The above proof for K-Means can be extended for K Medians, but it will work only if we use manhattan distance and medians. Using median and Euclidean distance will not be able to gaurantee that we will never revisit a visited partition. However, manhattan distance and median will provide that guarantee. Hence, for K Median, using manhattan distance will always converge, but using Euclidean will not. 
 
 
 
