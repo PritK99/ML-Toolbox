@@ -46,6 +46,8 @@ Essentially, this is what deep learning does. It learns low-level representation
 
 <img src="../assets/img/nn-plane-eg.webp" alt="nn-plane-eg">
 
+<img src="../assets/img/activation_visualization.png" alt="nn-plane-eg">
+
 To visualize how ReLU functions combine to yield a close prediction, these graphs can be plotted on Desmos. <a href="https://www.desmos.com/calculator">Click here</a> to access Desmos.
 
 For a visualization of how deep learning operates, you can watch the amazing playlist by 3Blue1Brown on <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural Networks</a>.
