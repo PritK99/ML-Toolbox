@@ -11,7 +11,7 @@ from sklearn.metrics import r2_score
 
 # Generating data
 x = np.linspace(-2, 2, 100).reshape(-1, 1)
-y_true = x**2 + 4    # np.sin(x) + np.cos(x), x**3, 
+y_true = x**3 + np.exp(x) + np.sin(x**10) + (x**2)*np.cos(np.cos(x)) # x**2 + 4 # np.sin(x) + np.cos(x) 
 
 X_tensor = torch.FloatTensor(x)
 y_tensor = torch.FloatTensor(y_true)
@@ -33,17 +33,19 @@ class ActivationNet(nn.Module):
             x = torch.sigmoid(x)
         elif self.activation == 'sin':
             x = torch.sin(x)
+        elif self.activation == 'xlog':
+            x = torch.relu(x**30)
 
         return self.output(x)    # W2.T @ (activation_function(W1.T @ X + B1)) + B2
 
-activations = ['relu', 'sigmoid', 'sin']
+activations = ['relu', 'sigmoid', 'sin', 'xlog']
 models = {}
 predictions = {}
 neuron_activations = {}
 losses = {}
 r2_scores = {}
 
-hidden_units = 8
+hidden_units = 4
 
 for activation in activations:
     print(f"Using {activation}")
@@ -77,8 +79,11 @@ for activation in activations:
             neuron_activations[activation] = torch.sigmoid(hidden_output).numpy()
         elif activation == 'sin':
             neuron_activations[activation] = torch.sin(hidden_output).numpy()
+        elif activation == 'xlog':
+            x = hidden_output
+            neuron_activations[activation] = torch.sigmoid(torch.relu(hidden_output))
 
-fig, axes = plt.subplots(2, 3, figsize=(20, 8))
+fig, axes = plt.subplots(2, 4, figsize=(20, 8))
 
 for i, activation in enumerate(activations):
     ax = axes[0, i]
@@ -102,4 +107,4 @@ for i, activation in enumerate(activations):
     ax.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.show()
+plt.savefig("./out.png")
