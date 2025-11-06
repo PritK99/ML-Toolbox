@@ -1,3 +1,8 @@
 pandas>=1.5.0
 numpy>=1.23.0
 matplotlib>=3.5.0
+torch
+torchvision
+tqdm
+torchview
+scikit-learn
