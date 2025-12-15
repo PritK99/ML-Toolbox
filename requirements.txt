@@ -6,3 +6,4 @@ torchvision
 tqdm
 torchview
 scikit-learn
+Levenshtein

@@ -1,16 +1,21 @@
 # K Nearest Neighbors (KNNs)
 
-<img src="../assets/img/knn1.webp" alt="KNN">
+<p align="center">
+  <img src = "../assets/img/knn-quote.jpeg" alt="KNN">
+  <br>
+  <small><i>Image source: https://www.linkedin.com/pulse/youre-average-five-people-you-spend-most-time-richard-goold (KNN where K = 5)</i></small>
+</p>
+
 
 ## Assumptions
 
 KNN assumes that data points that are close to each other in the feature space are likely to have similar labels. So when we get a new point, we find its nearest neighbors and give it a similar label.
 
-But this assumption does not always work. In some datasets, the relationship between features and target values is not based on how close the points are. For example, in geopolitics, neighboring countries often do not share the same interests. They might even be opposed to each other. In this case, the KNN idea that countries in the same region are similar does not hold.
+But this assumption does not always work. In some datasets, the relationship between features and target values is not based on how close the points are. For example, in geopolitics, neighboring countries often do not share the same interests. They might even be opposed to each other. In this case, the KNN idea that countries in the same region have similar policies might not hold.
 
 ## Algorithm
 
-The KNN Algorithm simple looks for the K nearest neighbors based on a distance metric, and takes a vote among them. For regression, it can be average of all values.
+The KNN Algorithm simply looks for the K nearest neighbors based on a distance metric, and takes a vote among them. For classification, we out the majority. For regression, output can be average of all neighbors.
 
 The KNN algorithm is only as good as its distance metric. The distance metric should be such that it captures the similarity between instances appropriately. 
 
@@ -30,7 +35,7 @@ Consider analyzing user behavior on an e-learning platform, with features like n
 
 Once the similarity metric is defined, for any given test point, we look at its `k` nearest neighbors and take the majority vote of the classes of these neighbors for classification and average of the target values for regression. 
 
-The choice of the parameter `k` (the number of neighbors) is crucial, as it impacts the model's sensitivity to noise and generalization ability. A smaller ```k``` may result in a model that is sensitive to noise, while a larger ```k``` may lead to a model that is too generalized. The optimal `k` is often determined through validation methods.
+The choice of the parameter `k` (the number of neighbors) is crucial. A smaller ```k``` may result in a model that is sensitive to noise, while a larger ```k``` may lead to a model that is too generalized. The optimal `k` is often determined through validation methods.
 
 ## Curse of Dimensionality in KNNs
 
@@ -42,24 +47,41 @@ One consequence of this challenge is that the nearest neighbor found by the algo
 
 In these cases, algorithms like the perceptron may be more suitable for classification tasks. The perceptron, for instance, can handle higher dimensions more gracefully and is less affected by the curse of dimensionality.
 
-However, it's essential to note that there are instances where datasets possess large dimensions but low intrinsic dimensionality. In such cases, KNN can still be effective. For example, images often have high dimensions but low intrinsic dimensionality, meaning that important information can be captured in fewer dimensions. Techniques like Principal Component Analysis (PCA) can help in reducing the dimensions while preserving most of the important information, making KNN applicable even in high-dimensional scenarios.
+However, it's essential to note that there are instances where datasets possess large dimensions but low intrinsic dimensionality. In such cases, KNN can still be effective. For example, images often have high dimensions but low intrinsic dimensionality, meaning that important information can be captured in fewer dimensions. 
 
 ## Results
 
 ### Classification
 
-Our goal was to build a system that could classify names as belonging to boys or girls. We had two options:
+Our goal was to build a system that could classify first names as boy or girl. We had two options:
 
 * Full Name as Text: This keeps the name as it is, "John" or "Sarah".
 * Encoded Name: We converted the name into a vector of 702 numbers. This vector was made up of the last letter and bigrams (like "ia" or "th").
 
-We used various distance metrics such as Manhattan distance, Euclidean Distance, Cosine Similarity, Hamming Distance to measure the distance between vectors, but none of these methods worked well. This might be because we didn't have enough data to make sense of such a complex representation. This might be due to curse of dimensionality.
+We used various distance metrics on encoded names to measure the distance between vectors, but none of these methods worked well. This might be because we didn't have enough data to make sense of such a complex representation. This might be due to curse of dimensionality.
 
-Since that didn't work, we decided comparing the names directly as text. We used minimum edit distance as the distance metric. This calculates the minimum number of changes (insertions, deletions, or replacements) needed to turn one name into another. This method of using minimum edit distance as distance metric proved to be more effective and achieved an accuracy of `82.45%` on test data with `K=17`. 
+Since that didn't work, we decided comparing the names directly as text. We used minimum edit distance as the distance metric. This calculates the minimum number of changes (insertions, deletions, or replacements) needed to turn one name into another. This method of using minimum edit distance as distance metric proved to be more effective.
 
-However this method has a shortcoming. Consider the names 'Prit' and 'Priti'. Clearly, the vowel on the end changes the gender. However, both of these names differ by edit distance of 1. Thus, we design a new metric for Indian names, accounting for the fact that addition of a vowel in end changes gender. A special adjustment is made to edit distance when the edit distance is 1 and the names only differ by a vowel at the end (e.g., "Shrey" and "Shreya"). In such cases, based on domain knowledge, the labels of the training samples are swapped (using XOR on the label), which might represent handling specific domain nuances. This method provided a validation accuracy of `86.82%` and a test accuracy of `83.84%` for `K=17`. 
+However this method had a shortcoming. Consider the names 'Prit' and 'Priti'. Clearly, the vowel on the end changes the gender. However, both of these names differ by edit distance of 1. Thus, we design a new metric for Indian names, accounting for the fact that addition of a vowel in end changes gender. A special adjustment is made to edit distance when the edit distance is 1 and the names only differ by a vowel at the end (e.g., "Shrey" and "Shreya"). In such cases, based on domain knowledge, the labels of the training samples are swapped (using XOR on the label), which might represent handling specific domain nuances. While we expected this trick to improve the performance of model, we found a decline on validation set. Hence for the test set, we do not use this trick.
 
-Further, by using weighted KNN woth `K=17`, we get a validation accuracy of `87.82%` and a test accuracy of `86.15%`.
+KNNs provided accuracy of `84.75%` on test set for `K=251`. 
+
+We try running the model on a few samples. 
+
+```
+names = ["Emma", "Jacob", "Preetika", "Raavan", "Mandodari", "Zooni", "Chandanbala"]
+
+I am 64.96% sure that emma is a girl.
+I am 50.36% sure that jacob is a boy.
+I am 100.00% sure that preetika is a girl.
+I am 59.09% sure that raavan is a boy.
+I am 60.13% sure that mandodari is a girl.
+I am 63.97% sure that zooni is a girl.
+I am 61.94% sure that chandanbala is a girl.
+```
+
+**Note:** We use average of neighbor votes as confidence value.
+
 
 ### Regression
 
@@ -87,3 +109,29 @@ Recommendation 4: Impact of euro played down The damage to exports caused by a s
 Recommendation 5: Survey: Surge in layoffs, hiring Challenger survey finds most job cuts in 6 months; seasonal hiring by retailers lifts new jobs. NEW YORK (CNN/Money) - Employers increased both hiring and layoff plans in August, according to a survey released Tuesday by an outplacement firm.
 
 ```
+
+# KD Trees
+
+<p align="center">
+  <img src = "../assets/img/kd_trees.png" alt="KD Trees">
+  <br>
+  <small><i>Image source: https://www.astroml.org/book_figures/chapter2/fig_kdtree_example.html</i></small>
+</p>
+
+KD Trees is a data structure built over KNNs to reduce inference time. Instead of comparing a test point with every data point, KD-Trees organize the data so we can skip many unnecessary comparisons.
+
+The main idea is to split the data space into two parts. When a new point is given, we first check which part it belongs to. We search that part first. We only search the other part if it might contain a closer neighbor than the ones we have already found. By repeating this splitting process, the data forms a tree structure. This allows us to quickly narrow down the search and reduces the time needed to find nearest neighbors.
+
+<p align="center">
+  <img src = "../assets/img/india_map.jpg" alt="India Map">
+  <br>
+  <small><i>Image source: https://www.mapsofindia.com/zonal/</i></small>
+</p>
+
+Imagine you are standing in a large crowd and want to find who your nearest neighbors are. The standard kNN approach would be to ask every person where they live. A smarter approach is to first divide the crowd into groups. For example, ask everyone from southern India to raise their hands. If you also live in southern India, your nearest neighbors are more likely to be in this group, so you check them first.
+
+There are cases where this may not be enough. For example, if you live in Telangana, some people from Maharashtra might actually be closer to you. In such situations, you also need to check the other group. Even in the worst case, you may still need to check everyone, which is no worse than the original kNN approach. But in most cases, this method saves a lot of work by avoiding unnecessary checks. This is similar to hit-miss concept in caching. There are a few instances where you will have to go to main memory, but for many cases, cache memory will provide you a faster inference.
+
+## Limitations
+
+Similar to KNNs, KD trees also suffer from curse of dimensionality. However, unlike KNNs which work for low intrinsic dimensionality, KD trees can not even work for low intrinsic dimensionality. KD-Trees divide the space using axis-aligned splits (splits along one feature at a time). In high dimensions, even if the data actually lies on a low-dimensional manifold, these axis-aligned splits do not align well with the true shape of the data. As a result, nearby points often end up in different partitions. For such cases, we can use ball trees. 
