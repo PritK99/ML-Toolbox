@@ -1,18 +1,13 @@
 # Autoencoder Family
 
-<div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
-  <div style="text-align: center;">
-    <img src="../assets/img/latent_space_visualization.png" alt="Abstraction" width="250">
-    <br>
-    <small><i>Visualizing latent vectors (Abstraction)</i></small>
-  </div>
+<div align="center">
 
-  <div style="text-align: center;">
-    <img src="../assets/img/reconstruction_from_T-shirt_Bag.png" alt="Generation" height="75" width="300">
-    <br>
-    <small><i>Creating new samples (Generation)</i></small>
-  </div>
+| Visualizing latent vectors (Abstraction) | Creating new samples (Generation) |
+|:-----------:|:--------------------------:|
+| <img src="../assets/img/latent_space_visualization.png" alt="Abstraction" width="250"> | <img src="../assets/img/reconstruction_from_T-shirt_Bag.png" alt="Generation" width="300"> |
+
 </div>
+
 
 ## Introduction
 
@@ -20,11 +15,10 @@ Apart from tasks like classification, regression, clustering, etc., we are also 
 
 ## Vanilla Autoencoders
 
-
 <p align="center">
-  <img src = "../assets/img/autoencoder.png" alt="autoencoders">
+  <img src = "../assets/img/autoencoder.png" alt="autoencoders" width="600">
   <br>
-  <small><i>Creating new samples (Generation)</i></small>
+  <small><i>Image Source: https://medium.com/data-science/applied-deep-learning-part-3-autoencoders-1c083af4d798</i></small>
 </p>
 
 ### Results
@@ -70,3 +64,19 @@ We wanted to explore how the autoencoder behaves when its input is distorted. Fo
 </p>
 
 Here, K denotes the multiple of 90 degree that was used to rotate the image. The rotations are random, even across epochs, but still the autoencoder has managed to reconstruct the original image.
+
+### Stress Test 01: Jigsaw Permutations
+
+An even more challenging task is to apply jigsaw permutations to the input images before feeding them to the autoencoder. This is an extreme task, but still the autoencoder performs very well. If we notice a few examples carefully, such as 8th and 10th example, the outputs have some artifacts. But still, producing these outputs from jigsawed input is very challenging.
+
+<p align="center">
+  <img src = "../assets/img/jigsaw_reconstructed_samples_epoch_1.png" alt="random-rotations">
+  <br>
+  <small><i>After 1st epoch</i></small>
+</p>
+
+<p align="center">
+  <img src = "../assets/img/jigsaw_reconstructed_samples_epoch_20.png" alt="random-rotations">
+  <br>
+  <small><i>After 20th epoch</i></small>
+</p>
