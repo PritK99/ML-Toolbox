@@ -56,7 +56,6 @@ class AlexNet(nn.Module):
 
         x = x.view((x.size(0), -1))    # (6, 6, 256) -> (1, 9216)
 
-        print(x.size())
         x = self.ffn1(x)    # (1, 9216) -> (1, 4096)
         x = self.relu(x)
         x = self.dropout(x)
@@ -72,11 +71,13 @@ class AlexNet(nn.Module):
 def train_one_epoch(model, train_dataloader, val_dataloader, loss_func, optimizer, device):
     train_loss = 0
     val_loss = 0
-
+    
     model.train()
+    train_counts = 0
     for img, label in tqdm(train_dataloader):
         img = img.to(device)
         label = label.to(device)
+        train_counts += len(img)
 
         pred = model(img)
 
@@ -89,10 +90,12 @@ def train_one_epoch(model, train_dataloader, val_dataloader, loss_func, optimize
     
     model.eval()
     accuracy = 0
+    val_counts = 0
     with torch.no_grad():
         for img, label in tqdm(val_dataloader):
             img = img.to(device)
             label = label.to(device)
+            val_counts += len(img)
 
             pred = model(img)
 
@@ -102,13 +105,14 @@ def train_one_epoch(model, train_dataloader, val_dataloader, loss_func, optimize
             loss = loss_func(pred, label)
             val_loss += loss.item()
     
-    train_loss /= len(train_dataloader)
-    val_loss /= len(val_dataloader)
-    accuracy /= (256*len(val_dataloader))
+    train_loss /= train_counts
+    val_loss /= val_counts
+    accuracy /= val_counts
 
     return train_loss, val_loss, accuracy
 
 def train(model, train_dataloader, val_dataloader, num_epochs, loss_func, optimizer, device):
+    best_val_accuracy = 0
     train_losses = []
     val_losses = []
     accuracies = []
@@ -119,23 +123,44 @@ def train(model, train_dataloader, val_dataloader, num_epochs, loss_func, optimi
         val_losses.append(val_loss)
         accuracies.append(accuracy)
 
-        checkpoint_path = os.path.join("alexnet_checkpoints", f"epoch_{epoch+1}.pt")
-        torch.save({
-                "epoch": epoch + 1,
-                "model_state_dict": model.state_dict(),
-                "optimizer_state_dict": optimizer.state_dict(),
-                "train_loss": train_loss,
-                "val_loss": val_loss,
-            },checkpoint_path)
-        print(f"Saved model to {checkpoint_path}")
+        if (accuracy > best_val_accuracy):
+            best_val_accuracy = accuracy
+            checkpoint_path = os.path.join("alexnet_checkpoints", f"best_model.pt")
+            torch.save({
+                    "epoch": epoch + 1,
+                    "model_state_dict": model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "train_loss": train_loss,
+                    "val_loss": val_loss,
+                },checkpoint_path)
+            print(f"Saved model to {checkpoint_path}", flush=True)
 
-        print(f"Completed epoch {epoch}: Train loss = {train_loss}, Val loss = {val_loss}, Accuracy: {accuracy}")
+            print(f"Completed epoch {epoch}: Train loss = {train_loss}, Val loss = {val_loss}, Accuracy: {accuracy}", flush=True)
     
     return train_losses, val_losses, accuracies
 
+def test(model, test_dataloader, device):
+    model.eval()
+    accuracy = 0
+    counts = 0
+    with torch.no_grad():
+        for img, label in tqdm(test_dataloader):
+            img = img.to(device)
+            label = label.to(device)
+            counts += len(img)
+
+            pred = model(img)
+            _, pred_class = pred.max(1)
+            accuracy += pred_class.eq(label).sum().item()
+
+    accuracy /= counts
+
+    return accuracy
+
 # Defining dataloader
-train_path = "/scratch/pritk/ILSVRC/Data/CLS-LOC/train"
-val_path = "/scratch/pritk/ILSVRC/Data/CLS-LOC/val"
+train_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/train"
+val_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/val"
+test_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/test"
 
 train_transforms = transforms.Compose([
     transforms.Resize(256),
@@ -154,23 +179,33 @@ val_transforms = transforms.Compose([
                          std=[0.229, 0.224, 0.225])
 ])
 
+test_transforms = transforms.Compose([
+    transforms.Resize(256),
+    transforms.CenterCrop(227),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                         std=[0.229, 0.224, 0.225])
+])
+
 train_dataset = datasets.ImageFolder(train_path, transform=train_transforms)
 val_dataset = datasets.ImageFolder(val_path, transform=val_transforms)
+test_dataset = datasets.ImageFolder(test_path, transform=val_transforms)
 train_dataloader = DataLoader(train_dataset, batch_size=256, shuffle=True, num_workers=8, pin_memory=True)
 val_dataloader = DataLoader(val_dataset, batch_size=256, shuffle=False, num_workers=8, pin_memory=True)
+test_dataloader = DataLoader(test_dataset, batch_size=256, shuffle=False, num_workers=8, pin_memory=True)
 
 # Defining device, model, optimizer, and loss function
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
+print(f"Using device: {device}", flush=True)
 
 alexnet = AlexNet()
 alexnet = alexnet.to(device)
 trainable_params = sum(p.numel() for p in alexnet.parameters() if p.requires_grad)
-print(f"Trainable parameters: {trainable_params}")
+print(f"Trainable parameters: {trainable_params}", flush=True)
 
 os.makedirs("alexnet_checkpoints", exist_ok=True)
-model_graph = draw_graph(alexnet, input_size=(256, 3, 227, 227), device='meta')
-model_graph.visual_graph.render("alexnet_checkpoints/alexnet_architecture", format="png", cleanup=True)
+# model_graph = draw_graph(alexnet, input_size=(256, 3, 227, 227), device='meta')
+# model_graph.visual_graph.render("alexnet_checkpoints/alexnet_architecture", format="png", cleanup=True)
 
 optimizer = torch.optim.SGD(alexnet.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0005)
 loss_func = nn.CrossEntropyLoss()
@@ -194,7 +229,7 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.savefig("alexnet_checkpoints/loss_curve.png")
-print("Saved loss curves to ./alexnet_checkpoints/loss_curve.png")
+print("Saved loss curves to ./alexnet_checkpoints/loss_curve.png", flush=True)
 
 plt.figure(figsize=(10, 6))
 plt.plot(epochs, accuracies, marker='o', color='green', label='Validation Accuracy')
@@ -207,4 +242,13 @@ plt.legend()
 plt.grid(True)
 plt.tight_layout()
 plt.savefig("alexnet_checkpoints/accuracy_curve.png")
-print("Saved accuracy curve to ./alexnet_checkpoints/accuracy_curve.png")
+print("Saved accuracy curve to ./alexnet_checkpoints/accuracy_curve.png", flush=True)
+
+# Running the best model on test set
+checkpoint_path = "alexnet_checkpoints/best_model.pt"
+
+checkpoint = torch.load(checkpoint_path, map_location=device)
+alexnet.load_state_dict(checkpoint["model_state_dict"])
+alexnet.to(device)
+test_accuracy = test(alexnet, test_dataloader, device)
+print(f"Final Accuracy: {test_accuracy}", flush=True)
