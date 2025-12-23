@@ -7,6 +7,6 @@
 #SBATCH -w gnode055
 #SBATCH --output=alexnet_logs.txt
 
-cd /scratch/pritk/
+cd /ssd_scratch/alexnet/
 source venv/bin/activate
 python alexnet.py

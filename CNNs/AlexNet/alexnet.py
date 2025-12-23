@@ -4,7 +4,7 @@ import torch.nn as nn
 import numpy as np
 from tqdm import tqdm
 from torchvision import transforms, datasets
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, ConcatDataset
 import matplotlib.pyplot as plt
 from torchview import draw_graph
 
@@ -68,54 +68,62 @@ class AlexNet(nn.Module):
 
         return x
 
-def train_one_epoch(model, train_dataloader, val_dataloader, loss_func, optimizer, device):
+def train_one_epoch(model, train_dataloader, val_dataloader, loss_func, optimizer, device, validate = True):
     train_loss = 0
     val_loss = 0
     
     model.train()
-    train_counts = 0
     for img, label in tqdm(train_dataloader):
         img = img.to(device)
         label = label.to(device)
-        train_counts += len(img)
 
         pred = model(img)
-
         loss = loss_func(pred, label)
         train_loss += loss.item()
 
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+
+    # Validation is only required when searching for best model over val dataset
+    if (validate):
+        model.eval()
+        accuracy = 0
+        val_counts = 0
+        with torch.no_grad():
+            for img, label in tqdm(val_dataloader):
+                img = img.to(device)
+                label = label.to(device)
+                val_counts += len(img)
+
+                pred = model(img)
+
+                _, pred_class = pred.max(1)
+                accuracy += pred_class.eq(label).sum().item()
+
+                loss = loss_func(pred, label)
+                val_loss += loss.item()
+
+        train_loss /= len(train_dataloader)
+        val_loss /= len(val_dataloader)
+        accuracy /= val_counts
+    else:
+        train_loss = None
+        val_loss = None
+        accuracy = None
     
-    model.eval()
-    accuracy = 0
-    val_counts = 0
-    with torch.no_grad():
-        for img, label in tqdm(val_dataloader):
-            img = img.to(device)
-            label = label.to(device)
-            val_counts += len(img)
-
-            pred = model(img)
-
-            _, pred_class = pred.max(1)
-            accuracy += pred_class.eq(label).sum().item()
-
-            loss = loss_func(pred, label)
-            val_loss += loss.item()
-    
-    train_loss /= train_counts
-    val_loss /= val_counts
-    accuracy /= val_counts
-
     return train_loss, val_loss, accuracy
 
 def train(model, train_dataloader, val_dataloader, num_epochs, loss_func, optimizer, device):
     best_val_accuracy = 0
+    optimal_num_epochs = 0
+    scheduler = []
     train_losses = []
     val_losses = []
     accuracies = []
+    threshold = 0.001
+    plateau_count = 0
+    patience = 5
 
     for epoch in range(num_epochs):
         train_loss, val_loss, accuracy = train_one_epoch(model, train_dataloader, val_dataloader, loss_func, optimizer, device)
@@ -123,21 +131,53 @@ def train(model, train_dataloader, val_dataloader, num_epochs, loss_func, optimi
         val_losses.append(val_loss)
         accuracies.append(accuracy)
 
-        if (accuracy > best_val_accuracy):
+        print(f"Completed epoch {epoch}: Train loss = {train_loss}, Val loss = {val_loss}, Accuracy: {accuracy}", flush=True)
+        
+        # If validation accuracy starts to plateau, we reduce lr 
+        if (accuracy > best_val_accuracy + threshold):    
+            plateau_count = 0
             best_val_accuracy = accuracy
+            optimal_num_epochs = epoch + 1
+
             checkpoint_path = os.path.join("alexnet_checkpoints", f"best_model.pt")
             torch.save({
                     "epoch": epoch + 1,
                     "model_state_dict": model.state_dict(),
                     "optimizer_state_dict": optimizer.state_dict(),
-                    "train_loss": train_loss,
-                    "val_loss": val_loss,
                 },checkpoint_path)
             print(f"Saved model to {checkpoint_path}", flush=True)
+        else:
+            plateau_count += 1
+        
+        if plateau_count >= patience:
+            scheduler.append(epoch + 1)    # We need to store the specific epoch where we reduced lr as we will require this for combined evaluation
+            for param_group in optimizer.param_groups:
+                param_group['lr'] *= 0.1
 
-            print(f"Completed epoch {epoch}: Train loss = {train_loss}, Val loss = {val_loss}, Accuracy: {accuracy}", flush=True)
+            plateau_count = 0 
+            print(f"LR reduced to {optimizer.param_groups[0]['lr']}")
     
-    return train_losses, val_losses, accuracies
+    return train_losses, val_losses, accuracies, optimal_num_epochs, scheduler
+
+def train_combined(model, combined_dataloader, optimal_num_epochs, scheduler, loss_func, optimizer, device):
+
+    for epoch in range(optimal_num_epochs):
+        train_loss, val_loss, accuracy = train_one_epoch(model, combined_dataloader, None, loss_func, optimizer, device, validate = False)    # We do not require validation for combined evaluation
+        print(f"Completed epoch {epoch}")
+
+        if (len(scheduler) > 0):
+            if (epoch + 1) in scheduler:
+                for param_group in optimizer.param_groups:
+                    param_group['lr'] *= 0.1
+
+    # Saving the final model
+    checkpoint_path = os.path.join("alexnet_checkpoints", f"best_model.pt")
+    torch.save({
+            "epoch": epoch + 1,
+            "model_state_dict": model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
+        },checkpoint_path)
+    print(f"Saved model to {checkpoint_path}", flush=True)
 
 def test(model, test_dataloader, device):
     model.eval()
@@ -160,7 +200,7 @@ def test(model, test_dataloader, device):
 # Defining dataloader
 train_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/train"
 val_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/val"
-test_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/test"
+# test_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/test"
 
 train_transforms = transforms.Compose([
     transforms.Resize(256),
@@ -179,20 +219,12 @@ val_transforms = transforms.Compose([
                          std=[0.229, 0.224, 0.225])
 ])
 
-test_transforms = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(227),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                         std=[0.229, 0.224, 0.225])
-])
-
 train_dataset = datasets.ImageFolder(train_path, transform=train_transforms)
 val_dataset = datasets.ImageFolder(val_path, transform=val_transforms)
-test_dataset = datasets.ImageFolder(test_path, transform=val_transforms)
+# test_dataset = datasets.ImageFolder(test_path, transform=val_transforms)
 train_dataloader = DataLoader(train_dataset, batch_size=256, shuffle=True, num_workers=8, pin_memory=True)
 val_dataloader = DataLoader(val_dataset, batch_size=256, shuffle=False, num_workers=8, pin_memory=True)
-test_dataloader = DataLoader(test_dataset, batch_size=256, shuffle=False, num_workers=8, pin_memory=True)
+# test_dataloader = DataLoader(test_dataset, batch_size=256, shuffle=False, num_workers=8, pin_memory=True)
 
 # Defining device, model, optimizer, and loss function
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -210,8 +242,8 @@ os.makedirs("alexnet_checkpoints", exist_ok=True)
 optimizer = torch.optim.SGD(alexnet.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0005)
 loss_func = nn.CrossEntropyLoss()
 
-num_epochs = 5
-train_losses, val_losses, accuracies = train(alexnet, train_dataloader, val_dataloader, num_epochs, loss_func, optimizer, device)
+num_epochs = 90
+train_losses, val_losses, accuracies, optimal_num_epochs, scheduler = train(alexnet, train_dataloader, val_dataloader, num_epochs, loss_func, optimizer, device)
 
 # Plotting loss curves and accuracy
 epochs = range(1, len(train_losses) + 1)
@@ -244,11 +276,25 @@ plt.tight_layout()
 plt.savefig("alexnet_checkpoints/accuracy_curve.png")
 print("Saved accuracy curve to ./alexnet_checkpoints/accuracy_curve.png", flush=True)
 
-# Running the best model on test set
-checkpoint_path = "alexnet_checkpoints/best_model.pt"
+# We dont have access to the test labels
+# # We need to redefine val to align with train transforms
+# val_dataset = datasets.ImageFolder(val_path, transform=train_transforms)
 
-checkpoint = torch.load(checkpoint_path, map_location=device)
-alexnet.load_state_dict(checkpoint["model_state_dict"])
-alexnet.to(device)
-test_accuracy = test(alexnet, test_dataloader, device)
-print(f"Final Accuracy: {test_accuracy}", flush=True)
+# # Trainng best model configuration on train and validation combined and evaluate on test set
+# combined_dataset = ConcatDataset([train_dataset, val_dataset])
+# combined_dataloader = DataLoader(combined_dataset, batch_size=256, shuffle=True, num_workers=8, pin_memory=True)
+
+# alexnet = AlexNet()
+# alexnet = alexnet.to(device)
+# optimizer = torch.optim.SGD(alexnet.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0005)
+# loss_func = nn.CrossEntropyLoss()
+
+# train_combined(alexnet, combined_dataloader, optimal_num_epochs, scheduler, loss_func, optimizer, device)
+
+# checkpoint_path = "alexnet_checkpoints/best_model.pt"
+
+# checkpoint = torch.load(checkpoint_path, map_location=device)
+# alexnet.load_state_dict(checkpoint["model_state_dict"])
+# alexnet.to(device)
+# test_accuracy = test(alexnet, test_dataloader, device)
+# print(f"Final Accuracy: {test_accuracy}", flush=True)

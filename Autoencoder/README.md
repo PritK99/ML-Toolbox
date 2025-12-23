@@ -1,4 +1,4 @@
-# Autoencoder Family
+# Autoencoder
 
 <div align="center">
 
@@ -11,9 +11,7 @@
 
 ## Introduction
 
-Apart from tasks like classification, regression, clustering, etc., we are also interested in abstraction and generation. Abstraction means learning representations for our data. For example, we can convert an image into a feature vector. This idea of learning low-dimensional feature representation is useful for many tasks, such as visualization or similarity. Generation means creating new data samples such that they belong to the original data distribution. Autoencoders are one family of models that can do these tasks. While there are several flavors of autoencoders, we will focus on vanilla autoencoders and variational autoencoders (VAEs).
-
-## Vanilla Autoencoders
+Apart from tasks like classification, regression, clustering, etc., we are also interested in abstraction and generation. Abstraction means learning representations of our data. For example, we can convert an image into a feature vector. This idea of learning low-dimensional feature representation is useful for many tasks, such as visualization and similarity. Generation means creating new data samples such that they belong to the original data distribution. Autoencoders are one family of models that can do these tasks. The vanilla autoencoders focus on abstraction task.
 
 <p align="center">
   <img src = "../assets/img/autoencoder.png" alt="autoencoders" width="600">
@@ -65,7 +63,7 @@ We wanted to explore how the autoencoder behaves when its input is distorted. Fo
 
 Here, K denotes the multiple of 90 degree that was used to rotate the image. The rotations are random, even across epochs, but still the autoencoder has managed to reconstruct the original image.
 
-### Stress Test 01: Jigsaw Permutations
+### Stress Test 02: Jigsaw Permutations
 
 An even more challenging task is to apply jigsaw permutations to the input images before feeding them to the autoencoder. This is an extreme task, but still the autoencoder performs very well. If we notice a few examples carefully, such as 8th and 10th example, the outputs have some artifacts. But still, producing these outputs from jigsawed input is very challenging.
 
