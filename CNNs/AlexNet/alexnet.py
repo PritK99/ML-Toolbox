@@ -198,8 +198,8 @@ def test(model, test_dataloader, device):
     return accuracy
 
 # Defining dataloader
-train_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/train"
-val_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/val"
+train_path = "/ssd_scratch/alexnet/ILSVRC/Data/CLS-LOC/train"
+val_path = "/ssd_scratch/alexnet/ILSVRC/Data/CLS-LOC/val"
 # test_path = "/ssd_scratch/pritk/ILSVRC/Data/CLS-LOC/test"
 
 train_transforms = transforms.Compose([
