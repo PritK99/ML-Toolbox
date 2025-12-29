@@ -16,7 +16,7 @@
   <img src = "../assets/img/alexnet_accuracy_curve.png" alt="AlexNet">
 </p>
 
-One observation we can make is how the accuracy suddenly shoots up when we decrease learning rate. In SGD, we usually start with a high learning rate and slowly reduce it. This is like the exploration phase (high learning rate), and then exploitation phase (low learning rate).
+One observation that we can make is how the accuracy suddenly shoots up when we decrease learning rate. In SGD, we usually start with a high learning rate and slowly reduce it. This is like the exploration phase (high learning rate), and then exploitation phase (low learning rate).
 
 ## Results
 
