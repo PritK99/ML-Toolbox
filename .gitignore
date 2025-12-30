@@ -6,3 +6,6 @@
 */checkpoints
 */fashion-mnist-data
 */logs
+
+# Raw data for association rule mining
+/Association Rule Mining/raw_data

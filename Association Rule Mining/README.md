@@ -45,3 +45,34 @@ Similarly, if I realize that an itemset of {Computer, Bread} is not frequent, it
 <img src="../assets/img/apriori-pruning.png">
 
 A very intuitive explanation of Apriori Algorithm can in these <a href="https://www.youtube.com/watch?v=eOOhn9CX2qU">slides</a>.
+
+
+
+
+
+## Results
+
+We choose an interesting task for Association Rule Mining. IIIT Hyderabad has two semesters, namely Monsoon and Spring. For each semester, it offers some courses, and the students register for these courses. Some courses are compulsory for certain segments of students. For example, M.Tech students in their first semester have a fixed set of courses that they must take. In contrast, some segments of students have more flexibility. For instance, M.S. students are allowed to choose electives based on their interests, as long as the courses are at the graduate level.
+
+Thus, there are some rules which affect course selection, which makes this dataset perfect for analyzing frequently chosen courses together using association rule mining. Measures of interestingness are useful here, because some courses may appear frequently simply because they are compulsory for a large group of students.
+
+**Note:** The data is not complete as there were several courses which allowed students to pursue a project instead of final examinations. Thus, we might not see all courses here.
+
+### Data and Preprocessing
+
+We need a transactional data format for association rule mining. The raw data that we use is exam seating arrangement data. The Monsoon 2025 exams were held over 7 days with morning and evening sessions. Thus, we have 14 PDFs, each corresponding to specific session of exam. One sample page from a sample PDF is as follows (The data is masked for privacy):
+
+```
+Seating Arrangement - Monsoon 2025 End Sem Exmainations
+Date : 01/12/2025 (3.00 pm to 6.00 pm)
+Subject : PD2.421-Business Fundamentals
+Room No : H - 101
+S.No Roll No Name of the Student
+ A1     1        NAME
+ A2     2        NAME 
+ A3     3        NAME
+ A4     4        NAME
+ A5     5        NAME 
+```
+
+Thus, the transactional data that we present as a CSV format is derived from these raw PDFs after masking. The raw data is not shared.

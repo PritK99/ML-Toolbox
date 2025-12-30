@@ -13,16 +13,46 @@
 - [Project](#ml-toolbox)
   - [Table of Contents](#table-of-contents)
   - [About](#about)
-  - [ML Philosophy](#ml-philosophy)
-  - [Decomposing an ML Problem](#decomposing-an-ml-problem)
   - [File Structure](#file-structure)
-  - [Getting Started](#getting-started)
+  - [ML Philosophy](#ml-philosophy)
   - [References](#references)
-  - [License](#license)
 
 ## About
 
 Each machine learning algorithm is a tool. ML-Toolbox is a collection of a few machine learning tools. The goal of this project is to understand machine learning algorithms by learning the theory behind them. This theory will help to choose the right tool for the task at hand.
+
+## File Structure
+
+```
+ML-Toolbox/
+ ┣ 📂assets/                                 # Supporting resources
+ ┃ ┣ 📂data/                                 # Datasets used in experiments and examples
+ ┃ ┃ ┣ 📄articles.csv
+ ┃ ┃ ┣ 📄gender.csv
+ ┃ ┃ ┣ 📄modified_mumbai_house_price.csv
+ ┃ ┃ ┣ 📄mumbai_house_price.csv
+ ┃ ┃ ┣ 📄student_marksheet.csv
+ ┃ ┃ ┣ 📄titanic.csv
+ ┃ ┃ ┣ 📄un_voting.csv 
+ ┃ ┣ 📂img/                                  
+ ┃ ┣ 📂scripts/                              # preprocessing scripts
+ ┃ ┣ 📂notes/                                # Notes
+ ┣ 📂Concept Learning/                       
+ ┣ 📂K Nearest Neighbors/
+ ┣ 📂Perceptron/
+ ┣ 📂Naive Bayes/
+ ┣ 📂Logistic Regression/
+ ┣ 📂Linear Regression/
+ ┣ 📂Support Vector Machine/
+ ┣ 📂Kernels/                                
+ ┃ ┣ 📂Perceptron/
+ ┃ ┣ 📂Linear Regression/
+ ┃ ┣ 📂Support Vector Machine/
+ ┣ 📂Decision Trees/
+ ┣ 📂Neural Networks/
+ ┣ 📂K Means Clustering/
+ ┣ 📄README.md                          
+```
 
 ## ML Philosophy
 
@@ -62,43 +92,9 @@ Finally, we choose hyperparameters such as the learning rate, batch size, and op
 
 Overall, a model can suffer from three types of error, and each of these errors can be reduced by injecting knowledge.
 
-## File Structure
-
-```
-ML-Toolbox/
- ┣ 📂assets/                                 # Supporting resources
- ┃ ┣ 📂data/                                 # Datasets used in experiments and examples
- ┃ ┃ ┣ 📄articles.csv
- ┃ ┃ ┣ 📄gender.csv
- ┃ ┃ ┣ 📄modified_mumbai_house_price.csv
- ┃ ┃ ┣ 📄mumbai_house_price.csv
- ┃ ┃ ┣ 📄student_marksheet.csv
- ┃ ┃ ┣ 📄titanic.csv
- ┃ ┃ ┣ 📄un_voting.csv 
- ┃ ┣ 📂img/                                  
- ┃ ┣ 📂scripts/                              # preprocessing scripts
- ┃ ┣ 📂notes/                                # Notes
- ┣ 📂Concept Learning/                       
- ┣ 📂K Nearest Neighbors/
- ┣ 📂Perceptron/
- ┣ 📂Naive Bayes/
- ┣ 📂Logistic Regression/
- ┣ 📂Linear Regression/
- ┣ 📂Support Vector Machine/
- ┣ 📂Kernels/                                
- ┃ ┣ 📂Perceptron/
- ┃ ┣ 📂Linear Regression/
- ┃ ┣ 📂Support Vector Machine/
- ┣ 📂Decision Trees/
- ┣ 📂Neural Networks/
- ┣ 📂K Means Clustering/
- ┣ 📄README.md                          
-```
-
 ## References
 
 * Cornell CS4780 <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a> by Prof. Kilian Weinberger.
-
 * CS7.403 Statistical Methods in Artificial Intelligence course by IIIT Hyderabad
 * MIT 6.036 <a href="https://www.youtube.com/playlist?list=PLxC_ffO4q_rW0bqQB80_vcQB09HOA3ClV">Machine Learning</a> by Prof. Tamara Broderick.
 * <a href="https://www.youtube.com/playlist?list=PLZ_xn3EIbxZEoWLlm9y6OizFkontrhA6G">Gaussian Process Summer School 2024</a>
