@@ -1,18 +1,29 @@
-# Association Rule Mining
+# Apriori Algorithm
 
-Association rule mining can be posed as unsupervised learning, where we extract a set of patterns from a database. The goal is to find frequently occurring patterns.
+<p align="center">
+  <img src = "../assets/img/amazon_apriori.png" alt="Apriori">
+  <br>
+  <small><i>Amazon recommendation when searching for a laptop stand</i></small>
+</p>
 
 ## Introduction
 
-One difference between recommendation systems and association rule mining is what they focus on. Recommendation systems are personalized. They suggest things based on your individual preferences, like what you have liked or bought before. Association rule mining, however, looks at the whole dataset to find patterns that happen frequently, without focusing on individual users.
+Apriori Algorithm is used to discover frequently occurring patterns or associations in the data. For example, it can be used to find that the people who generally buy laptop stand also buy mouse pad. It is an unsupervised technique to find correlations among objects in transactional data.
 
-For example, in a store, you might place computers and antivirus softwares next to each other. Even if I don’t like antivirus softwares and don’t buy it when I buy computers, many other people do. So it makes sense to place them near each other in the store. This is a pattern that association rule mining helps to find.
+This association rule mining is a specific form of recommendation system that is generalized for all user. The patterns obtained from Apriori can allow us to understand that we should keep mouse pads and laptop stands nearby to boost store revenue.
+
+## Algorithm
+
+Suppose we have 10 items in our store. Thus, there are possible patterns that can exist.
+
+
+### Measures of Rule Interestingness 
 
 It is important to note that "If people buy computer, they are likely to buy antivirus software" i.e. `Computer -> Antivirus` is not the same as "If people buy antivirus software, they are likely to buy computer" i.e. `Antivirus -> Computer`.
 
 Given a set of 3 items A, B, and C, we can generate 12 rules out of it. Some of them are `A -> B`, `B, C -> A`, `C -> A, B`. What we want to know is which of these 12 rules are interesting for us. Hence we define certain measures of interestingness for rules. 
 
-### Measures of Rule Interestingness 
+
 
 Consider a rule `A -> B`.
 
