@@ -8,73 +8,134 @@
 
 ## Introduction
 
-Apriori Algorithm is used to discover frequently occurring patterns or associations in the data. For example, it can be used to find that the people who generally buy laptop stand also buy mouse pad. 
+Association Rule Mining is identifying patterns between items in transactional data. For example, in a computer store, we might find that customers who buy a laptop stand often also buy a mouse pad. We can use this pattern to make business decisions, like placing laptop stands and mouse pads near each other in the store. Apriori Algorithm is a smart way to discover these associations.
 
-Apriori Algorithm comes under association rule mining is a specific form of recommendation system. The patterns obtained from Apriori can allow us to understand that we should keep mouse pads and laptop stands nearby to boost store revenue.
+## Naive Algorithm
 
-## Algorithm
+Imagine we have three items, {computer, mouse, antivirus}, in our store. There are several possible patterns that could exist.
 
-Suppose we have 10 items in our store. Thus, there are possible patterns that can exist.
+```
+{computer} → {mouse}
+{computer} → {antivirus}
+{mouse} → {antivirus}
+{mouse} → {computer}
+{antivirus} → {computer}
+{antivirus} → {mouse}
+{computer, mouse} → {antivirus}
+{computer, antivirus} → {mouse}
+{mouse, antivirus} → {computer}
+{computer} → {mouse, antivirus}
+{mouse} → {computer, antivirus}
+{antivirus} → {computer, mouse}
+```
 
+Out of all these, we want to find the patterns that are meaningful. The naive approach to association rule mining is to loop over every possible pattern and decide whether the pattern is interesting or not. This requires metrics that can help us determine whether a rule is interesting. These metrics are known as measures of rule interestingness.
 
 ### Measures of Rule Interestingness 
 
-It is important to note that "If people buy computer, they are likely to buy antivirus software" i.e. `Computer -> Antivirus` is not the same as "If people buy antivirus software, they are likely to buy computer" i.e. `Antivirus -> Computer`.
+The three popular metrics used to evaluate association rules are `support`, `confidence`, and `lift`.
+Each metric captures a different aspect of “interestingness”. Using all three together helps us find rules that are truly meaningful.
 
-Given a set of 3 items A, B, and C, we can generate 12 rules out of it. Some of them are `A -> B`, `B, C -> A`, `C -> A, B`. What we want to know is which of these 12 rules are interesting for us. Hence we define certain measures of interestingness for rules. 
+<p align="center">
+  <img src = "../assets/img/interestingness.jpeg" alt="interestingness">
+</p>
 
+Consider the following transactions:
 
+```
+T1 → Computer, Antivirus, Pendrive
+T2 → Computer, Antivirus, Mouse, Pendrive
+T3 → Mouse, Pendrive
+T4 → Computer, Antivirus, Mouse, Pendrive, Sticker
+T5 → Antivirus, Mouse, Pendrive
+```
 
-Consider a rule `A -> B`.
+In this store, for every purchase the consumer made, we gave them a pendrive for free.
 
-* Support: Support is defined as the percentage of times A and B have appeared together in the dataset. Do note that support for `Computer -> Antivirus` is same as `Antivirus -> Computer`. 
+#### Measure 1: Support
 
-* Confidence: Confidence indicates that percentage of people who bought A and then also bought B. Do note that confidence for `Computer -> Antivirus` is not the same as `Antivirus -> Computer`. 
+Support tells us whether a rule is worth considering at all. The idea is that if an item appears very rarely in the data, we do not have enough evidence to make decisions about it. Any rule involving such items is trivial. For example, our data has only `1` out of `5` transactions that contain a sticker. Hence, it is not worth exploring rules involving stickers. 
 
-Typically, association rules are considered interesting if they satisfy both a minimum support threshold and a minimum confidence threshold. However these rules alone can be misguiding.
+The formula for support is simply the probability of finding the given item or set of items.
 
-Consider a scenario where a store provides Antivirus Software for free on any purchase. Each transaction on the database now contains Antivirus. Thus, if we were to check confidence of `Camera -> Antivirus`, it would be very high. However we know that this is not the case. Hence we define measures such as lift.
+#### Measure 2: Lift
 
-* Lift: Lift refers to the increase in the ratio of sale of B when A is sold. This eliminates the issue of `Camera -> Antivirus` because the number of times Antivirus has been sold is greater than number of time Camera & Antivirus has been sold. Thus there is a decrease in sale of B when A & B are considered together.
+Lift measures how strongly two items are associated. This is different from support, which just measures how frequent the items are. In our data, we gave free pendrives to each customer, and hence each transaction has a pendrive. However, in reality, buying a pendrive does not mean we will buy a computer next.
 
-<img src="../assets/img/interestingness-rules.png">
+The formula for lift is the probability of both items appearing in a transaction, divided by the product of the individual probabilities of each item. Note that when the items are independent of each other, the numerator becomes equal to the denominator, and lift equals 1. Thus, a lift of 1 means the items are independent.
 
-In general, association rule mining can be viewed as a two-step process:
+* If `Lift = 1`, A and B are independent (no association).
+* If `Lift > 1`, A and B are positively associated.
+* If `Lift < 1`, A and B are negatively associated.
 
-* Find all frequent itemsets: These are the itemsets that will occur at least as frequently as a predetermined minimum support count, `min_sup`.
+For the rule `Pendrive → Computer`, the support is `100%`, but the lift is `1`, meaning there is no real association between the items.
 
-* Generate strong association rules from the frequent itemsets: These are the rules which satisfy minimum support and minimum confidence.
+Note: If we ignore support, a rule like `Sticker → Computer` might have a lift of `5/3`. However, this can be misleading because the data is too sparse. That’s why it's important to check support first.
+
+#### Measure 3: Confidence
+
+While support and lift are useful measures, they don't capture directionality. For both metrics, `A → B` is the same as `B → A`, but in reality, this might not be the case. For example, if a person buys a computer, they are likely to buy antivirus software. However, a person buying an antivirus might already own a computer, so they are unlikely to buy another one. Instead, they might buy related items, like camera clips. Confidence is a measure of directionality.
+
+In formula terms, confidence is conditional probability `P(B|A)`, i.e. probability of buying B given A is bought.
+
+For our example, `{computer} → {mouse}` has higher confidence than `{mouse} → {computer}`.
+
+**Note:** For applications like shelf placement or course selection, confidence doesn't matter a lot. The importance is on grouping rather than direction. So we can ignore confidence for such usecases.
+
+## Issues with Naive Approach
+
+<p align="center">
+  <img src = "../assets/img/apriori_naive_1.jpeg" alt="naive_approach">
+</p>
+
+<p align="center">
+  <img src = "../assets/img/apriori_naive_2.jpeg" alt="naive_approach">
+</p>
 
 ## Apriori Algorithm
 
-A brute force way for association rule mining can be evaluating each and every combination of itemsets. For a database of size 3, this becomes 12 different combinations. Thus this does not scale well as items increase. For example, consider a CD Shop which keeps thousands of different CDs. 
+Apriori means using prior knowledge. The trick used in Apriori Algorithm is simple:
 
-Apriori algorithm uses a very simple concept for limited candidates generation. Consider 3 people A, B, and C. If I say A and B are not friends, then it also means that A, B, and C together are not friends. A and C might be friends and B and C might be friends. But the only fact that A and B are not friends is enough for me to conclude that A, B , and C are not friends as a group.
+1) If an itemset is not frequent, then all of its supersets are also not frequent. For example, if `{A}` is not frequent, then `{A, B}`, `{A, C}`, `{A, B, C}`, etc. cannot be frequent. So we can prune them without checking their support.
 
-Similarly, if I realize that an itemset of {Computer, Bread} is not frequent, it is enough for me to conclude all the supersets of this set are not frequent. Hence, I can prune the evaluation of those subsets.
+2) Similarly, if an itemset contains any subset that is not frequent, then the itemset itself cannot be frequent. For example, the candidate `{A, B, C}` can not be frequent if we have the prior knowledge that `{A, C}` is not frequent.
 
-<img src="../assets/img/apriori-pruning.png">
+The algorithm starts by building the `1-itemset`. Only items whose support is greater than or equal to the support threshold are kept. Items with low support are removed, and hence all their possible combinations get pruned. Using the frequent `1-itemset`, the algorithm builds `2-itemsets`, `3-itemsets` ... `k-itemsets`. 
 
-A very intuitive explanation of Apriori Algorithm can in these <a href="https://www.youtube.com/watch?v=eOOhn9CX2qU">slides</a>.
+While creating new itemsets, it joins the elements of the previous itemset and prunes if any new candidate has a subset of items that are not frequent. This process continues until no new frequent itemsets can be formed. Now, we generate rules for all the itemsets that had enough support, and only evaluate those rules for interestingness.
 
+Consider the following example. Just by knowing that item `A` does not have enough support, we can prune many itemsets that contain `A`.
 
+<p align="center">
+  <img src = "../assets/img/apriori-pruning.jpeg" alt="apriori_pruning">
+</p>
 
+This is the first type of pruning called `support based pruning`.
 
+Now, consider the following 2-itemset,
+
+```
+BC -> Frequent
+CD -> Not Frequent
+BD -> Frequent
+```
+
+To generate candidates for the `3-itemset`, we can join `BC` and `BD` because both are frequent. This produces the candidate `BCD`. However, `BCD` contains the subset `CD`, which is not frequent. Therefore, `BCD` cannot be frequent, and we can prune it immediately without checking its support. This reduces our database scans. 
+
+This is the second type of pruning called `subset based pruning`.
+
+<p align="center">
+  <img src = "../assets/img/apriori_trick.jpeg" alt="apriori_trick">
+</p>
 
 ## Results
 
-We choose an interesting task for Association Rule Mining. IIIT Hyderabad has two semesters, namely Monsoon and Spring. For each semester, it offers some courses, and the students register for these courses. Some courses are compulsory for certain segments of students. For example, M.Tech students in their first semester have a fixed set of courses that they must take. In contrast, some segments of students have more flexibility. For instance, M.S. students are allowed to choose electives based on their interests, as long as the courses are at the graduate level.
+We chose an interesting task for Association Rule Mining. Every semester, IIIT Hyderabad offers some courses, and the students register for these courses. Some courses are compulsory for certain segments of students. For example, M.Tech students in their first semester have a fixed set of courses that they must take. In contrast, some segments of students are allowed to choose electives.
 
-Thus, there are some rules which affect course selection, which makes this dataset perfect for analyzing frequently chosen courses together using association rule mining. Measures of interestingness are useful here, because some courses may appear frequently simply because they are compulsory for a large group of students.
-
-**Note:** The data is not complete as there were several courses which allowed students to pursue a project instead of final examinations. Thus, we might not see all courses here.
-
-### Data and Preprocessing
-
-We need a transactional data format for association rule mining. The raw data that we use is exam seating arrangement data. The Monsoon 2025 exams were held over 7 days with morning and evening sessions. Thus, we have 14 PDFs, each corresponding to specific session of exam. One sample page from a sample PDF is as follows (The data is masked for privacy):
+The raw data that we use is exam seating arrangement data. The Monsoon 2025 exams were held over 7 days with morning and evening sessions. Thus, we have 14 PDFs, each corresponding to a specific session of the exam. One sample page from a sample PDF is as follows:
 
 ```
-Seating Arrangement - Monsoon 2025 End Sem Exmainations
+Seating Arrangement - Monsoon 2025 End Sem Examinations
 Date : 01/12/2025 (3.00 pm to 6.00 pm)
 Subject : PD2.421-Business Fundamentals
 Room No : H - 101
@@ -86,4 +147,25 @@ S.No Roll No Name of the Student
  A5     5        NAME 
 ```
 
-Thus, the transactional data that we present as a CSV format is derived from these raw PDFs after masking. The raw data is not shared.
+The transactional data we use is derived from these raw PDFs using `scripts/student_courses_data_preprocessing.py`. 
+
+First, we run the apriori algorithm over the entire dataset (~2000 students) with `support_threshold = 0.025` (i.e., `50` students is the minimum frequency for an itemset) and `confidence_threshold = 0.95`. Some of the rules discovered are as follows:
+
+```
+['MA4.101-Real Analysis'] -> ['Computer Programming']
+['EC5.201-Signal Processing'] -> ['EC5.202-Systems Thinking']
+['CS1.304-Data Structures & Algorithms for Problem Solving'] -> ['CS3.304-Advanced Operating Systems']
+```
+
+The rules that we obtain here are courses which are compulsory. The first two rules are compulsory for `B. Tech` students in their semester I, while the third course is compulsory for `M. Tech` students in their semester I. Thus, the algorithm gives high confidence and lift for these rules.
+
+We also try another variant of data, where we remove all the compulsory courses and only analyze the patterns among electives. For electives, we set a lower threshold (`support_threshold = 0.01` and `confidence_threshold = 0.7`). The patterns discovered are:
+
+```
+['CE1.621-Retrofit of Existing Infrastructure'] -> ['CE1.610-Advanced Design of Steel Structures']
+['CE1.610-Advanced Design of Steel Structures'] -> ['CE1.621-Retrofit of Existing Infrastructure']
+['CS3.401-Distributed Systems', 'CG1.402-Introduction to Cognitive Science'] -> ['CS3.402-Advanced Computer Networks']
+['CS3.401-Distributed Systems', 'CS8.501-Research in Information Security'] -> ['CS3.402-Advanced Computer Networks']
+```
+
+While the first two rules make sense intuitively because they belong to the same domain, it is interesting to observe rules such as `{Distributed Systems, Introduction to Cognitive Science} -> {Advanced Computer Networks}`. Somehow, students who prefer system courses also tend to take course on cognitive science!
