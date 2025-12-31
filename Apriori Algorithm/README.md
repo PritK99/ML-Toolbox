@@ -8,9 +8,9 @@
 
 ## Introduction
 
-Apriori Algorithm is used to discover frequently occurring patterns or associations in the data. For example, it can be used to find that the people who generally buy laptop stand also buy mouse pad. It is an unsupervised technique to find correlations among objects in transactional data.
+Apriori Algorithm is used to discover frequently occurring patterns or associations in the data. For example, it can be used to find that the people who generally buy laptop stand also buy mouse pad. 
 
-This association rule mining is a specific form of recommendation system that is generalized for all user. The patterns obtained from Apriori can allow us to understand that we should keep mouse pads and laptop stands nearby to boost store revenue.
+Apriori Algorithm comes under association rule mining is a specific form of recommendation system. The patterns obtained from Apriori can allow us to understand that we should keep mouse pads and laptop stands nearby to boost store revenue.
 
 ## Algorithm
 
