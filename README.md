@@ -25,40 +25,50 @@ Each machine learning algorithm is a tool. ML-Toolbox is a collection of a few m
 
 ```
 ML-Toolbox/
- ┣ 📂assets/                                 # Supporting resources
- ┃ ┣ 📂data/                                 # Datasets used in experiments and examples
- ┃ ┃ ┣ 📄articles.csv
- ┃ ┃ ┣ 📄gender.csv
- ┃ ┃ ┣ 📄modified_mumbai_house_price.csv
- ┃ ┃ ┣ 📄mumbai_house_price.csv
- ┃ ┃ ┣ 📄student_marksheet.csv
- ┃ ┃ ┣ 📄titanic.csv
- ┃ ┃ ┣ 📄un_voting.csv 
+ ┣ 📂assets/
+ ┃ ┣ 📂data/                                 # datasets used in experiments
  ┃ ┣ 📂img/                                  
- ┃ ┣ 📂scripts/                              # preprocessing scripts
- ┃ ┣ 📂notes/                                # Notes
- ┣ 📂Concept Learning/    
+ ┃ ┣ 📂scripts/                              # demo and preprocessing scripts
+ ┣ 📂Concept Learning/  
+ ┃ ┣ 📄titanic_survival_prediction.ipynb  
  ┣ 📂Perceptron/
+ ┃ ┣ 📄gender_prediction.ipynb  
+ ┣ 📂Apriori Algorithm/
+ ┃ ┣ 📄correlated_courses.ipynb 
+ ┣ 📄README.md 
 
 // WIP
 
- ┣ 📂Apriori Algorithm/        
+ ┣ 📂SVMs/
+ ┃ ┣ 📄gender_prediction.ipynb  
 
 // TO DO
 
- ┣ 📂K Nearest Neighbors/
+ ┣ 📂KNNs/
  ┣ 📂Naive Bayes/
  ┣ 📂Logistic Regression/
  ┣ 📂Linear Regression/
+ ┣ 📂Gaussian Processes
  ┣ 📂Support Vector Machine/
  ┣ 📂Kernels/                                
  ┃ ┣ 📂Perceptron/
  ┃ ┣ 📂Linear Regression/
  ┃ ┣ 📂Support Vector Machine/
  ┣ 📂Decision Trees/
+ ┣ 📂Random Forests/
+ ┣ 📂Bagging/
+ ┣ 📂Boosting/
+ ┣ 📂preprocessing/Bias Variance Decomposition/
  ┣ 📂Neural Networks/
- ┣ 📂K Means Clustering/
- ┣ 📄README.md                          
+ ┣ 📂CNNs/
+ ┣ 📂RNNs/
+ ┣ 📂K Means Clustering/  
+ ┣ 📂GMMs/  
+ ┣ 📂Kernel Density Estimation/   
+ ┣ 📂PCA/   
+ ┣ 📂Autoencoders/
+ ┣ 📂VAEs/
+                                                  
 ```
 
 ## ML Philosophy
