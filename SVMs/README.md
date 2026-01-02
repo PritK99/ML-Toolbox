@@ -1,16 +1,26 @@
 # Support Vector Machines
 
-<img src = "../assets/img/svm.jpg" alt="svm">
+<p align="center">
+  <img src = "../assets/img/svm.webp" alt="svm">
+  <br>
+  <small><i>Image source: https://medium.com/@dhivyasamin/support-vector-machine-in-machine-learning-algorithms-3fd8f399e0c2</i></small>
+</p>
 
 ## Introduction
 
-SVM is a classification algorithm based on maximum margin linear discriminants, that is, the goal is to find the optimal hyperplane that maximizes the gap or margin between the classes.
+In addition to being correct, we want machine learning models to be confident in their predictions. For linear classifiers, correctness is accuracy, and confidence is a meaure of how sure the classifier is about its prediction. In the figure below, all three hyperplanes classify the data correctly. However, for the dotted classifiers, some data points lie very close to the decision boundary. A small perturbation could change their classification. Thus, the model is not very confident about the points. The green classifier places the boundary sucht that geometrically it maximizing the margin between  data points which makes it more confident and robust.
 
-The goal of the perceptron was to find a hyperplane, but it has no guarantee of optimality. SVM finds the optimal hyperplane by using the geometric intuition that maximizing the margin between classes would lead to better generalization.
+<p align="center">
+  <img src = "../assets/img/svm_confidence.png" alt="linear-classifiers">
+</p>
+
+Algorithms like perceptron find the correct solution given the assumptions hold, but they have no gaurantee on confidence. This means that out of many possible hyperplanes, perceptron will choose any one hyperplane that separates points correctly. SVMs improve on this and find the optimal hyperplane with highest margin.
 
 ## Assumptions
 
-SVMs assume that the data is linearly separable. However, unlike perceptron which requires this assumption to be followed strictly, SVMs can handle some noise or error in classification by introducing slack variables. This is called Soft Margin Classification. 
+Similar to perceptrons, SVMs assume that the data is linearly separable. However, unlike perceptron which requires this assumption to be followed strictly, SVMs can handle some noise or error in classification by introducing slack variables. This is called Soft Margin Classification. For data that is not linearly separable, we can use kernelized SVMs.
+
+
 
 ## Algorithm
 
