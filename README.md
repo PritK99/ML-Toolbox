@@ -26,9 +26,9 @@ Each machine learning algorithm is a tool. ML-Toolbox is a collection of a few m
 ```
 ML-Toolbox/
  ┣ 📂assets/
- ┃ ┣ 📂data/                                 # datasets used in experiments
+ ┃ ┣ 📂data/                                 # datasets
  ┃ ┣ 📂img/                                  
- ┃ ┣ 📂scripts/                              # demo and preprocessing scripts
+ ┃ ┣ 📂scripts/                              # preprocessing scripts
  ┣ 📂Concept Learning/  
  ┃ ┣ 📄titanic_survival_prediction.ipynb  
  ┣ 📂Perceptron/
