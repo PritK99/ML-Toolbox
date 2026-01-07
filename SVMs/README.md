@@ -22,7 +22,7 @@ Algorithms like perceptron do find the correct solution (given the assumptions h
 
 Similar to perceptrons, SVMs assume that the data is linearly separable. However, SVMs do not require this assumption to be followed strictly. Soft Margin SVMs can find a classifier even if the data is not perfectly separable. Also, kernelized SVMs can handle non-linear data.
 
-## SVMs with Hard Margin (Primal Formulation)
+## SVMs with Hard Margin
 
 The distance of a point `X` from a hyperplane is given by 
 
@@ -36,18 +36,12 @@ Our goal now is to find optimal hyperplane parameters `W` and `b` that maximize 
 
 This new formulation is a Quadratic Optimization Problem (QP). Here, Objective is the quadratic form `||w||^2` while constraints are linear. Because the quadratic represents a parabola, the above formulation will always give a unique optimal solution, provided a hyperplane exists. All the training points which lie on the margin, are called Support Vectors. Only these points are needed to determine the optimal hyperplane. Moving support vectors in any direction will change the hyperplane..
 
-## SVMs with Soft Margin (Primal Formulation)
+## SVMs with Soft Margin
 
 The above formulation works well when data is linearly separable. However, in real-world scenarios, data might not be perfectly separable due to noise or outliers. To handle this, we allow relax our constraint slightly. Now for each data point, rather than forcing `W(xi) + b >= 1`, we allow `W(xi) + b >= 1 - ξi`. However, we want this relaxation to be as minimum as possible. Hence, we add this to our objective. We use parameter `C` to control the impact caused by slack. For large value of C, the model will behave as hard margin SVMs. For small values of C, the model might sacrifice some points (even if they were separable) to find a better hyperplane.
 
 <img src="../assets/img/soft-margin-primal-formulation-1.jpeg" alt="soft-margin-primal-formulation">
 
 <img src="../assets/img/soft-margin-primal-formulation-2.jpeg" alt="soft-margin-primal-formulation">
-
-## SVMs with Hard Margin (Dual Formulation)
-
-
-## SVMs with Soft Margin (Dual Formulation)
-
 
 ## Results
