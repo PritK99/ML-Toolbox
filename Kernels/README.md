@@ -4,9 +4,13 @@
 
 ## Introduction
 
+Linear models like perceptron, linear regression, SVMs make the assumption that a linear hyperplane exist which can explain the data. These models are not effective when it comes t non linear data. 
+
 Machine Learning algorithms like SVMs are very successful at finding linear boundaries to separate data points belonging to different classes. However, real-world data frequently exhibits non-linear relationships, posing a challenge for linear classifiers.
 
 Kernelization is a technique that allows linear classifiers to learn non-linear decision boundaries. We often use kernelization when our model suffers from a high bias problem (i.e. the assumption that our data is linearly seperable).
+
+Kernel methods allow us to map our non-linear data into higher dimensions, where it can become linearly separable, and then fit a linear classifier to it. This comes from Cover's theorem which says that a pattern classification problem is more likely to be linearly separable when mapped to a higher-dimensional space than in its original lower-dimensional space.
 
 ## Intuition
 
