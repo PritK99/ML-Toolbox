@@ -26,7 +26,7 @@ Similar to perceptrons, SVMs assume that the data is linearly separable. However
 
 The distance of a point `X` from a hyperplane is given by 
 
-<img src="../assets/img/distance-of-point.png" alt="distance of a point from plane">
+<img src="../assets/img/distance-of-point.jpeg" alt="distance of a point from plane">
 
 Our goal now is to find optimal hyperplane parameters `W` and `b` that maximize margin, constrained to the fact that the hyperplane classifies all the points properly. 
 
