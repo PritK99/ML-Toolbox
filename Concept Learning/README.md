@@ -1,12 +1,20 @@
 # Concept Learning
 
+<p align="center">
+  <img src="../assets/img/find-s-example.png" alt="find-s">
+  <br>
+  <small><i>Image source: https://www.edureka.co/blog/find-s-algorithm-in-machine-learning/</i></small>
+</p>
+
 ## Hypothesis Space
 
 Formally, in the context of machine learning, the function ```f(x)``` represents a hypothesis ```h```  within a hypothesis space ```H```. For instance, if we select a decision tree as our function ```f(x)```, then the hypothesis space ```H``` would encompass the set of all possible decision trees. The objective is to find a hypothesis ```h``` that serves as the most accurate approximation of the true function ```f```.
 
 ## Introduction to Concept Learning
 
-<img src="../assets/img/birds-concept.png" alt="birds-concept">
+<p align="center">
+  <img src="../assets/img/birds-concept.png" alt="birds-concept">
+</p>
 
 Imagine we want to learn to identify birds from a group of animals. We can start by looking at different birds and try to understand the features which make them different from other animals. We might look at a sparrow and derive that if the animal has wings, feathers, brown color, a short tail, etc. then it is a bird. However, by looking at other birds, we might realize that color has nothing to do with a bird, and we can come to a generalized idea that if it has feathers or wings, it is a bird.
 
@@ -24,8 +32,12 @@ However, while FIND-S is a basic way to learn from examples, it's not very pract
 
 ### Algorithm
 
-<img src="../assets/img/find-s.png" alt="find-s">
+<p align="center">
+  <img src="../assets/img/find-s.png" alt="find-s">
+  <br>
+  <small><i>Image source: https://www.edureka.co/blog/find-s-algorithm-in-machine-learning/</i></small>
+</p>
 
 ### Results
 
-Upon applying the FIND-S algorithm to the Titanic dataset, it yields a highly general hypothesis, suggesting limitations in its ability to understand the concept of survival in the Titanic data. However, if we consider only the first few instances, it gives us the following hypothesis: `['?', '?', '?', 'female', '?', '?', '?', '?', '?', '?']`. This finding suggests that gender emerges as a notable attribute among survivors, provided we consider only the first few instances.
+Upon applying the FIND-S algorithm to the Titanic dataset, it yields a highly general hypothesis, suggesting limitations in its ability to understand the concept of survival in the Titanic data. However, if we consider only the first few instances, it gives us a hypothesis: `['?', '?', '?', 'female', '?', '?', '?', '?', '?', '?']`. This finding suggests that gender is a common attribute among first few survivors.
