@@ -8,18 +8,9 @@
   <small><i>Image source: https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote01_MLsetup.html</i></small>
 </p>
 
-## Table of Contents
-
-- [Project](#ml-toolbox)
-  - [Table of Contents](#table-of-contents)
-  - [About](#about)
-  - [File Structure](#file-structure)
-  - [ML Philosophy](#ml-philosophy)
-  - [References](#references)
-
 ## About
 
-Each machine learning algorithm is a tool. ML-Toolbox is a collection of a few machine learning tools. The goal of this project is to understand machine learning algorithms by learning the theory behind them. This theory will help to choose the right tool for the task at hand.
+Classical machine learning and optimization methods are truly fascinating. The motivation behind this project is to explore these foundational techniques in depth. The repository is currently under development, and given the vast breadth of machine learning algorithms and optimization techniques, it is likely to remain a work in progress for a long time.
 
 ## File Structure
 
