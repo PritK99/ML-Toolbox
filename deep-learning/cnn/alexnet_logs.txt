@@ -1,0 +1,324 @@
+==========================================
+SLURM_JOB_ID = 2556479
+SLURM_NODELIST = gnode055
+SLURM_JOB_GPUS = 1
+==========================================
+Using device: cuda
+Trainable parameters: 62378344
+100%|██████████| 5005/5005 [29:56<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.95it/s]
+Completed epoch 0: Train loss = 6.851979314078103, Val loss = 6.581281058642329, Accuracy: 0.00362
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:26<00:00,  2.74it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.93it/s]
+Completed epoch 1: Train loss = 6.103077167469067, Val loss = 5.293384249113044, Accuracy: 0.05642
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:26<00:00,  2.74it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 2: Train loss = 5.210242583153845, Val loss = 4.513141359601702, Accuracy: 0.13442
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:29<00:00,  2.74it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.02it/s]
+Completed epoch 3: Train loss = 4.6759649233860925, Val loss = 4.039907803340834, Accuracy: 0.19158
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:22<00:00,  2.75it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.94it/s]
+Completed epoch 4: Train loss = 4.314626122283173, Val loss = 3.663255815603295, Accuracy: 0.24288
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:09<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.96it/s]
+Completed epoch 5: Train loss = 4.062160650238052, Val loss = 3.4363642286281197, Accuracy: 0.28008
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:05<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.99it/s]
+Completed epoch 6: Train loss = 3.881015537263868, Val loss = 3.264429965189525, Accuracy: 0.30632
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:09<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:05<00:00,  2.98it/s]
+Completed epoch 7: Train loss = 3.746569861184348, Val loss = 3.19405241341007, Accuracy: 0.32512
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:09<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.96it/s]
+Completed epoch 8: Train loss = 3.6410440356819542, Val loss = 3.0396214638437544, Accuracy: 0.34838
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:05<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 9: Train loss = 3.56114441731593, Val loss = 2.9533465097145157, Accuracy: 0.36074
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:04<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.97it/s]
+Completed epoch 10: Train loss = 3.4972740908364552, Val loss = 2.9081721993125216, Accuracy: 0.37348
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:55<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 11: Train loss = 3.4451399487810774, Val loss = 2.8417992245177834, Accuracy: 0.37902
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:05<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:07<00:00,  2.89it/s]
+Completed epoch 12: Train loss = 3.3969321182795933, Val loss = 2.7895624947791196, Accuracy: 0.38584
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:03<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.03it/s]
+Completed epoch 13: Train loss = 3.363470386529898, Val loss = 2.8128503153518754, Accuracy: 0.38966
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:07<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 14: Train loss = 3.33571694909514, Val loss = 2.7993504976739687, Accuracy: 0.3918
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:02<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.03it/s]
+Completed epoch 15: Train loss = 3.309214837448699, Val loss = 2.7070889333072974, Accuracy: 0.4049
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:58<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.06it/s]
+Completed epoch 16: Train loss = 3.2842564688576803, Val loss = 2.6797559632330525, Accuracy: 0.40566
+100%|██████████| 5005/5005 [29:38<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 17: Train loss = 3.2641253222237814, Val loss = 2.669574283823675, Accuracy: 0.40948
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:20<00:00,  2.75it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 18: Train loss = 3.2453850806652604, Val loss = 2.664175345581405, Accuracy: 0.41082
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:54<00:00,  2.79it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.96it/s]
+Completed epoch 19: Train loss = 3.232658364270236, Val loss = 2.636057739355126, Accuracy: 0.41802
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:57<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.97it/s]
+Completed epoch 20: Train loss = 3.2186628973329223, Val loss = 2.6029337322225374, Accuracy: 0.4192
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:59<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 21: Train loss = 3.2058332844333095, Val loss = 2.595078249366916, Accuracy: 0.42542
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:02<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 22: Train loss = 3.1954134146531263, Val loss = 2.5808237377478154, Accuracy: 0.4285
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:11<00:00,  2.76it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.06it/s]
+Completed epoch 23: Train loss = 3.1830743714884204, Val loss = 2.5739909510831445, Accuracy: 0.42674
+100%|██████████| 5005/5005 [29:37<00:00,  2.82it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.95it/s]
+Completed epoch 24: Train loss = 3.1738044357680892, Val loss = 2.5896826599325453, Accuracy: 0.42652
+100%|██████████| 5005/5005 [29:43<00:00,  2.81it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.06it/s]
+Completed epoch 25: Train loss = 3.1676765836321272, Val loss = 2.6043689202289193, Accuracy: 0.42322
+100%|██████████| 5005/5005 [29:57<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 26: Train loss = 3.1593587095087226, Val loss = 2.59625727242353, Accuracy: 0.42596
+100%|██████████| 5005/5005 [29:54<00:00,  2.79it/s] 
+100%|██████████| 196/196 [01:03<00:00,  3.09it/s]
+Completed epoch 27: Train loss = 3.151965443737857, Val loss = 2.5445696465214906, Accuracy: 0.43184
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:52<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 28: Train loss = 3.1446957760638408, Val loss = 2.580029200230326, Accuracy: 0.42692
+100%|██████████| 5005/5005 [30:15<00:00,  2.76it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 29: Train loss = 3.135731129355721, Val loss = 2.5599482533883076, Accuracy: 0.43508
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:38<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.07it/s]
+Completed epoch 30: Train loss = 3.1334392431851747, Val loss = 2.560233229277085, Accuracy: 0.43462
+100%|██████████| 5005/5005 [29:35<00:00,  2.82it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.95it/s]
+Completed epoch 31: Train loss = 3.127464092599524, Val loss = 2.5521620207903335, Accuracy: 0.432
+100%|██████████| 5005/5005 [29:42<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 32: Train loss = 3.1235014012286237, Val loss = 2.5272997660296306, Accuracy: 0.43926
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:05<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.96it/s]
+Completed epoch 33: Train loss = 3.117996498683354, Val loss = 2.545365897672517, Accuracy: 0.43188
+100%|██████████| 5005/5005 [29:52<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.93it/s]
+Completed epoch 34: Train loss = 3.112701406440773, Val loss = 2.5275204467530155, Accuracy: 0.4371
+100%|██████████| 5005/5005 [29:43<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.98it/s]
+Completed epoch 35: Train loss = 3.1077677331366145, Val loss = 2.5290059550684325, Accuracy: 0.43386
+100%|██████████| 5005/5005 [30:06<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 36: Train loss = 3.106230247794808, Val loss = 2.508005218846457, Accuracy: 0.44146
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:59<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:06<00:00,  2.95it/s]
+Completed epoch 37: Train loss = 3.1005252435609894, Val loss = 2.509113066658682, Accuracy: 0.44014
+100%|██████████| 5005/5005 [29:53<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.97it/s]
+Completed epoch 38: Train loss = 3.099467768893018, Val loss = 2.547850172434534, Accuracy: 0.4318
+100%|██████████| 5005/5005 [29:51<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.93it/s]
+Completed epoch 39: Train loss = 3.095517425746708, Val loss = 2.5199380364953257, Accuracy: 0.43854
+100%|██████████| 5005/5005 [29:33<00:00,  2.82it/s] 
+100%|██████████| 196/196 [01:03<00:00,  3.10it/s]
+Completed epoch 40: Train loss = 3.0906261566040163, Val loss = 2.499122848316115, Accuracy: 0.44242
+100%|██████████| 5005/5005 [29:46<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.03it/s]
+Completed epoch 41: Train loss = 3.0860701359949863, Val loss = 2.5545428626391353, Accuracy: 0.43656
+LR reduced to 0.001
+100%|██████████| 5005/5005 [29:45<00:00,  2.80it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 42: Train loss = 2.6870200990320563, Val loss = 2.133927044211602, Accuracy: 0.51092
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:53<00:00,  2.79it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 43: Train loss = 2.6081359520301475, Val loss = 2.1033911248859094, Accuracy: 0.51734
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:00<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.02it/s]
+Completed epoch 44: Train loss = 2.5714876919955043, Val loss = 2.0810434809144662, Accuracy: 0.5227
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:07<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 45: Train loss = 2.546408609386448, Val loss = 2.0654356330633163, Accuracy: 0.52678
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:01<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.08it/s]
+Completed epoch 46: Train loss = 2.53100528693223, Val loss = 2.0473972905655295, Accuracy: 0.52884
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:08<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.02it/s]
+Completed epoch 47: Train loss = 2.518685366843011, Val loss = 2.0541592301154625, Accuracy: 0.52774
+100%|██████████| 5005/5005 [29:49<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.07it/s]
+Completed epoch 48: Train loss = 2.505925155162335, Val loss = 2.030782685900221, Accuracy: 0.53104
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:06<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.03it/s]
+Completed epoch 49: Train loss = 2.4987506323403768, Val loss = 2.032122568208344, Accuracy: 0.53178
+100%|██████████| 5005/5005 [29:43<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.07it/s]
+Completed epoch 50: Train loss = 2.4891714368547713, Val loss = 2.0297529368984457, Accuracy: 0.53242
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:43<00:00,  2.81it/s] 
+100%|██████████| 196/196 [01:02<00:00,  3.11it/s]
+Completed epoch 51: Train loss = 2.4839669914274185, Val loss = 2.0285979454614678, Accuracy: 0.53216
+100%|██████████| 5005/5005 [29:56<00:00,  2.79it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 52: Train loss = 2.4783221742847226, Val loss = 2.022381496064517, Accuracy: 0.53258
+100%|██████████| 5005/5005 [30:08<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 53: Train loss = 2.4709386678842398, Val loss = 2.0150286686055514, Accuracy: 0.53532
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:51<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 54: Train loss = 2.4666682066379133, Val loss = 2.0112074528421675, Accuracy: 0.53498
+100%|██████████| 5005/5005 [29:38<00:00,  2.81it/s] 
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 55: Train loss = 2.461614768631332, Val loss = 2.021869439555674, Accuracy: 0.53366
+100%|██████████| 5005/5005 [29:33<00:00,  2.82it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 56: Train loss = 2.4581605708325185, Val loss = 2.0012297505626875, Accuracy: 0.53772
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:45<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 57: Train loss = 2.4555296007093492, Val loss = 2.0138432432194144, Accuracy: 0.53512
+100%|██████████| 5005/5005 [30:06<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 58: Train loss = 2.449745985177847, Val loss = 2.0021152593651594, Accuracy: 0.53844
+100%|██████████| 5005/5005 [29:39<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 59: Train loss = 2.4458154582596205, Val loss = 2.0010165453565363, Accuracy: 0.53756
+100%|██████████| 5005/5005 [30:00<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.97it/s]
+Completed epoch 60: Train loss = 2.443494149378606, Val loss = 1.9932008385658264, Accuracy: 0.53832
+100%|██████████| 5005/5005 [29:58<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:05<00:00,  3.00it/s]
+Completed epoch 61: Train loss = 2.4370980877499955, Val loss = 2.0066763086586583, Accuracy: 0.53936
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:30<00:00,  2.83it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.98it/s]
+Completed epoch 62: Train loss = 2.436116598035906, Val loss = 1.9904601464466172, Accuracy: 0.53992
+100%|██████████| 5005/5005 [29:43<00:00,  2.81it/s] 
+100%|██████████| 196/196 [01:03<00:00,  3.10it/s]
+Completed epoch 63: Train loss = 2.4346196276086434, Val loss = 1.9905415524025352, Accuracy: 0.53892
+100%|██████████| 5005/5005 [29:30<00:00,  2.83it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 64: Train loss = 2.4295898005917116, Val loss = 1.9996875679614592, Accuracy: 0.53782
+100%|██████████| 5005/5005 [29:48<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.08it/s]
+Completed epoch 65: Train loss = 2.427416795045584, Val loss = 2.005978066398173, Accuracy: 0.53428
+100%|██████████| 5005/5005 [30:10<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.07it/s]
+Completed epoch 66: Train loss = 2.4231855762112033, Val loss = 2.0019873438441023, Accuracy: 0.53608
+LR reduced to 0.0001
+100%|██████████| 5005/5005 [29:54<00:00,  2.79it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.03it/s]
+Completed epoch 67: Train loss = 2.3311937836619405, Val loss = 1.9213249333658997, Accuracy: 0.55294
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:03<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 68: Train loss = 2.317132470562503, Val loss = 1.9159317430184812, Accuracy: 0.55562
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:48<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 69: Train loss = 2.310593219856163, Val loss = 1.916520814506375, Accuracy: 0.55486
+100%|██████████| 5005/5005 [30:17<00:00,  2.75it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 70: Train loss = 2.3064456228252417, Val loss = 1.9087365616341025, Accuracy: 0.55672
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [30:05<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.03it/s]
+Completed epoch 71: Train loss = 2.3040661646531415, Val loss = 1.909026024901137, Accuracy: 0.55686
+100%|██████████| 5005/5005 [29:44<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.10it/s]
+Completed epoch 72: Train loss = 2.3018482772739497, Val loss = 1.9068843518592873, Accuracy: 0.55766
+100%|██████████| 5005/5005 [29:37<00:00,  2.82it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.98it/s]
+Completed epoch 73: Train loss = 2.297866313869541, Val loss = 1.9051696141155399, Accuracy: 0.557
+100%|██████████| 5005/5005 [29:38<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:06<00:00,  2.95it/s]
+Completed epoch 74: Train loss = 2.297370518647231, Val loss = 1.905744998126614, Accuracy: 0.55678
+100%|██████████| 5005/5005 [29:59<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 75: Train loss = 2.296169387139045, Val loss = 1.8987436458772542, Accuracy: 0.55856
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:55<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.02it/s]
+Completed epoch 76: Train loss = 2.2939530295211, Val loss = 1.903040117451123, Accuracy: 0.55742
+100%|██████████| 5005/5005 [29:40<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.98it/s]
+Completed epoch 77: Train loss = 2.2922548398628577, Val loss = 1.9020927028388392, Accuracy: 0.5581
+100%|██████████| 5005/5005 [30:04<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 78: Train loss = 2.2926795480491875, Val loss = 1.9009557396781689, Accuracy: 0.55862
+100%|██████████| 5005/5005 [29:44<00:00,  2.81it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.02it/s]
+Completed epoch 79: Train loss = 2.2890131936087594, Val loss = 1.9016524118428328, Accuracy: 0.55868
+100%|██████████| 5005/5005 [29:58<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.04it/s]
+Completed epoch 80: Train loss = 2.2904166265920205, Val loss = 1.8975754936738891, Accuracy: 0.5587
+LR reduced to 1e-05
+100%|██████████| 5005/5005 [30:06<00:00,  2.77it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.05it/s]
+Completed epoch 81: Train loss = 2.2757300909939824, Val loss = 1.892249038633035, Accuracy: 0.56004
+Saved model to alexnet_checkpoints/best_model.pt
+100%|██████████| 5005/5005 [29:59<00:00,  2.78it/s] 
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 82: Train loss = 2.2756598534045755, Val loss = 1.891835299681644, Accuracy: 0.55986
+100%|██████████| 5005/5005 [30:04<00:00,  2.77it/s] 
+100%|██████████| 196/196 [01:05<00:00,  2.98it/s]
+Completed epoch 83: Train loss = 2.2770139945970547, Val loss = 1.8922267413260985, Accuracy: 0.55998
+100%|██████████| 5005/5005 [29:44<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 84: Train loss = 2.273619398632488, Val loss = 1.8908034268082405, Accuracy: 0.5604
+100%|██████████| 5005/5005 [29:51<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 85: Train loss = 2.269994148841271, Val loss = 1.8900476499479644, Accuracy: 0.561
+100%|██████████| 5005/5005 [30:00<00:00,  2.78it/s]
+100%|██████████| 196/196 [01:05<00:00,  3.01it/s]
+Completed epoch 86: Train loss = 2.273954249119068, Val loss = 1.8896391628956308, Accuracy: 0.561
+LR reduced to 1.0000000000000002e-06
+100%|██████████| 5005/5005 [29:56<00:00,  2.79it/s]
+100%|██████████| 196/196 [01:03<00:00,  3.09it/s]
+Completed epoch 87: Train loss = 2.276658492941004, Val loss = 1.889548625264849, Accuracy: 0.56082
+100%|██████████| 5005/5005 [29:24<00:00,  2.84it/s]
+100%|██████████| 196/196 [01:04<00:00,  3.02it/s]
+Completed epoch 88: Train loss = 2.273107440416868, Val loss = 1.889937040148949, Accuracy: 0.56056
+100%|██████████| 5005/5005 [29:46<00:00,  2.80it/s]
+100%|██████████| 196/196 [01:05<00:00,  2.99it/s]
+Completed epoch 89: Train loss = 2.275921362644428, Val loss = 1.8899129537903532, Accuracy: 0.56072
+Saved loss curves to ./alexnet_checkpoints/loss_curve.png
+Saved accuracy curve to ./alexnet_checkpoints/accuracy_curve.png
