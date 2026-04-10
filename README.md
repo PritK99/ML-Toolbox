@@ -33,7 +33,7 @@ ML-Toolbox/
 │   ├── 📂 boosting*
 │   └── 📂 random-forests*
 │
-├── 📂 kernels                    # Kernel Methods
+├── 📂 kernel-methods                    # Kernels
 │       ├── 📂 perceptron*
 │       ├── 📂 linear-regression*
 │       └── 📂 svm*
