@@ -33,7 +33,7 @@ ML-Toolbox/
 │   ├── 📂 boosting*
 │   └── 📂 random-forests*
 │
-├── 📂 kernel-methods                    # Kernels
+├── 📂 kernel-methods             # Kernels
 │       ├── 📂 perceptron*
 │       ├── 📂 linear-regression*
 │       └── 📂 svm*
@@ -111,7 +111,7 @@ However, with great power comes great responsibility. In all three components, i
 
 ## Getting Started
 
-The datasets are either public datasets from libraries (such as Fashion-MNIST) or datasets downloaded from Kaggle. Details about each dataset used can be found in `assets/data/README.md`. The datasets can be downloaded from their original sources or from <a href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">this link</a>. Once downloaded, the datasets must be placed in the `/assets/data` folder.
+The datasets are either public datasets from libraries (such as Fashion-MNIST) or datasets downloaded from Kaggle. Details about each dataset used can be found in `assets/data/README.md`. The datasets can be downloaded from their original sources or from <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">this link</a>. Once downloaded, the datasets must be placed in the `/assets/data` folder.
 
 ## Major References
 
