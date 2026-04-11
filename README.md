@@ -10,7 +10,7 @@
 
 ## About
 
-Classical machine learning and optimization methods are truly fascinating. The motivation behind this project is to explore these foundational techniques in depth. The repository is currently under development, and given the vast breadth of machine learning algorithms and optimization techniques, it is likely to remain a work in progress for a long time.
+Classical machine learning and optimization methods are truly fascinating. The motivation behind this project is to explore these foundational techniques in depth. The repository is currently under development, and given the vast breadth of machine learning algorithms and optimization methods, it is likely to remain a work in progress for a long time.
 
 ## File Structure
 
@@ -52,7 +52,7 @@ ML-Toolbox/
 │   ├── 📂 autoencoders*
 │   └── 📂 variational-autoencoders*
 │
-├── 📂 optimization/              # Optimization Techniques
+├── 📂 optimization-methods/      # Optimization Techniques
 │   ├── 📂 unconstrained/
 │   │   ├── gradient-descent*
 │   │   ├── newtons-method*
