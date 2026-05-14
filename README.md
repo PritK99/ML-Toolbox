@@ -8,6 +8,18 @@
   <small><i>Image source: https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote01_MLsetup.html</i></small>
 </p>
 
+## Table of Contents
+
+- [ML Toolbox](#ml-toolbox)
+  - [About](#about)
+  - [Philosophy](#philosophy)
+  - [How do we combine knowledge with data?](#how-do-we-combine-knowledge-with-data)
+  - [File Structure](#list-of-algorithms)
+  - [List of Algorithms](#Getting-Started)
+  - [Getting Started](#getting-started)
+  - [References](#references)
+
+
 ## About
 
 Classical machine learning and optimization methods are deeply fascinating fields of study. The motivation behind this project is to explore these techniques in depth.
@@ -54,7 +66,7 @@ Another aspect of optimization is the choice of hyperparameters, such as the lea
 
 However, with great power comes great responsibility. In all three components, if our priors are incorrect or misleading, they can increase the error instead of reducing it. 
 
-## File Structure
+## List of Algorithms
 
 ```
 ML-Toolbox/
@@ -139,7 +151,7 @@ Note: * indicates work in progress.
 
 The datasets used are either publicly available datasets from standard libraries (such as Fashion-MNIST) or datasets downloaded from Kaggle. Details about each dataset can be found in assets/data/README.md. The datasets can either be downloaded from their original sources or from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
 
-## Major References
+## References
 
 * Cornell CS4780 <a href="https://www.youtube.com/playlist?list=PLl8OlHZGYOQ7bkVbuRthEsaLr7bONzbXS">Machine Learning for Intelligent Systems</a> by Prof. Kilian Weinberger.
 * <a href="https://www.youtube.com/playlist?list=PLZ_xn3EIbxZEoWLlm9y6OizFkontrhA6G">Gaussian Process Summer School 2024</a>.
