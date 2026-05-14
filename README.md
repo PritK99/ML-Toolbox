@@ -34,19 +34,19 @@ Now, depending on the value of λ, we may choose different machine learning algo
 
 Knowledge is the set of priors we have about a problem. For example, if I ask you to find two numbers whose product is 30, there are several possible answers. However, if we know that the numbers are as close as possible to each other, we can infer that the answer must be (5,6). In machine learning, there are three main ways in which we combine priors with data.
 
-1. *Model & Design Choices*
+#### 1. Model & Design Choices
 
 Given a problem, our goal is to find the optimal solution. Since we cannot search over all possible solutions, we restrict ourselves to a particular class of solutions through design choices. These choices include how we model the problem, what assumptions we make, how we formulate the loss function, and so on. Such choices reflect what we already believe about the problem or what properties we want from the solution.
 
 For example, consider a classification problem. If we only care about prediction accuracy, a Support Vector Machine (SVM) may be a good choice. However, if we want probability estimates instead of just class labels, models such as Naive Bayes or Logistic Regression are more suitable. Another example is regularization. L2 regularization is useful when we want smoother and simpler models, whereas L1 regularization is preferred when we want sparse solutions.
 
-2. *Data*
+#### 2. Data
 
 Data is the second place where we can inject prior knowledge. This includes techniques such as data augmentation, synthetic data generation, and feature engineering.
 
 For example, when working with datasets such as ImageNet, we often use augmentation techniques like horizontal flipping because we know that the identity of most objects does not change when the image is flipped. By augmenting the data in this way, we improve generalization.
 
-3. *Optimization*
+#### 3. Optimization
 
 The third place where we can inject prior knowledge is in the optimization process itself. For some problems, such as total variation denoising, algorithms like ADMM may perform better than standard gradient descent. In other cases, Newton’s method may converge in only a few steps, whereas gradient descent may require many more iterations.
 
@@ -59,29 +59,37 @@ However, with great power comes great responsibility. In all three components, i
 ```
 ML-Toolbox/
 │
-├── 📂 supervised-learning/       # Supervised Learning
-│   ├── 📂 perceptron*
-│   ├── 📂 knn*
-│   ├── 📂 naive-bayes*
-│   ├── 📂 logistic-regression*
-│   ├── 📂 linear-regression*
-│   ├── 📂 decision-trees*
-│   ├── 📂 kd-ball-trees*
-│   ├── 📂 svm*
-│   ├── 📂 gaussian-processes*
-│   ├── 📂 neural-networks*
-│   ├── 📂 cnn*
-│   └── 📂 rnn*
-│
-├── 📂 ensemble-learning/         # Ensemble Methods
-│   ├── 📂 bagging*
-│   ├── 📂 boosting*
-│   └── 📂 random-forests*
-│
-├── 📂 kernel-methods/            # Kernels
-│   ├── 📂 perceptron*
-│   ├── 📂 linear-regression*
-│   └── 📂 svm*
+├── 📂 supervised-learning/
+│   ├── 📂 linear-models/
+│   │   ├── linear-regression*
+│   │   ├── logistic-regression*
+│   │   └── perceptron*
+│   │
+│   ├── 📂 probabilistic-models/
+│   │   ├── naive-bayes*
+│   │   ├── gaussian-processes*
+│   │   └── hidden-markov-models*
+│   │
+│   ├── 📂 instance-based-learning/
+│   │   ├── knn*
+│   │   ├── kd-trees*
+│   │   └── ball-trees*
+│   │
+│   ├── 📂 tree-based-methods/
+│   │   ├── decision-trees*
+│   │   ├── random-forests*
+│   │   ├── bagging*
+│   │   └── boosting*
+│   │
+│   ├── 📂 kernel-methods/
+│   │   ├── kernel-perceptron*
+│   │   ├── kernel-regression*
+│   │   └── svm*
+│   │
+│   └── 📂 neural-networks/
+│       ├── mlp*
+│       ├── cnn*
+│       ├── rnn*
 │
 ├── 📂 unsupervised-learning/     # Unsupervised Learning
 │   ├── 📂 anomaly-detection*
