@@ -69,30 +69,42 @@ ML-Toolbox/
 │   ├── 📂 kd-ball-trees*
 │   ├── 📂 svm*
 │   ├── 📂 gaussian-processes*
+│   ├── 📂 neural-networks*
+│   ├── 📂 cnn*
+│   └── 📂 rnn*
 │
 ├── 📂 ensemble-learning/         # Ensemble Methods
 │   ├── 📂 bagging*
 │   ├── 📂 boosting*
 │   └── 📂 random-forests*
 │
-├── 📂 kernel-methods             # Kernels
-│       ├── 📂 perceptron*
-│       ├── 📂 linear-regression*
-│       └── 📂 svm*
+├── 📂 kernel-methods/            # Kernels
+│   ├── 📂 perceptron*
+│   ├── 📂 linear-regression*
+│   └── 📂 svm*
 │
 ├── 📂 unsupervised-learning/     # Unsupervised Learning
-│   ├── 📂 k-means*
-│   ├── 📂 gaussian-mixture-models*
-│   ├── 📂 kernel-density-estimation*
-│   ├── 📂 pca*
-│   └── 📂 apriori-algorithm*
-│
-├── 📂 deep-learning/             # Deep Learning
-│   ├── 📂 neural-networks*
-│   ├── 📂 cnn*
-│   ├── 📂 rnn*
-│   ├── 📂 autoencoders*
-│   └── 📂 variational-autoencoders*
+│   ├── 📂 anomaly-detection*
+│   │
+│   ├── 📂 association-rule-mining*
+│   │   └── apriori-algorithm*
+│   │
+│   ├── 📂 clustering*
+│   │   ├── k-means*
+│   │   └── gaussian-mixture-models*
+│   │
+│   ├── 📂 density-estimation*
+│   │   └── kernel-density-estimation*
+│   │
+│   ├── 📂 dimensionality-reduction*
+│   │   └── pca*
+│   │
+│   ├── 📂 generative-models*
+│   │   └── generative-adversarial-networks*
+│   │
+│   └── 📂 representation-learning*
+│       ├── autoencoders*
+│       └── variational-autoencoders*
 │
 ├── 📂 optimization-methods/      # Optimization Techniques
 │   ├── 📂 unconstrained/
@@ -102,16 +114,17 @@ ML-Toolbox/
 │   │   ├── coordinate-descent*
 │   │   └── conjugate-gradient*
 │   │
-│   ├── 📂 constrained/
+│   └── 📂 constrained/
+│
+├── 📂 data/                      # Datasets
 │
 ├── 📂 assets/
-│   ├── 📂 data/                  # Datasets
-│   ├── 📂 img/                   # Images & visual assets
-│   └── 📂 scripts/               # Preprocessing scripts
+│   ├── img/                      # Images & visual assets
+│   └── scripts/                  # Preprocessing scripts
 │
 └── 📄 README.md
 
-Note: * indicates work in progress.                                              
+Note: * indicates work in progress.
 ```
 
 ## Getting Started
