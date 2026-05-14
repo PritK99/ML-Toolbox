@@ -14,7 +14,7 @@ The idea of clustering is to group similar objects together. The goal is to obta
 For each clustering algorithm, we will use the two images shown below and observe the clustering results produced by each method on these images.
 
 <p align="center">
-  <img src="../../assets/img/clustering/majnu_bhai_painting.jpg" alt="Majnu Bhai painting">
+  <img src="../../assets/img/clustering/rocking_horse.jpg" alt="Rocking horse">
   <br>
   <small><i>The iconic "Rocking Horse" painting from the movie "Welcome"</i></small>
 </p>
@@ -24,3 +24,6 @@ For each clustering algorithm, we will use the two images shown below and observ
   <br>
   <small><i>A photograph of cloudy mountains taken by me</i></small>
 </p>
+
+## Algorithm 1: K-Means
+
