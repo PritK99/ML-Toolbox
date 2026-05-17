@@ -9,3 +9,6 @@
 
 # Raw data for association rule mining
 /Apriori Algorithm/raw_data
+
+# executables
+*.out

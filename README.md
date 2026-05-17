@@ -17,6 +17,9 @@
   - [File Structure](#list-of-algorithms)
   - [List of Algorithms](#Getting-Started)
   - [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Datasets](#datasets)
+    - [Usage](#usage)
   - [References](#references)
 
 
@@ -149,7 +152,42 @@ Note: * indicates work in progress.
 
 ## Getting Started
 
+### Installation
+
+Clone the project by typing the following command in your Terminal/CommandPrompt
+
+```
+git clone https://github.com/PritK99/ML-Toolbox.git
+```
+
+Navigate to the ML-Toolbox folder
+
+```
+cd ML-Toolbox
+```
+
+We also require OpenCV (C++). To install OpenCV on Ubuntu, run the following command
+
+```
+sudo apt install libopencv-dev
+```
+
+You can verify the installation by running
+
+```
+pkg-config --modversion opencv4
+```
+
+### Datasets
+
 The datasets used are either publicly available datasets from standard libraries (such as Fashion-MNIST) or datasets downloaded from Kaggle. Details about each dataset can be found in assets/data/README.md. The datasets can either be downloaded from their original sources or from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
+
+### Usage
+
+
+```
+g++ k-means.cpp ../../utils/image.cpp  `pkg-config --cflags --libs opencv4`
+```
 
 ## References
 
