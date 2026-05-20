@@ -14,8 +14,13 @@
   - [About](#about)
   - [Philosophy](#philosophy)
   - [How do we combine knowledge with data?](#how-do-we-combine-knowledge-with-data)
-  - [File Structure](#list-of-algorithms)
-  - [List of Algorithms](#Getting-Started)
+## Table of Contents
+
+- [ML Toolbox](#ml-toolbox)
+  - [About](#about)
+  - [Philosophy](#philosophy)
+  - [How do we combine knowledge with data?](#how-do-we-combine-knowledge-with-data)
+  - [List of Algorithms](#list-of-algorithms)
   - [Getting Started](#getting-started)
     - [Installation](#installation)
     - [Datasets](#datasets)

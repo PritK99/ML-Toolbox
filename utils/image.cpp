@@ -29,7 +29,7 @@ void show_image(cv::Mat& img){
     cv::destroyAllWindows();
 }
 
-// This is for testing functions
+// // This is for testing functions
 // int main(){
 //     std::string img_path = "../data/cloudy_mountains.jpg";
 

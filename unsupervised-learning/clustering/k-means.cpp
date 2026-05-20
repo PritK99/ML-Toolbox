@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../../utils/image.hpp"
 
 int main(){
