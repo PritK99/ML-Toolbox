@@ -14,12 +14,6 @@
   - [About](#about)
   - [Philosophy](#philosophy)
   - [How do we combine knowledge with data?](#how-do-we-combine-knowledge-with-data)
-## Table of Contents
-
-- [ML Toolbox](#ml-toolbox)
-  - [About](#about)
-  - [Philosophy](#philosophy)
-  - [How do we combine knowledge with data?](#how-do-we-combine-knowledge-with-data)
   - [List of Algorithms](#list-of-algorithms)
   - [Getting Started](#getting-started)
     - [Installation](#installation)
@@ -83,6 +77,7 @@ ML-Toolbox/
 │   ├── 📂 linear-models/
 │   │   ├── linear-regression*
 │   │   ├── logistic-regression*
+│   │   └── svm*
 │   │   └── perceptron*
 │   │
 │   ├── 📂 probabilistic-models/
@@ -104,7 +99,7 @@ ML-Toolbox/
 │   ├── 📂 kernel-methods/
 │   │   ├── kernel-perceptron*
 │   │   ├── kernel-regression*
-│   │   └── svm*
+│   │   └── kernel-svm*
 │   │
 │   └── 📂 neural-networks/
 │       ├── mlp*

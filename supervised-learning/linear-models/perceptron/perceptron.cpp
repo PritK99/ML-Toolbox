@@ -10,41 +10,6 @@ bool is_vowel(const char c){
     return false;
 }
 
-std::vector <int> fit(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, std::vector <float> &weights, const int max_iters){
-    std::vector <int> all_misclassifications;
-
-    for (int i = 0; i < max_iters; i++){
-        int misclassifications = 0;
-
-        for (int j = 0; j < data.size(); j++){
-            const std::vector<float>& data_point = data[j];
-            float dot = std::inner_product(weights.begin(), weights.end(), data_point.begin(), 0);
-
-            if (labels[j]*dot <= 0){
-                misclassifications += 1;
-                
-                // Update rule
-                for (int k = 0; k < weights.size(); k++){
-                    weights[k] += labels[j]*data_point[k];
-                }
-            }
-        }
-
-        all_misclassifications.push_back(misclassifications);
-        if (i % 10 == 0){
-            std::cout << "Misclassifications at iteration " << i << ": " << misclassifications << std::endl;
-        }
-
-        if (misclassifications == 0){
-            std::cout << "Perceptron converged at iteration " << i << std::endl;
-            break;
-        }
-    }
-    std::cout << "Perceptron did not converge." << std::endl;
-
-    return all_misclassifications
-}
-
 std::pair<std::vector<std::vector<float>>, std::vector<int>> extract_features(std::vector<std::vector<std::string>>& raw_data, const int num_features){
     std::vector<std::vector<float>> data;
     std::vector<int> labels;
@@ -79,17 +44,17 @@ std::pair<std::vector<std::vector<float>>, std::vector<int>> extract_features(st
         }
 
         // Trigrams
-        for (int j = 0; j < name.size() - 2; j++){
-            char c1 = std::tolower(name[j]);
-            char c2 = std::tolower(name[j+1]);
-            char c3 = std::tolower(name[j+2]);
+        // for (int j = 0; j < name.size() - 2; j++){
+        //     char c1 = std::tolower(name[j]);
+        //     char c2 = std::tolower(name[j+1]);
+        //     char c3 = std::tolower(name[j+2]);
 
-            int idx1 = c1 - 'a';
-            int idx2 = c2 - 'a';
-            int idx3 = c3 - 'a';
+        //     int idx1 = c1 - 'a';
+        //     int idx2 = c2 - 'a';
+        //     int idx3 = c3 - 'a';
 
-            row[1 + 26 + 26*26 + idx1*26*26 + idx2*26 + idx3] += 1;
-        }
+        //     row[1 + 26 + 26*26 + idx1*26*26 + idx2*26 + idx3] += 1;
+        // }
         
         row[num_features - 1] = 1;    // bias term
 
@@ -105,6 +70,84 @@ std::pair<std::vector<std::vector<float>>, std::vector<int>> extract_features(st
     }
 
     return {data, labels};
+}
+
+std::vector <int> fit(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, std::vector <float> &weights, const int max_iters){
+    std::vector <int> all_misclassifications;
+    bool is_converged = false;
+
+    for (int i = 0; i < max_iters; i++){
+        int misclassifications = 0;
+
+        for (int j = 0; j < data.size(); j++){
+            const std::vector<float>& data_point = data[j];
+            float dot = std::inner_product(weights.begin(), weights.end(), data_point.begin(), 0.0f);
+
+            if (labels[j]*dot <= 0){
+                misclassifications += 1;
+                
+                // Update rule
+                for (int k = 0; k < weights.size(); k++){
+                    weights[k] += labels[j]*data_point[k];
+                }
+            }
+        }
+
+        all_misclassifications.push_back(misclassifications);
+        if (i % 10 == 0){
+            std::cout << "Misclassifications at iteration " << i << ": " << misclassifications << std::endl;
+        }
+
+        if (misclassifications == 0){
+            std::cout << "Perceptron converged at iteration " << i << std::endl;
+            is_converged = true;
+            break;
+        }
+    }
+
+    if (!is_converged){
+        std::cout << "Perceptron did not converge." << std::endl;
+    }
+
+    return all_misclassifications;
+}
+
+void validate(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, const std::vector <float> &weights){
+    std::vector<int> preds;
+
+    for (int i = 0; i < data.size(); i++){
+        const std::vector<float>& data_point = data[i];
+        float dot = std::inner_product(weights.begin(), weights.end(), data_point.begin(), 0.0f);
+
+        if (dot >= 0){
+            preds.push_back(1);
+        }
+        else{
+            preds.push_back(-1);
+        }
+    }
+
+    std::array<std::array<int, 2>, 2> confusion_matrix{};    // This will be [[TP, FP], [FN, TN]]
+    for (int i = 0; i < labels.size(); i++){
+        if (labels[i] == 1){
+            if (preds[i] == 1){
+                confusion_matrix[0][0] += 1;    // TP
+            }
+            else{
+                confusion_matrix[1][0] += 1;    // FN
+            }
+        }
+        else{
+            if (preds[i] == -1){
+                confusion_matrix[1][1] += 1;    // TN
+            }
+            else{
+                confusion_matrix[0][1] += 1;    // FP
+            }
+        }
+    }
+
+    std::cout << confusion_matrix[0][0] << " " << confusion_matrix[0][1] << " " << confusion_matrix[1][0] << " " << confusion_matrix[1][1] << std::endl;
 }
 
 int main(){
@@ -143,8 +186,11 @@ int main(){
     std::cout << "Val data: " << val_data.size() << std::endl;
     std::cout << "Test data: " << test_data.size() << std::endl;
 
-    int max_iters = 1000;
+    int max_iters = 500;
     std::vector <int> all_misclassifications = fit(train_data, train_labels, weights, max_iters);
+
+    validate(train_data, train_labels, weights);
+    validate(val_data, val_labels, weights);
 
     return 0;
 }

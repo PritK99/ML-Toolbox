@@ -8,6 +8,7 @@
 #include <string>
 #include <algorithm>
 #include <random>
+#include <array>
 #include <numeric> 
 
 std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> read_csv(const std::string& csv_path);
