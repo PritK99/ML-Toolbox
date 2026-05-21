@@ -44,19 +44,31 @@ std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> spli
     std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> splits;
 
     // Shuffling dataset
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(data.begin(), data.end(), g);
+    std::vector<int> indices(num_samples);
+    std::iota(indices.begin(), indices.end(), 0);
+
+    // std::random_device rd;
+    // std::mt19937 g(rd());
+    std::mt19937 g(99);
+    std::shuffle(indices.begin(), indices.end(), g);
+
+    std::vector<std::vector<float>> shuffled_data(num_samples);
+    std::vector<int> shuffled_labels(num_samples);
+
+    for (int i = 0; i < num_samples; i++) {
+        shuffled_data[i] = data[indices[i]];
+        shuffled_labels[i] = labels[indices[i]];
+    }
 
     int num_test_samples = int(test_ratio*num_samples);
     int num_val_samples = int(val_ratio*num_samples);
 
-    std::vector <std::vector <float>> val_data (data.begin(), data.begin() + num_val_samples);
-    std::vector<int> val_labels (labels.begin(), labels.begin() + num_val_samples);
-    std::vector <std::vector <float>> test_data (data.begin() + num_val_samples, data.begin() + num_val_samples + num_test_samples);
-    std::vector<int> test_labels (labels.begin() + num_val_samples, labels.begin() + num_val_samples + num_test_samples);
-    std::vector <std::vector <float>> train_data (data.begin() + num_val_samples + num_test_samples, data.end());
-    std::vector<int> train_labels (labels.begin() + num_val_samples + num_test_samples, labels.end());
+    std::vector <std::vector <float>> val_data (shuffled_data.begin(), shuffled_data.begin() + num_val_samples);
+    std::vector<int> val_labels (shuffled_labels.begin(), shuffled_labels.begin() + num_val_samples);
+    std::vector <std::vector <float>> test_data (shuffled_data.begin() + num_val_samples, shuffled_data.begin() + num_val_samples + num_test_samples);
+    std::vector<int> test_labels (shuffled_labels.begin() + num_val_samples, shuffled_labels.begin() + num_val_samples + num_test_samples);
+    std::vector <std::vector <float>> train_data (shuffled_data.begin() + num_val_samples + num_test_samples, shuffled_data.end());
+    std::vector<int> train_labels (shuffled_labels.begin() + num_val_samples + num_test_samples, shuffled_labels.end());
 
     splits.push_back({train_data, train_labels});
     splits.push_back({val_data, val_labels});

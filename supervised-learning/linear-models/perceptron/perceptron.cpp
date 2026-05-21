@@ -44,17 +44,17 @@ std::pair<std::vector<std::vector<float>>, std::vector<int>> extract_features(st
         }
 
         // Trigrams
-        // for (int j = 0; j < name.size() - 2; j++){
-        //     char c1 = std::tolower(name[j]);
-        //     char c2 = std::tolower(name[j+1]);
-        //     char c3 = std::tolower(name[j+2]);
+        for (int j = 0; j < name.size() - 2; j++){
+            char c1 = std::tolower(name[j]);
+            char c2 = std::tolower(name[j+1]);
+            char c3 = std::tolower(name[j+2]);
 
-        //     int idx1 = c1 - 'a';
-        //     int idx2 = c2 - 'a';
-        //     int idx3 = c3 - 'a';
+            int idx1 = c1 - 'a';
+            int idx2 = c2 - 'a';
+            int idx3 = c3 - 'a';
 
-        //     row[1 + 26 + 26*26 + idx1*26*26 + idx2*26 + idx3] += 1;
-        // }
+            row[1 + 26 + 26*26 + idx1*26*26 + idx2*26 + idx3] += 1;
+        }
         
         row[num_features - 1] = 1;    // bias term
 
@@ -112,7 +112,7 @@ std::vector <int> fit(const std::vector<std::vector<float>> &data, const std::ve
     return all_misclassifications;
 }
 
-void validate(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, const std::vector <float> &weights){
+void evaluate(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, const std::vector <float> &weights){
     std::vector<int> preds;
 
     for (int i = 0; i < data.size(); i++){
@@ -128,26 +128,70 @@ void validate(const std::vector<std::vector<float>> &data, const std::vector<int
     }
 
     std::array<std::array<int, 2>, 2> confusion_matrix{};    // This will be [[TP, FP], [FN, TN]]
+    int TP = 0;
+    int FP = 0;
+    int FN = 0;
+    int TN = 0;
     for (int i = 0; i < labels.size(); i++){
         if (labels[i] == 1){
             if (preds[i] == 1){
-                confusion_matrix[0][0] += 1;    // TP
+                TP += 1;
             }
             else{
-                confusion_matrix[1][0] += 1;    // FN
+                FN += 1;
             }
         }
         else{
             if (preds[i] == -1){
-                confusion_matrix[1][1] += 1;    // TN
+                TN += 1;
             }
             else{
-                confusion_matrix[0][1] += 1;    // FP
+                FP += 1;
             }
         }
     }
+    confusion_matrix[0][0] = TP;
+    confusion_matrix[1][0] = FN;
+    confusion_matrix[0][1] = FP;
+    confusion_matrix[1][1] = TN;
 
-    std::cout << confusion_matrix[0][0] << " " << confusion_matrix[0][1] << " " << confusion_matrix[1][0] << " " << confusion_matrix[1][1] << std::endl;
+    float accuracy = (TP + TN)*1.0 / (TP + FP + FN + TN);
+    float precision = TP*1.0 / (TP + FP);
+    float recall = TP*1.0 / (TP + FN);
+    float f1 = 2*precision*recall / (precision + recall);
+
+    std::cout << "Confusion Matrix: " << confusion_matrix[0][0] << " " << confusion_matrix[0][1] << " " << confusion_matrix[1][0] << " " << confusion_matrix[1][1] << std::endl;
+    std::cout << "Accuracy: " << accuracy << std::endl;
+    std::cout << "Precision: " << precision << std::endl;
+    std::cout << "Recall: " << recall << std::endl;
+    std::cout << "F1: " << f1 << std::endl;
+}
+
+void inference(const std::vector<std::string> names, const std::vector <float> &weights, int num_features){
+    std::vector<std::vector<std::string>> dummy_data;
+    for (int i = 0; i < names.size(); i++){
+        std::vector<std::string> row;
+        row.push_back(names[i]);
+        row.push_back("0");
+
+        dummy_data.push_back(row);
+    }
+
+    auto feature_result = extract_features(dummy_data, num_features);
+    std::vector<std::vector<float>> data = feature_result.first;
+    std::vector<int> labels = feature_result.second;
+
+    for (int i = 0; i < data.size(); i++){
+        const std::vector<float>& data_point = data[i];
+        float dot = std::inner_product(weights.begin(), weights.end(), data_point.begin(), 0.0f);
+
+        if (dot >= 0){
+            std::cout << "I am sure " << names[i] << " is a boy." << std::endl;
+        }
+        else{
+            std::cout << "I am sure " << names[i] << " is a girl." << std::endl;
+        }
+    }
 }
 
 int main(){
@@ -186,11 +230,17 @@ int main(){
     std::cout << "Val data: " << val_data.size() << std::endl;
     std::cout << "Test data: " << test_data.size() << std::endl;
 
-    int max_iters = 500;
+    int max_iters = 1000;
     std::vector <int> all_misclassifications = fit(train_data, train_labels, weights, max_iters);
 
-    validate(train_data, train_labels, weights);
-    validate(val_data, val_labels, weights);
+    std::cout << "Validating" << std::endl;
+    evaluate(val_data, val_labels, weights);    // Validation
+
+    std::cout << "Testing" << std::endl;
+    evaluate(test_data, test_labels, weights);    // Testing
+
+    std::vector <std::string> names = {"Prit", "Asin", "Raavan", "Mandodari", "Zooni", "Chandanbala"};
+    inference(names, weights, num_features);
 
     return 0;
 }

@@ -1,18 +1,25 @@
-#include <fstream>
+#include <cstdio>
 #include <vector>
 
 int main() {
 
     std::vector<double> y = {1,4,9,16,25};
 
-    std::ofstream file("data.txt");
+    FILE* gnuplot = popen("gnuplot -persistent", "w");
 
-    for (int i = 0; i < y.size(); i++)
-        file << i << " " << y[i] << "\n";
+    fprintf(gnuplot, "set title 'Quadratic Growth'\n");
+    fprintf(gnuplot, "set xlabel 'x'\n");
+    fprintf(gnuplot, "set ylabel 'y'\n");
 
-    file.close();
+    fprintf(gnuplot, "plot '-' with linespoints title 'y = x^2'\n");
 
-    system("gnuplot -p -e \"plot 'data.txt' with lines\"");
+    for (int i = 0; i < y.size(); i++) {
+        fprintf(gnuplot, "%d %f\n", i, y[i]);
+    }
+
+    fprintf(gnuplot, "e\n");
+
+    pclose(gnuplot);
 
     return 0;
 }
