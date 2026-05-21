@@ -39,9 +39,9 @@ std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> re
     return {column_names, data};
 }
 
-std::vector<std::vector <std::vector <std::string>>> split_data(std::vector <std::vector <std::string>>& data, float val_ratio, float test_ratio){
+std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> split_data(std::vector <std::vector <float>>& data, std::vector<int> &labels, const float val_ratio, const float test_ratio){
     int num_samples = data.size();
-    std::vector<std::vector <std::vector <std::string>>> splits;
+    std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> splits;
 
     // Shuffling dataset
     std::random_device rd;
@@ -51,13 +51,16 @@ std::vector<std::vector <std::vector <std::string>>> split_data(std::vector <std
     int num_test_samples = int(test_ratio*num_samples);
     int num_val_samples = int(val_ratio*num_samples);
 
-    std::vector <std::vector <std::string>> val_data (data.begin(), data.begin() + num_val_samples);
-    std::vector <std::vector <std::string>> test_data (data.begin() + num_val_samples, data.begin() + num_val_samples + num_test_samples);
-    std::vector <std::vector <std::string>> train_data (data.begin() + num_val_samples + num_test_samples, data.end());
+    std::vector <std::vector <float>> val_data (data.begin(), data.begin() + num_val_samples);
+    std::vector<int> val_labels (labels.begin(), labels.begin() + num_val_samples);
+    std::vector <std::vector <float>> test_data (data.begin() + num_val_samples, data.begin() + num_val_samples + num_test_samples);
+    std::vector<int> test_labels (labels.begin() + num_val_samples, labels.begin() + num_val_samples + num_test_samples);
+    std::vector <std::vector <float>> train_data (data.begin() + num_val_samples + num_test_samples, data.end());
+    std::vector<int> train_labels (labels.begin() + num_val_samples + num_test_samples, labels.end());
 
-    splits.push_back(train_data);
-    splits.push_back(val_data);
-    splits.push_back(test_data);
+    splits.push_back({train_data, train_labels});
+    splits.push_back({val_data, val_labels});
+    splits.push_back({test_data, test_labels});
 
     return splits;
 }
