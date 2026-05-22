@@ -1,62 +1,90 @@
 # Perceptron
 
-<img src="../assets/img/perceptron-visualization.png" alt="perceptron-visualization">
+<p align="center">
+  <img src = "../../../assets/img/perceptron/visualization.gif" alt="perceptron visualization">
+  <br>
+  <small><i>Image source: https://commons.wikimedia.org/wiki/File:PerceptronSample.gif</i></small>
+</p>
 
-## Assumptions
+## Introduction
 
-Perceptrons are used for classification, and they make a core assumption that there exists a hyperplane that can perfectly separate the data. While this isn't always true in low dimensions, it tends to hold in higher dimensions because points are more spread out due to the curse of dimensionality, making separation easier. So, for low dimensions, other algorithms like KNN are preferred, while for higher dimensions, perceptrons are useful.
+The perceptron is one of the earliest linear classification algorithms. Linear classifiers assume that there exists a hyperplane that can separate the data into different classes. The goal of the perceptron is therefore to learn a hyperplane $w^T x + b = 0$ such that all the data points are correctly classified. The fact that the data can be separated using a linear hyperplane is the knowledge, while the parameters of the hyperplane are learned from the data.
 
 ## Algorithm
 
-In a perceptron, we define a hyperplane using a weight vector `w` (normal to the hyperplane) and a bias `b`. We can combine these into one vector `W` = `[w, b]` by extending our feature space into one higher dimension. A hyperplane is a subspace that is one dimension lower than the feature space. For instance, in 2D, it's a line. Instead of characterizing it with both `w` and `b`, we extend it to 3D and draw a plane passing through the origin, removing the need for an extra bias term.
+A hyperplane is a subspace whose dimension is one less than that of the feature space. For example, in a 2D feature space, a hyperplane is simply a straight line, while in 3D it is a plane. A hyperplane can be defined using:
 
-<img src = "../assets/img/perceptron.jpeg" alt="Perceptron Algorithm">
+1) A weight vector w, which is normal (perpendicular) to the hyperplane, and
+2) A bias term b, which controls the offset from the origin.
 
-During inference, we look at the direction of the point relative to the hyperplane using `Wx` and classify based on the sign of the result. If `Wx > 0`, it's in the positive class, and vice versa.
+Hence, it can be written as $w^T x + b = 0$. But, this is as good as $W^T X = 0$ where `W` = `[w, b]` and `X` = `[x, 1]`. Because the bias term is absorbed into `W` now, we don't have to do additional bookkeeping for the bias term.
 
-However, if the data isn't linearly separable, the algorithm will keep trying indefinitely. To avoid this, we can set a limit on the number of iterations.
+Now, we can use the following algorithm to learn the parameters for the hyperplane.
 
-### Geometric Intuition
+<p align="center">
+  <img src = "../../../assets/img/perceptron/perceptron-algorithm.jpeg" alt="perceptron algorithm">
+</p>
 
-Adding `yx` of incorrectly classified example to weights `W` pushes the hyperplane to accommodate that missclassified point. While it is not guaranteed that the point will be fixed immediately, the perceptron will slowly get that point right. This is because we add (if `Y = +1`) or subtract (if `Y = -1`) the data point vector from the normal vector, which fixes the issue.
+During inference, we just need to check the sign of $W^T X$ to classify it.
 
-<img src="../assets/img/perceptron-working.jpeg" alt="perceptron-working">
+### Why does the update rule work?
 
-However, this intuition is not enough to know that perceptron will converge for all data point. While accommodating the misclassified point, it may make new mistakes for orignally classified points. Hence we need to prove that the perceptron will converge given our assumption holdes true.
+A single perceptron update is not guaranteed to classify the point correctly immediately after the update. But it moves the decision boundary in a direction that makes the current example more likely to be classified correctly.
 
-## Proof that the Perceptron will always converge
+<p align="center">
+  <img src = "../../../assets/img/perceptron/update-rule.png" alt="update-rule-geometry">
+</p>
 
-If the points are linearly separable (can be perfectly separated by a line or hyperplane), the Perceptron will converge to a solution (though not necessarily the best one). But if they're not separable, it will loop forever.
+While adjusting the hyperplane for one point, it is possible that some previously correct points may become misclassified. However, we can show that if we keep following the update rule, the perceptron will find a separating hyperplane.
 
-<img src="../assets/img/perceptron-proof1.jpeg" alt="perceptron proof">
+### Proof that the Perceptron will converge
 
-<img src="../assets/img/perceptron-proof2.jpeg" alt="perceptron proof">
+The goal of this proof is to show that if the points are linearly separable, the Perceptron will find a separable hyperplane.
 
-<img src="../assets/img/perceptron-proof3.jpeg" alt="perceptron proof">
+<p align="center">
+  <img src = "../../../assets/img/perceptron/perceptron-proof1.jpeg" alt="perceptron algorithm">
+  <br>
+  <img src = "../../../assets/img/perceptron/perceptron-proof2.jpeg" alt="perceptron algorithm">
+  <br>
+  <img src = "../../../assets/img/perceptron/perceptron-proof3.jpeg" alt="perceptron algorithm">
+</p>
 
+## Demo
 
-## Results
+We now build a perceptron for the task of gender prediction using first names. Given a name, the goal is to predict whether it is a boy's or a girl's name. To do this, we first construct features from the name using:
 
-The Perceptron algorithm for Gender Classification converges in `98` steps when we consider feature vector made up of all unigrams, all bigrams, and all trigrams in name and a binary feature indicating whether the last character is a vowel i.e. vector of size `(18280, 1)`. It achieves an accuracy of `88.46%` on the test data, which is a good score compared to other algorithms such as KNN. 
+1) 26 unigrams
+2) 26*26 bigrams
+3) 26*26*26 trigrams
+4) 1 feature indicating whether the name ends with a vowel.
+5) 1 bias term
 
-Sample Predictions:
+For Indian names, especially North Indian names, many girl names end with a vowel, while for boy names, they do not. Hence, this feature can be useful for classification.
+
+To run the perceptron, we require `csv.cpp` from `/utils`.
 
 ```
-Indian Names:
-I am sure Asin is a boy.    # Wrong
-I am sure Anvay is a boy.
-I am sure Samantha is a girl.
+g++ perceptron.cpp ../../../utils/csv.cpp
+./a.out
+```
+
+The perceptron converged after 80 iterations with 87.6% accuracy on the validation set. If we don't use trigram features, the algorithm does not converge on the training set. The results on the test set are:
+
+```
+Confusion Matrix: 56 8 10 55
+Accuracy: 0.860465
+Precision: 0.875
+Recall: 0.848485
+F1: 0.861538
+```
+
+We can now try running the algorithm on a few sample names:
+
+```
+I am sure Prit is a boy.
+I am sure Asin is a boy.    // This is wrong
 I am sure Raavan is a boy.
 I am sure Mandodari is a girl.
 I am sure Zooni is a girl.
 I am sure Chandanbala is a girl.
-
-Foreign Names:
-I am sure Emma is a girl.
-I am sure Jacob is a boy.
-I am sure Carlos is a boy.
-I am sure Hermoine is a girl.
-I am sure Leonardo is a girl.    # Wrong
-I am not sure if Meryl is a boy or a girl.    # Wrong
-I am sure Obama is a girl.    # Wrong
 ```
