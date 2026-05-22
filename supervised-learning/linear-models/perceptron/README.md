@@ -53,11 +53,11 @@ The goal of this proof is to show that if the points are linearly separable, the
 
 We now build a perceptron for the task of gender prediction using first names. Given a name, the goal is to predict whether it is a boy's or a girl's name. To do this, we first construct features from the name using:
 
-1) 26 unigrams
-2) 26*26 bigrams
-3) 26*26*26 trigrams
-4) 1 feature indicating whether the name ends with a vowel.
-5) 1 bias term
+1) `26` unigrams
+2) `26*26` bigrams
+3) `26*26*26` trigrams
+4) `1` feature indicating whether the name ends with a vowel.
+5) `1` bias term
 
 For Indian names, especially North Indian names, many girl names end with a vowel, while for boy names, they do not. Hence, this feature can be useful for classification.
 

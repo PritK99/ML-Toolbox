@@ -75,10 +75,10 @@ ML-Toolbox/
 │
 ├── 📂 supervised-learning/
 │   ├── 📂 linear-models/
+│   │   ├── perceptron
 │   │   ├── linear-regression*
 │   │   ├── logistic-regression*
 │   │   └── svm*
-│   │   └── perceptron*
 │   │
 │   ├── 📂 probabilistic-models/
 │   │   ├── naive-bayes*
