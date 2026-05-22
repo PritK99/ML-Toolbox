@@ -182,6 +182,11 @@ pkg-config --modversion opencv4
 
 The datasets used are either publicly available datasets from standard libraries (such as Fashion-MNIST) or datasets downloaded from Kaggle. Details about each dataset can be found in assets/data/README.md. The datasets can either be downloaded from their original sources or from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
 
+#### List of Kaggle Datasets used in the project
+
+1) <a href="https://www.kaggle.com/competitions/learning-agency-lab-automated-essay-scoring-2/data">Learning Agency Lab - Automated Essay Scoring 2.0</a>
+
+
 ### Usage
 
 
