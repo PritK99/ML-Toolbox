@@ -6,6 +6,16 @@
   <small><i>Image source: https://commons.wikimedia.org/wiki/File:PerceptronSample.gif</i></small>
 </p>
 
+## Table of Contents
+
+- [Perceptron](#perceptron)
+  - [Introduction](#introduction)
+  - [Algorithm](#algorithm)
+    - [Why does the update rule work?](#why-does-the-update-rule-work)
+    - [Proof that the Perceptron will converge](#proof-that-the-perceptron-will-converge)
+  - [Usage](#usage)
+  - [Demo](#demo)
+
 ## Introduction
 
 The perceptron is one of the earliest linear classification algorithms. Linear classifiers assume that there exists a hyperplane that can separate the data into different classes. The goal of the perceptron is therefore to learn a hyperplane $w^T x + b = 0$ such that all the data points are correctly classified. The fact that the data can be separated using a linear hyperplane is the knowledge, while the parameters of the hyperplane are learned from the data.
@@ -49,6 +59,12 @@ The goal of this proof is to show that if the points are linearly separable, the
   <img src = "../../../assets/img/perceptron/perceptron-proof3.jpeg" alt="perceptron algorithm">
 </p>
 
+## Usage
+
+```
+g++ perceptron.cpp ../../../utils/csv.cpp 
+```
+
 ## Demo
 
 We now build a perceptron for the task of gender prediction using first names. Given a name, the goal is to predict whether it is a boy's or a girl's name. To do this, we first construct features from the name using:
@@ -61,21 +77,13 @@ We now build a perceptron for the task of gender prediction using first names. G
 
 For Indian names, especially North Indian names, many girl names end with a vowel, while for boy names, they do not. Hence, this feature can be useful for classification.
 
-To run the perceptron, we require `csv.cpp` from `/utils`.
+The perceptron converged after 80 iterations with 89.9% accuracy on the validation set. If we don't use trigram features, the algorithm does not converge on the training set. The results on the test set are:
 
 ```
-g++ perceptron.cpp ../../../utils/csv.cpp
-./a.out
-```
-
-The perceptron converged after 80 iterations with 87.6% accuracy on the validation set. If we don't use trigram features, the algorithm does not converge on the training set. The results on the test set are:
-
-```
-Confusion Matrix: 56 8 10 55
-Accuracy: 0.860465
+Confusion Matrix: 49 7 9 64
+Accuracy: 0.875969
 Precision: 0.875
-Recall: 0.848485
-F1: 0.861538
+Recall: 0.844828
 ```
 
 We can now try running the algorithm on a few sample names:
