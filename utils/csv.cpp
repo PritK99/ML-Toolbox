@@ -88,6 +88,51 @@ std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> spli
     return splits;
 }
 
+std::vector <std::vector <float>> normalize_data(const std::vector <std::vector <float>> &data){
+    std::vector <std::vector <float>> normalized_data;
+
+    int num_features = data[0].size();
+    std::vector <float> mean (num_features); 
+    std::vector <float> std_dev (num_features);
+    
+    // Calculating mean
+    for (int i = 0; i < data.size(); i++){
+        for (int j = 0; j < num_features; j++){
+            mean[j] += data[i][j];
+        }
+    }
+
+    for (int j = 0; j < num_features; j++){
+        mean[j] /= data.size();
+    }
+
+    // Calculating standard deviation
+    for (int i = 0; i < data.size(); i++){
+        for (int j = 0; j < num_features; j++){
+            std_dev[j] += std::pow(data[i][j] - mean[j], 2);
+        }
+    }
+
+    for (int j = 0; j < num_features; j++){
+        std_dev[j] /= data.size();
+        std_dev[j] = std::pow(std_dev[j], 0.5);
+    }
+    
+    // Normalizing
+    for (int i = 0; i < data.size(); i++){
+        std::vector <float> data_point = data[i];
+        for (int j = 0; j < num_features; j++){
+            if (std_dev[j] != 0){
+                data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
+            }
+        }
+
+        normalized_data.push_back(data_point);
+    }
+
+    return normalized_data;
+}
+
 // // This is for testing functions
 // int main(){
 //     std::string csv_path = "../data/gender.csv";
