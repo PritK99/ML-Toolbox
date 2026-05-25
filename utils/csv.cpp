@@ -24,14 +24,25 @@ std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> re
 
     // After first iteration, we start reading the data
     while (std::getline(file, line)) {
-
         std::stringstream ss(line);
         std::string cell;
         std::vector<std::string> row;
 
-        while (std::getline(ss, cell, ',')) {
-            row.push_back(cell);
+        bool is_string = false;
+        for (int i = 0; i < line.size(); i++){
+            if (line[i] == '"'){
+                is_string = !is_string;
+            }
+
+            if (line[i] == ',' && !is_string){
+                row.push_back(cell);
+                cell = "";
+                continue;
+            }
+
+            cell += line[i];
         }
+        row.push_back(cell);    // This is for last column which doesnt have a comma
 
         data.push_back(row);
     }
