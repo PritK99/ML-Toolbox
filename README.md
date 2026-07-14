@@ -104,7 +104,15 @@ ML-Toolbox/
 │   └── 📂 neural-networks/
 │       ├── mlp*
 │       ├── cnn*
-│       ├── rnn*
+│       └── rnn*
+│
+├── 📂 self-supervised-learning/     # Self Supervised Learning
+│   ├── 📂 representation-learning*
+│   │    └── autoencoders*
+│   │
+│   └──  📂 generative-models*
+│       ├── vae*
+│       └── diffusion*
 │
 ├── 📂 unsupervised-learning/     # Unsupervised Learning
 │   ├── 📂 anomaly-detection*
@@ -119,15 +127,8 @@ ML-Toolbox/
 │   ├── 📂 density-estimation*
 │   │   └── kernel-density-estimation*
 │   │
-│   ├── 📂 dimensionality-reduction*
-│   │   └── pca*
-│   │
-│   ├── 📂 generative-models*
-│   │   └── generative-adversarial-networks*
-│   │
-│   └── 📂 representation-learning*
-│       ├── autoencoders*
-│       └── variational-autoencoders*
+│   └── 📂 dimensionality-reduction*
+│       └── pca*
 │
 ├── 📂 optimization-methods/      # Optimization Techniques
 │   ├── 📂 unconstrained/
@@ -166,7 +167,11 @@ Navigate to the ML-Toolbox folder
 cd ML-Toolbox
 ```
 
-We also require OpenCV (C++). To install OpenCV on Ubuntu, run the following command
+**Note**: Classical algorithms (such as the Perceptron and Linear Regression) are implemented in C++, while deep learning models (such as Variational Autoencoders (VAEs) and Diffusion Models) are implemented in Python.
+
+#### Implementations using `C++`
+
+We require OpenCV (C++). To install OpenCV on Ubuntu, run the following command
 
 ```
 sudo apt install libopencv-dev
@@ -176,6 +181,24 @@ You can verify the installation by running
 
 ```
 pkg-config --modversion opencv4
+```
+
+#### Implementations using `Python`
+
+First, we need to create a virtual environment
+
+```
+python3 -m venv venv-mltoolbox
+```
+
+```
+source venv/bin/activate
+```
+
+Now, we can install all the dependencies
+
+```
+pip install -r requirements.txt
 ```
 
 ### Datasets

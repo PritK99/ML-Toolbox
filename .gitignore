@@ -7,7 +7,11 @@
 /data/**/*.json
 /data/**/*.data
 /data/**/*.jpg
+/data/**/*.ndjson
 
 # Virtual environments
-/.venv
+/venv-mltoolbox
 /mltoolbox
+
+# Cache
+*__pycache__

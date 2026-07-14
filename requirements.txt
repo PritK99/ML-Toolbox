@@ -8,3 +8,4 @@ torchview
 scikit-learn
 Levenshtein
 pdfplumber
+opencv-python
