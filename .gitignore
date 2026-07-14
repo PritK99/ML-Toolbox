@@ -9,6 +9,9 @@
 /data/**/*.jpg
 /data/**/*.ndjson
 
+# Plots
+*plots
+
 # Virtual environments
 /venv-mltoolbox
 /mltoolbox

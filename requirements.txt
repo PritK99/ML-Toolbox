@@ -9,3 +9,4 @@ scikit-learn
 Levenshtein
 pdfplumber
 opencv-python
+torchinfo
