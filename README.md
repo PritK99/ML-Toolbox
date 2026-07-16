@@ -107,8 +107,8 @@ ML-Toolbox/
 │       └── rnn*
 │
 ├── 📂 self-supervised-learning/     # Self Supervised Learning
-│   ├── 📂 representation-learning*
-│   │    └── autoencoder*
+│   ├── 📂 representation-learning
+│   │    └── autoencoder
 │   │
 │   └──  📂 generative-models*
 │       ├── vae*

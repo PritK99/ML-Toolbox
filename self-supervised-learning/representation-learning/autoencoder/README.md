@@ -8,11 +8,11 @@
 
 ## Introduction
 
-The main goal of autoencoders is to learn compact representations of data. They achieve this by compressing the original input into a lower-dimensional latent space that captures the most important features needed to describe the input.
+The main goal of autoencoders is to learn compact representations of data. This is done by compressing the original input into a lower-dimensional latent space that captures the most important features needed to describe the input.
 
 A loose analogy is describing a human face. While a complete image contains every detail of a face, we can often describe the key characteristics using a small set of attributes: a round face, curly hair, wrinkles, a sharp nose, and so on. An artist can create a resonable approximation if they know these important features.
 
-The latent space learned by an autoencoder serves a similar purpose. Instead of storing every pixel of an image, it learns a compact representation that captures the underlying structure and important variations in the data. Once the data is mapped into this latent space, we can perform tasks such as measuring similarity between samples, visualizing clusters, or using this compact representations for other tasks (as in `diffusion`).
+The latent space learned by an autoencoder serves a similar purpose. Instead of storing every pixel of an image, it learns a compact representation that captures the underlying structure and important variations in the data. Once the data is mapped into this latent space, we can perform tasks such as measuring similarity between samples, visualizing clusters, or using this compact representations for other tasks (as used in `diffusion`).
 
 
 ## Architecture
@@ -41,5 +41,32 @@ $$
 
 ## Results
 
-Our model has `6.7 M` parameters and roughly takes 4 mins per epoch to train. The vanilla autoencoder uses MSE loss. However, the quyickdraw dataset sample have a huge class imbalance bcause they are sketeches. see samples in `data\README.md`. Due to this, the MSE loss scores extremely high even by simply predicting every pixel as background. It does work with MSE loss, but the signal would be quite weak. To work around this, we use weigted binary cross entropy loss, where we weigh the white pixels higher. 
+Our autoencoder has `6.7M` parameters and takes approximately `11` minutes per epoch to train on RTX 2080 GPU and we train for 15 epochs. The following are reconstruction, interpolation and PCA plot for best epoch.
 
+<p align="center">
+  <img src = "../../../assets/img/autoencoder/reconstructions.png" alt="reconstruction">
+  <br>
+  <small><i>Reconstruction plot</i></small>
+</p>
+
+<p align="center">
+  <img src = "../../../assets/img/autoencoder/pca.png" alt="pca">
+  <br>
+  <small><i>PCA plot</i></small>
+</p>
+
+<p align="center">
+  <img src = "../../../assets/img/autoencoder/interpolation.png" alt="interpolation">
+  <br>
+  <small><i>Interpolation plot</i></small>
+</p>
+
+The interpolation results are not very good because sketches do not blend smoothly into one another. However, if we perform the same experiment on datasets such as Fashion-MNIST, we can observe much smoother interpolations.
+
+<p align="center">
+  <img src = "../../../assets/img/autoencoder/fashion-mnist-interpolation.png" alt="interpolation">
+  <br>
+  <small><i>Interpolation plot for FashionMNIST</i></small>
+</p>
+
+I would argue that the resulting image resembles both a bag and a T-shirt.

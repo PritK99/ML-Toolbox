@@ -20,6 +20,7 @@ class QuickDrawDataset(Dataset):
         # First we will load and filter out all the good drawings
         self.drawings = []
         self.labels = []
+
         with open(cow_json_path, "r") as file:
             for line in file:
                 data = json.loads(line)
@@ -41,7 +42,7 @@ class QuickDrawDataset(Dataset):
                 strokes = data["drawing"]
                 self.drawings.append(strokes)
                 self.labels.append(1)
-        
+
         self.transforms = transforms
         
     def __len__(self):
@@ -75,6 +76,7 @@ def get_dataloader(batch_size, cow_json_path, bulldozer_json_path, val_ratio=0.1
         torchvision.transforms.ToTensor(),
         torchvision.transforms.RandomHorizontalFlip(),
         torchvision.transforms.RandomRotation(degrees=15),
+        torchvision.transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 0.5)),    # The sketches are way too sharp
     ])
 
     dataset = QuickDrawDataset(cow_json_path, bulldozer_json_path, transforms)
@@ -92,8 +94,8 @@ def get_dataloader(batch_size, cow_json_path, bulldozer_json_path, val_ratio=0.1
 # This is just to test the dataloader function
 if __name__ == "__main__":
     batch_size = 16
-    cow_json_path = "../../../data/full_simplified_cow.ndjson"
-    bulldozer_json_path = "../../../data/full_simplified_bulldozer.ndjson"
+    cow_json_path = "full_simplified_cow.ndjson"
+    bulldozer_json_path = "full_simplified_bulldozer.ndjson"
 
     val_ratio = 0.1
     train_dataloader, val_dataloader = get_dataloader(batch_size, cow_json_path, bulldozer_json_path, val_ratio)
