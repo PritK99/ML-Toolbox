@@ -35,3 +35,9 @@ For each clustering algorithm, we will use the two images shown below and observ
 
 ## Algorithm 1: K-Means
 
+### Usage
+
+
+```
+g++ k-means.cpp ../../utils/image.cpp  `pkg-config --cflags --libs opencv4`
+```

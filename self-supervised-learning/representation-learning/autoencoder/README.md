@@ -34,10 +34,26 @@ $$
 To train the autoencoder, we minimize the reconstruction error between the original input and the reconstructed output:
 
 $$
-\mathcal{L}_{\text{reconstruction}}
-=
-\|x - \hat{x}\|^2
+\mathcal{L} = \|x - \hat{x}\|^2
 $$
+
+## Usage
+
+After downloading and the ImageNet dataset, we need to first prepare validation folder using `prepare_val_data.py`. To train the autoencoder, run `train.py`. To generate latent space interpolations, first organize the input image pairs in the interpolation_dir directory using the following structure:
+
+
+```
+interpolation_dir/
+├── pair1/
+│   ├── 1.png
+│   └── 2.png
+├── pair2/
+│   ├── 1.png
+│   └── 2.png
+└── ...
+```
+
+Each subdirectory should contain exactly two images. Once the directory is prepared, generate interpolations by running `python inference.py`
 
 ## Results
 
@@ -54,5 +70,5 @@ Once the model is trained, we can also explore its latent space by interpolating
 <p align="center">
   <img src = "../../../assets/img/autoencoder/interpolation_pair_0.png" alt="reconstruction">
   <br>
-  <small><i>Interpolation between charizard to charizard mega x. This looks like charizard is evolving! </i></small>
+  <small><i>Interpolation from Charizard to Mega Charizard X. This looks like Charizard evolving into its Mega X form.</i></small>
 </p>
