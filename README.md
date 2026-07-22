@@ -192,7 +192,7 @@ pip install -r requirements.txt
 
 ### Datasets
 
-The datasets used in this project are either publicly available (e.g., ImageNet and datasets from Kaggle) or created as part of this work (e.g., the IIITH Course Preference dataset). Details about each dataset can be found in assets/data/README.md. The datasets can either be downloaded from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
+The datasets used in this project are either publicly available (e.g., ImageNet and datasets from Kaggle) or created as part of this work (e.g., the IIITH Course Preference dataset). Details about each dataset can be found in assets/data/README.md. The datasets can be downloaded from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
 
 ## References
 
