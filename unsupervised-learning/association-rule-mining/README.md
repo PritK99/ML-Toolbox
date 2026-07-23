@@ -1,14 +1,16 @@
-# Apriori Algorithm
+# Association Rule Mining
 
 <p align="center">
-  <img src = "../assets/img/amazon_apriori.png" alt="Apriori">
+  <img src = "../../assets/img/apriori/amazon-recommendations.png" alt="Apriori Example">
   <br>
-  <small><i>Amazon recommendation when searching for a laptop stand</i></small>
+  <small><i>Amazon recommendation when searching for oil pastels</i></small>
 </p>
 
 ## Introduction
 
-Association Rule Mining is identifying patterns between items in transactional data. For example, in a computer store, we might find that customers who buy a laptop stand often also buy a mouse pad. We can use this pattern to make business decisions, like placing laptop stands and mouse pads near each other in the store. Apriori Algorithm is a smart way to discover these associations.
+Association Rule Mining is discovering patterns between items in transactional data. For example, in a computer store, we might find that customers who buy a laptop stand often also buy a mouse pad. We can use this pattern to make business decisions, like placing laptop stands and mouse pads near each other in the store. 
+
+Thus, the overall idea is that we are given a set of items, and using the transactional data, we need to discover association rules among the items. 
 
 ## Naive Algorithm
 
@@ -31,7 +33,7 @@ Imagine we have three items, {computer, mouse, antivirus}, in our store. There a
 
 Out of all these, we want to find the patterns that are meaningful. The naive approach to association rule mining is to loop over every possible pattern and decide whether the pattern is interesting or not. This requires metrics that can help us determine whether a rule is interesting. These metrics are known as measures of rule interestingness.
 
-### Measures of Rule Interestingness 
+## Measures of Interestingness 
 
 The three popular metrics used to evaluate association rules are `support`, `confidence`, and `lift`.
 Each metric captures a different aspect of “interestingness”. Using all three together helps us find rules that are truly meaningful.
@@ -52,13 +54,13 @@ T5 → Antivirus, Mouse, Pendrive
 
 In this store, for every purchase the consumer made, we gave them a pendrive for free.
 
-#### Measure 1: Support
+### Measure 1: Support
 
 Support tells us whether a rule is worth considering at all. The idea is that if an item appears very rarely in the data, we do not have enough evidence to make decisions about it. Any rule involving such items is trivial. For example, our data has only `1` out of `5` transactions that contain a sticker. Hence, it is not worth exploring rules involving stickers. 
 
 The formula for support is simply the probability of finding the given item or set of items.
 
-#### Measure 2: Lift
+### Measure 2: Lift
 
 Lift measures how strongly two items are associated. This is different from support, which just measures how frequent the items are. In our data, we gave free pendrives to each customer, and hence each transaction has a pendrive. However, in reality, buying a pendrive does not mean we will buy a computer next.
 
@@ -72,7 +74,7 @@ For the rule `Pendrive → Computer`, the support is `100%`, but the lift is `1`
 
 Note: If we ignore support, a rule like `Sticker → Computer` might have a lift of `5/3`. However, this can be misleading because the data is too sparse. That’s why it's important to check support first.
 
-#### Measure 3: Confidence
+### Measure 3: Confidence
 
 While support and lift are useful measures, they don't capture directionality. For both metrics, `A → B` is the same as `B → A`, but in reality, this might not be the case. For example, if a person buys a computer, they are likely to buy antivirus software. However, a person buying an antivirus might already own a computer, so they are unlikely to buy another one. Instead, they might buy related items, like camera clips. Confidence is a measure of directionality.
 
@@ -81,6 +83,20 @@ In formula terms, confidence is conditional probability `P(B|A)`, i.e. probabili
 For our example, `{computer} → {mouse}` has higher confidence than `{mouse} → {computer}`.
 
 **Note:** For applications like shelf placement or course selection, confidence doesn't matter a lot. The importance is on grouping rather than direction. So we can ignore confidence for such usecases.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Issues with Naive Approach
 
