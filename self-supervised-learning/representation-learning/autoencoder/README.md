@@ -34,39 +34,41 @@ $$
 To train the autoencoder, we minimize the reconstruction error between the original input and the reconstructed output:
 
 $$
-\mathcal{L}_{reconstruction}
-=
-||x - \hat{x}||^2
+\mathcal{L} = \|x - \hat{x}\|^2
 $$
+
+## Usage
+
+After downloading and the ImageNet dataset, we need to first prepare validation folder using `prepare_val_data.py`. To train the autoencoder, run `train.py`. To generate latent space interpolations, first organize the input image pairs in the interpolation_dir directory using the following structure:
+
+
+```
+interpolation_dir/
+├── pair1/
+│   ├── 1.png
+│   └── 2.png
+├── pair2/
+│   ├── 1.png
+│   └── 2.png
+└── ...
+```
+
+Each subdirectory should contain exactly two images. Once the directory is prepared, generate interpolations by running `python inference.py`
 
 ## Results
 
-Our autoencoder has `6.7M` parameters and takes approximately `11` minutes per epoch to train on RTX 2080 GPU and we train for 15 epochs. The following are reconstruction, interpolation and PCA plot for best epoch.
+Our autoencoder has `6.7M` parameters and takes approximately `11` minutes per epoch to train on RTX 2080 GPU and we train for 20 epochs. The following are reconstructions for best epoch. 
 
 <p align="center">
-  <img src = "../../../assets/img/autoencoder/reconstructions.png" alt="reconstruction">
+  <img src = "../../../assets/img/autoencoder/reconstructions_19.png" alt="reconstruction">
   <br>
   <small><i>Reconstruction plot</i></small>
 </p>
 
-<p align="center">
-  <img src = "../../../assets/img/autoencoder/pca.png" alt="pca">
-  <br>
-  <small><i>PCA plot</i></small>
-</p>
+Once the model is trained, we can also explore its latent space by interpolating between the latent representations of two images. 
 
 <p align="center">
-  <img src = "../../../assets/img/autoencoder/interpolation.png" alt="interpolation">
+  <img src = "../../../assets/img/autoencoder/interpolation_pair_0.png" alt="reconstruction">
   <br>
-  <small><i>Interpolation plot</i></small>
+  <small><i>Interpolation from Charizard to Mega Charizard X. This looks like Charizard evolving into its Mega X form.</i></small>
 </p>
-
-The interpolation results are not very good because sketches do not blend smoothly into one another. However, if we perform the same experiment on datasets such as Fashion-MNIST, we can observe much smoother interpolations.
-
-<p align="center">
-  <img src = "../../../assets/img/autoencoder/fashion-mnist-interpolation.png" alt="interpolation">
-  <br>
-  <small><i>Interpolation plot for FashionMNIST</i></small>
-</p>
-
-I would argue that the resulting image resembles both a bag and a T-shirt.

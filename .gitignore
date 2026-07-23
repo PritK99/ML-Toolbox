@@ -12,6 +12,9 @@
 # Plots
 *plots
 
+# Weight files
+*.pth
+
 # Virtual environments
 /venv-mltoolbox
 /mltoolbox

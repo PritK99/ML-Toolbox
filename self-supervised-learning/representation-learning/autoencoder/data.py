@@ -1,116 +1,69 @@
 import os
-import cv2
-import json
-import numpy as np
+import re
+import torch
+import numpy as np 
 import torchvision
-import torch.nn as nn
-from torch.utils.data import Dataset, DataLoader, random_split
 import matplotlib.pyplot as plt
+from torch.utils.data import random_split, DataLoader
 
-class QuickDrawDataset(Dataset):
-    """
-    QuickDraw dataset provides an ndjson file for each class
-    Each line in the ndjson file contains a drawing
-    For now, we only use the cow class which has ~1L images
-    https://github.com/googlecreativelab/quickdraw-dataset
-    """
-    def __init__(self, cow_json_path, bulldozer_json_path, transforms):
-        super().__init__()
+from utils import denormalize
+from config import Config
 
-        # First we will load and filter out all the good drawings
-        self.drawings = []
-        self.labels = []
+def get_dataloaders(batch_size, train_path, test_path, synset_mapping_file):
 
-        with open(cow_json_path, "r") as file:
-            for line in file:
-                data = json.loads(line)
-
-                if (data["recognized"] == False):
-                    continue
-
-                strokes = data["drawing"]
-                self.drawings.append(strokes)
-                self.labels.append(0)
-        
-        with open(bulldozer_json_path, "r") as file:
-            for line in file:
-                data = json.loads(line)
-
-                if (data["recognized"] == False):
-                    continue
-
-                strokes = data["drawing"]
-                self.drawings.append(strokes)
-                self.labels.append(1)
-
-        self.transforms = transforms
-        
-    def __len__(self):
-        return len(self.drawings)
-
-    def __getitem__(self, index):
-        """
-        The data contains stroke points
-        We need to use them and connect the points to obtain an image
-        """
-        strokes = self.drawings[index]
-        label = self.labels[index]
-
-        drawing = np.zeros((256, 256), dtype=np.uint8)
-        for stroke in strokes:
-            x_coords = stroke[0]
-            y_coords = stroke[1]
-
-            for i in range(len(x_coords) - 1):
-                cv2.line(drawing, (x_coords[i], y_coords[i]), (x_coords[i+1], y_coords[i+1]), color=255)
-        
-        drawing = self.transforms(drawing)
-        
-        return drawing, label
-
-def get_dataloader(batch_size, cow_json_path, bulldozer_json_path, val_ratio=0.1):
-    """
-    This function applies transforms and returns a dataloader
-    """
-    transforms = torchvision.transforms.Compose([
-        torchvision.transforms.ToTensor(),
+    mean = [0.485, 0.456, 0.406]
+    std = [0.229, 0.224, 0.225]
+    train_val_transforms = torchvision.transforms.Compose([
+        torchvision.transforms.Resize((256, 256)),
         torchvision.transforms.RandomHorizontalFlip(),
-        torchvision.transforms.RandomRotation(degrees=15),
-        torchvision.transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 0.5)),    # The sketches are way too sharp
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.Normalize(mean, std)
+    ])
+    test_transforms = torchvision.transforms.Compose([
+        torchvision.transforms.Resize((256, 256)),
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.Normalize(mean, std)
     ])
 
-    dataset = QuickDrawDataset(cow_json_path, bulldozer_json_path, transforms)
+    train_data = torchvision.datasets.ImageFolder(root=train_path, transform=train_val_transforms)
+    test_data = torchvision.datasets.ImageFolder(root=test_path, transform=test_transforms)
 
-    val_size = int(val_ratio * len(dataset))
-    train_size = len(dataset) - val_size
+    train_data, val_data = random_split(train_data, [0.9, 0.1])    # We will use the original val as test set, and use 10% of train set as val instead
 
-    train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+    train_dataloader = DataLoader(train_data, batch_size, shuffle=True, num_workers=4, pin_memory=True)
+    val_dataloader = DataLoader(val_data, batch_size, shuffle=False, num_workers=4, pin_memory=True)
+    test_dataloader = DataLoader(test_data, batch_size, shuffle=False, num_workers=4, pin_memory=True)
 
-    train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=2)
-    val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=2)
+    # We just create a dictionary using synset mapping for ease
+    id_to_class = {}
+    synset_to_id = test_data.class_to_idx
+    with open(synset_mapping_file, "r", encoding="utf-8") as f:
 
-    return train_dataloader, val_dataloader
+        lines = f.read().splitlines()
+        for line in lines:
+            synset, class_name = line.split(' ', 1)
+            id_to_class[synset_to_id[synset]] = class_name
 
-# This is just to test the dataloader function
+    return train_dataloader, val_dataloader, test_dataloader, id_to_class
+
 if __name__ == "__main__":
-    batch_size = 16
-    cow_json_path = "full_simplified_cow.ndjson"
-    bulldozer_json_path = "full_simplified_bulldozer.ndjson"
+    os.makedirs("results", exist_ok=True)
+    config = Config()
 
-    val_ratio = 0.1
-    train_dataloader, val_dataloader = get_dataloader(batch_size, cow_json_path, bulldozer_json_path, val_ratio)
+    train_dataloader, val_dataloader, test_dataloader, id_to_class = get_dataloaders(config.batch_size, config.train_path, config.test_path, config.synset_mapping_file)
 
-    os.makedirs("plots", exist_ok=True)
     for img, label in train_dataloader:
         print(img.shape)
+        print(label.shape)
+
+        fig, axes = plt.subplots(5, 1, figsize=(8, 16))
+        for i in range(5):
+            axes[i].imshow(denormalize(img[i]).permute(1, 2, 0).numpy())
+            axes[i].set_title(id_to_class[label[i].item()])
         
-        fig, axes = plt.subplots(2, 3)
-        for i in range(2):
-            for j in range(3):
-                axes[i, j].imshow(img[2*i + j].detach().squeeze(0), cmap="gray")
-        
+        plt.suptitle("Data Samples")
         plt.tight_layout()
-        plt.savefig("plots/data_samples.png")
+        plt.savefig("results/data_samples.png")
         plt.close()
 
         break

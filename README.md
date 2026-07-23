@@ -18,15 +18,14 @@
   - [Getting Started](#getting-started)
     - [Installation](#installation)
     - [Datasets](#datasets)
-    - [Usage](#usage)
   - [References](#references)
 
 
 ## About
 
-Classical machine learning and optimization methods are deeply fascinating fields of study. The motivation behind this project is to explore these techniques in depth.
+Machine learning and optimization methods are deeply fascinating fields of study. The motivation behind this project is to explore these techniques in depth.
 
-This repository is currently under development, and given the vast scope of machine learning algorithms and optimization methods, it will likely remain a work in progress for a long time.
+This repository is currently under development, and given the vast ocean of ML algorithms, architectures, and optimization techniques to explore, it will likely remain a work in progress for a long time.
 
 ## Philosophy
 
@@ -130,16 +129,6 @@ ML-Toolbox/
 │   └── 📂 dimensionality-reduction*
 │       └── pca*
 │
-├── 📂 optimization-methods/      # Optimization Techniques
-│   ├── 📂 unconstrained/
-│   │   ├── gradient-descent*
-│   │   ├── newtons-method*
-│   │   ├── quasi-newton-method*
-│   │   ├── coordinate-descent*
-│   │   └── conjugate-gradient*
-│   │
-│   └── 📂 constrained/
-│
 ├── 📂 data/                      # Datasets
 │
 ├── 📂 assets/
@@ -167,7 +156,7 @@ Navigate to the ML-Toolbox folder
 cd ML-Toolbox
 ```
 
-**Note**: Classical algorithms (such as the Perceptron and Linear Regression) are implemented in C++, while deep learning models (such as Variational Autoencoders (VAEs) and Diffusion Models) are implemented in Python.
+Classical algorithms (such as the Perceptron and Linear Regression) are implemented in C++, while deep learning models (such as Variational Autoencoders (VAEs) and Diffusion Models) are implemented in Python.
 
 #### Implementations using `C++`
 
@@ -203,14 +192,7 @@ pip install -r requirements.txt
 
 ### Datasets
 
-The datasets used are either publicly available datasets from standard libraries (such as Fashion-MNIST) or datasets downloaded from Kaggle. Details about each dataset can be found in assets/data/README.md. The datasets can either be downloaded from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
-
-### Usage
-
-
-```
-g++ k-means.cpp ../../utils/image.cpp  `pkg-config --cflags --libs opencv4`
-```
+The datasets used in this project are either publicly available (e.g., ImageNet and datasets from Kaggle) or created as part of this work (e.g., the IIITH Course Preference dataset). Details about each dataset can be found in assets/data/README.md. The datasets can be downloaded from the following <a target="_blank" href="https://iiithydresearch-my.sharepoint.com/:f:/g/personal/prit_kanadiya_research_iiit_ac_in/IgCAsvxlQCVzQIFTEjRVEk71AbHk8xwgYtHWHMbOREhGvnk?e=mU1mg3">Onedrive Link</a>. Once downloaded, the datasets should be placed in the `/data` folder.
 
 ## References
 
