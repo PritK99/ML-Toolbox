@@ -27,7 +27,10 @@ std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> re
         std::stringstream ss(line);
         std::string cell;
         std::vector<std::string> row;
-
+        
+        // We could have simply split at commas
+        // But this would break the string fields with commas such as in essay dataset
+        // Thus, we explicitly check if the comma is inside double quotes, indicating it is part of string and not a separator
         bool is_string = false;
         for (int i = 0; i < line.size(); i++){
             if (line[i] == '"'){

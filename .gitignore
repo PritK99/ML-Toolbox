@@ -21,3 +21,6 @@
 
 # Cache
 *__pycache__
+
+# Temporaries / Hidden files
+/data/temp
