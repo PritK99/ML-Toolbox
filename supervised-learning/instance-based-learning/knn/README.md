@@ -1,25 +1,29 @@
 # K Nearest Neighbors (KNNs)
 
 <p align="center">
-  <img src = "../assets/img/knn-quote.jpeg" alt="KNN">
+  <img src = "../../../assets/img/knn/knn-quote.jpeg" alt="KNN">
   <br>
   <small><i>Image source: https://www.linkedin.com/pulse/youre-average-five-people-you-spend-most-time-richard-goold (KNN where K = 5)</i></small>
 </p>
 
+## Table of Contents
+
+- [KNN](#knn)
+  - [Assumptions](#assumptions)
+  - [Algorithm](#algorithm)
+  - [Curse of Dimensionality](#curse-of-dimensionality)
+  - [Usage](#usage)
+  - [Results & Demo](#results--demo)
 
 ## Assumptions
 
-KNN assumes that data points that are close to each other in the feature space are likely to have similar labels. So when we get a new point, we find its nearest neighbors and give it a similar label.
+KNN assumes that data points that are close to each other in the feature space are likely to have similar labels. So when we get a new point, we assign it a label similar to its nearest neighbors.
 
 But this assumption does not always work. In some datasets, the relationship between features and target values is not based on how close the points are. For example, in geopolitics, neighboring countries often do not share the same interests. They might even be opposed to each other. In this case, the KNN idea that countries in the same region have similar policies might not hold.
 
 ## Algorithm
 
-The KNN Algorithm simply looks for the K nearest neighbors based on a distance metric, and takes a vote among them. For classification, we out the majority. For regression, output can be average of all neighbors.
-
-The KNN algorithm is only as good as its distance metric. The distance metric should be such that it captures the similarity between instances appropriately. 
-
-For instance, Euclidean distance works well for classifying handwritten digits because it captures the geometric closeness of pixel intensities in image space. However, using Euclidean distance for comparing text documents isn't ideal, since text data is typically represented as high-dimensional sparse vectors (e.g., word counts or TF-IDF scores). In such cases, Cosine similarity is a better choice because it measures the angle between two vectors, focusing on their direction rather than their magnitude. This makes it more suitable for identifying how similar two texts are based on their content, regardless of document length or scale.
+The KNN Algorithm simply looks for the K nearest neighbors, picks their label, and assigns it to the target point. For classification, we can use the majority. For regression, output can be average of all neighbor values. The KNN algorithm is only as good as its distance metric. The distance metric should be such that it captures the similarity between instances appropriately. 
 
 Some commonly used metrics are as follows:-
 
@@ -29,7 +33,7 @@ Some commonly used metrics are as follows:-
 
 The choice of distance metric depends on the amount of penalty one wants to assign to differences in each dimension. If p is lower, say 1, then the metric is less sensitive to outliers and treats each dimension equally. If p is higher, say infinity, then it is sensitive to outliers in any single dimension.
 
-Consider analyzing user behavior on an e-learning platform, with features like number of quizzes taken, videos watched, time spent reading, and forum activity. These actions are independent and contribute additively to overall engagement. Manhattan distance is better here as it effectively captures similarity in such multi-faceted user behavior without letting one large difference dominate. Euclidean distance (p=2) would work better. Similarly, Chebyshev distance (p=infinity) can be used when one dimension is more important than others. For example, in medical diagnosis, a single severely abnormal symptom may be more significant than several marginally abnormal symptoms.
+Consider analyzing user behavior on an e-learning platform, with features like number of quizzes taken, videos watched, time spent reading, and forum activity. These actions are independent and contribute additively to overall engagement. Manhattan distance is better here as it effectively captures similarity in such multi-faceted user behavior without letting one large difference dominate. Similarly, Chebyshev distance (p=infinity) can be used when one dimension is more important than others. For example, in medical diagnosis, a single severely abnormal symptom may be more significant than several marginally abnormal symptoms.
 
 2. Cosine Similarity: Cosine similarity measures the cosine of the angle between two vectors. It is a measure of orientation and not magnitude. Cosine similarity is commonly used as a similarity metric for text data.
 
@@ -39,7 +43,7 @@ The choice of the parameter `k` (the number of neighbors) is crucial. A smaller 
 
 ## Curse of Dimensionality in KNNs
 
-<img src="../assets/img/curseofdimensionality.png" alt="curse-of-dimensionality">
+<img src="../../../assets/img/knn/curseofdimensionality.png" alt="curse-of-dimensionality">
 
 KNNs are based on the assumption that data points close together in the feature space are more likely to belong to the same category. However, as the number of features increases, this assumption can break down due to the curse of dimensionality. In high-dimensional spaces with few data points (sparse data), identifying the true nearest neighbors becomes challenging.
 
@@ -49,89 +53,21 @@ In these cases, algorithms like the perceptron may be more suitable for classifi
 
 However, it's essential to note that there are instances where datasets possess large dimensions but low intrinsic dimensionality. In such cases, KNN can still be effective. For example, images often have high dimensions but low intrinsic dimensionality, meaning that important information can be captured in fewer dimensions. 
 
-## Results
-
-### Classification
-
-Our goal was to build a system that could classify first names as boy or girl. We had two options:
-
-* Full Name as Text: This keeps the name as it is, "John" or "Sarah".
-* Encoded Name: We converted the name into a vector of 702 numbers. This vector was made up of the last letter and bigrams (like "ia" or "th").
-
-We used various distance metrics on encoded names to measure the distance between vectors, but none of these methods worked well. This might be because we didn't have enough data to make sense of such a complex representation. This might be due to curse of dimensionality.
-
-Since that didn't work, we decided comparing the names directly as text. We used minimum edit distance as the distance metric. This calculates the minimum number of changes (insertions, deletions, or replacements) needed to turn one name into another. This method of using minimum edit distance as distance metric proved to be more effective.
-
-However this method had a shortcoming. Consider the names 'Prit' and 'Priti'. Clearly, the vowel on the end changes the gender. However, both of these names differ by edit distance of 1. Thus, we design a new metric for Indian names, accounting for the fact that addition of a vowel in end changes gender. A special adjustment is made to edit distance when the edit distance is 1 and the names only differ by a vowel at the end (e.g., "Shrey" and "Shreya"). In such cases, based on domain knowledge, the labels of the training samples are swapped (using XOR on the label), which might represent handling specific domain nuances. While we expected this trick to improve the performance of model, we found a decline on validation set. Hence for the test set, we do not use this trick.
-
-KNNs provided accuracy of `84.75%` on test set for `K=251`. 
-
-We try running the model on a few samples. 
+## Usage
 
 ```
-names = ["Emma", "Jacob", "Preetika", "Raavan", "Mandodari", "Zooni", "Chandanbala"]
-
-I am 64.96% sure that emma is a girl.
-I am 50.36% sure that jacob is a boy.
-I am 100.00% sure that preetika is a girl.
-I am 59.09% sure that raavan is a boy.
-I am 60.13% sure that mandodari is a girl.
-I am 63.97% sure that zooni is a girl.
-I am 61.94% sure that chandanbala is a girl.
+g++ knn.cpp ../../../utils/csv.cpp ../../../utils/distances.cpp ../../../utils/metrics.cpp
 ```
 
-**Note:** We use average of neighbor votes as confidence value.
+## Results & Demo
 
-
-### Regression
-
-For the task of Mumbai House Price Prediction, average errors for KNN is `0.38 Cr`, but weighted KNN has a lower error of `0.30 Cr`. Here, we use the inverse distances as weights.
-
-This is quite lower error compared to linear regression. This is maybe because of features such as latitude and longitude. In places like Mumbai, where location strongly affects prices, linear regression falls short because it can't handle non-linear relationships like those between prices and coordinates. Also, by converting nominal and ordinal features such as age, type, and status to appropriate numeric values, we were able to improve accuracy. We use absolute distance as a metric for finding the nearest neighbour. This absolute distance represents median value and hence is more effective than linear regression which predicts the mean. While predicting quantities such as property prices or average salary, outliers can easily skew the mean but not the median. Hence median becomes a better estimate than mean in this case.
-
-### Retrival
-
-While KNN is commonly used in supervised learning for classification and regression tasks, it can also be applied in unsupervised settings such as clustering. We use the idea of Nearest Neighbors for article retrieval. Each article is represented using TF-IDF representation. 
-
-For example, if the user is currently reading article (<a href="https://www.cnbc.com/2025/06/03/chinas-may-factory-activity-unexpectedly-shrinks-clocking-its-worst-drop-in-nearly-3-years-caixin-.html">source</a>): `China’s manufacturing activity in May shrank at its fastest pace since September 2022, a private survey showed Tuesday, as a sharper decline in new export orders highlighted the impact of prohibitive U.S. tariffs.`. The following recommendations are generated:
+We split the data in 80:10:10 ratio, and obtain the following results on the test set.
 
 ```
-You might also like:
-
-Recommendation 1: UK House Prices Rise at Fastest Pace Since July (Update3) UK house prices unexpectedly rose in November at the fastest pace since July, reinforcing expectations real estate values will level out, avoiding a collapse from records, according to Nationwide Building Society.
-
-Recommendation 2: UK growth at fastest pace in nearly 4 years Britain #39;s economy accelerated to the fastest annual pace in nearly four years in the second quarter as manufacturing emerged from a slump and consumers ratcheted up spending, the government said Friday.
-
-Recommendation 3: China, ASEAN Agree to End Tariffs (AP) AP - China has reached agreement with the Association of Southeast Asian Nations, or ASEAN, on completely removing tariffs on merchandise goods by 2010 as part of a proposed free trade agreement, the Chinese Ministry of Commerce says.
-
-Recommendation 4: Impact of euro played down The damage to exports caused by a stronger euro has been played down by a member of the European Central Bank #39;s governing council in remarks highlighting the bank #39;s limited concern about the currency #39;s rise.
-
-Recommendation 5: Survey: Surge in layoffs, hiring Challenger survey finds most job cuts in 6 months; seasonal hiring by retailers lifts new jobs. NEW YORK (CNN/Money) - Employers increased both hiring and layoff plans in August, according to a survey released Tuesday by an outplacement firm.
-
+MAE: 0.541427
+RMSE: 0.708649
+R2: 0.530219
 ```
 
-# KD Trees
+Since essay scores range from 1 to 6, the MAE of `0.54` indicates that, on average, our model's predictions differ from the actual essay scores by approximately `0.54` points on the 1–6 scoring scale. The R² score of `0.53` is an okay score, which is surprisingly high since we never accounted for punctuations, flow, content etc.
 
-<p align="center">
-  <img src = "../assets/img/kd_trees.png" alt="KD Trees">
-  <br>
-  <small><i>Image source: https://www.astroml.org/book_figures/chapter2/fig_kdtree_example.html</i></small>
-</p>
-
-KD Trees is a data structure built over KNNs to reduce inference time. Instead of comparing a test point with every data point, KD-Trees organize the data so we can skip many unnecessary comparisons.
-
-The main idea is to split the data space into two parts. When a new point is given, we first check which part it belongs to. We search that part first. We only search the other part if it might contain a closer neighbor than the ones we have already found. By repeating this splitting process, the data forms a tree structure. This allows us to quickly narrow down the search and reduces the time needed to find nearest neighbors.
-
-<p align="center">
-  <img src = "../assets/img/india_map.jpg" alt="India Map">
-  <br>
-  <small><i>Image source: https://www.mapsofindia.com/zonal/</i></small>
-</p>
-
-Imagine you are standing in a large crowd and want to find who your nearest neighbors are. The standard kNN approach would be to ask every person where they live. A smarter approach is to first divide the crowd into groups. For example, ask everyone from southern India to raise their hands. If you also live in southern India, your nearest neighbors are more likely to be in this group, so you check them first.
-
-There are cases where this may not be enough. For example, if you live in Telangana, some people from Maharashtra might actually be closer to you. In such situations, you also need to check the other group. Even in the worst case, you may still need to check everyone, which is no worse than the original kNN approach. But in most cases, this method saves a lot of work by avoiding unnecessary checks. This is similar to hit-miss concept in caching. There are a few instances where you will have to go to main memory, but for many cases, cache memory will provide you a faster inference.
-
-## Limitations
-
-Similar to KNNs, KD trees also suffer from curse of dimensionality. However, unlike KNNs which work for low intrinsic dimensionality, KD trees can not even work for low intrinsic dimensionality. KD-Trees divide the space using axis-aligned splits (splits along one feature at a time). In high dimensions, even if the data actually lies on a low-dimensional manifold, these axis-aligned splits do not align well with the true shape of the data. As a result, nearby points often end up in different partitions. For such cases, we can use ball trees. 

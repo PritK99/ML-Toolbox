@@ -1,6 +1,9 @@
 /*
-The issue with raw essay dataset is that each essay spans over many lines. Thus, the way we read csv does not hold since we expect each line to have a new row.
-Hence, we will have to condense each essay o a single row.
+The issue with raw essay dataset is that each essay spans over many lines. 
+The way we read csv does not hold since we expect each line to have a new data instance.
+Hence, we will have to condense each essay to a single row.
+One way to do it would have been to split at commas, but that becomes difficult since essays themselves use commas
+Hence, we use labels to keep track of essays
 */
 #include <iostream>
 #include <fstream>

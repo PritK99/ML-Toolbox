@@ -74,7 +74,7 @@ ML-Toolbox/
 │
 ├── 📂 supervised-learning/
 │   ├── 📂 linear-models/
-│   │   ├── perceptron
+│   │   ├── perceptron*
 │   │   ├── linear-regression*
 │   │   ├── logistic-regression*
 │   │   └── svm*
@@ -85,7 +85,7 @@ ML-Toolbox/
 │   │   └── hidden-markov-models*
 │   │
 │   ├── 📂 instance-based-learning/
-│   │   ├── knn*
+│   │   ├── knn
 │   │   ├── kd-trees*
 │   │   └── ball-trees*
 │   │

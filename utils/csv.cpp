@@ -53,9 +53,9 @@ std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> re
     return {column_names, data};
 }
 
-std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> split_data(std::vector <std::vector <float>>& data, std::vector<int> &labels, const float val_ratio, const float test_ratio){
+std::vector<std::pair<std::vector <std::vector <float>>, std::vector<float>>> split_data(std::vector <std::vector <float>>& data, std::vector<float> &labels, const float val_ratio, const float test_ratio){
     int num_samples = data.size();
-    std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> splits;
+    std::vector<std::pair<std::vector <std::vector <float>>, std::vector<float>>> splits;
 
     // Shuffling dataset
     std::vector<int> indices(num_samples);
@@ -67,7 +67,7 @@ std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> spli
     std::shuffle(indices.begin(), indices.end(), g);
 
     std::vector<std::vector<float>> shuffled_data(num_samples);
-    std::vector<int> shuffled_labels(num_samples);
+    std::vector<float> shuffled_labels(num_samples);
 
     for (int i = 0; i < num_samples; i++) {
         shuffled_data[i] = data[indices[i]];
@@ -78,11 +78,11 @@ std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> spli
     int num_val_samples = int(val_ratio*num_samples);
 
     std::vector <std::vector <float>> val_data (shuffled_data.begin(), shuffled_data.begin() + num_val_samples);
-    std::vector<int> val_labels (shuffled_labels.begin(), shuffled_labels.begin() + num_val_samples);
+    std::vector<float> val_labels (shuffled_labels.begin(), shuffled_labels.begin() + num_val_samples);
     std::vector <std::vector <float>> test_data (shuffled_data.begin() + num_val_samples, shuffled_data.begin() + num_val_samples + num_test_samples);
-    std::vector<int> test_labels (shuffled_labels.begin() + num_val_samples, shuffled_labels.begin() + num_val_samples + num_test_samples);
+    std::vector<float> test_labels (shuffled_labels.begin() + num_val_samples, shuffled_labels.begin() + num_val_samples + num_test_samples);
     std::vector <std::vector <float>> train_data (shuffled_data.begin() + num_val_samples + num_test_samples, shuffled_data.end());
-    std::vector<int> train_labels (shuffled_labels.begin() + num_val_samples + num_test_samples, shuffled_labels.end());
+    std::vector<float> train_labels (shuffled_labels.begin() + num_val_samples + num_test_samples, shuffled_labels.end());
 
     splits.push_back({train_data, train_labels});
     splits.push_back({val_data, val_labels});
@@ -91,47 +91,76 @@ std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> spli
     return splits;
 }
 
-std::vector <std::vector <float>> normalize_data(const std::vector <std::vector <float>> &data){
-    std::vector <std::vector <float>> normalized_data;
+std::vector <std::vector <std::vector <float>>> normalize_data(const std::vector <std::vector <float>> &train_data, const std::vector <std::vector <float>> &val_data, const std::vector <std::vector <float>> &test_data){
+    std::vector <std::vector <float>> normalized_train_data;
+    std::vector <std::vector <float>> normalized_val_data;
+    std::vector <std::vector <float>> normalized_test_data;
 
-    int num_features = data[0].size();
+    int num_features = train_data[0].size();
     std::vector <float> mean (num_features); 
     std::vector <float> std_dev (num_features);
     
     // Calculating mean
-    for (int i = 0; i < data.size(); i++){
+    for (int i = 0; i < train_data.size(); i++){
         for (int j = 0; j < num_features; j++){
-            mean[j] += data[i][j];
+            mean[j] += train_data[i][j];
         }
     }
 
     for (int j = 0; j < num_features; j++){
-        mean[j] /= data.size();
+        mean[j] /= train_data.size();
     }
 
     // Calculating standard deviation
-    for (int i = 0; i < data.size(); i++){
+    for (int i = 0; i < train_data.size(); i++){
         for (int j = 0; j < num_features; j++){
-            std_dev[j] += std::pow(data[i][j] - mean[j], 2);
+            std_dev[j] += std::pow(train_data[i][j] - mean[j], 2);
         }
     }
 
     for (int j = 0; j < num_features; j++){
-        std_dev[j] /= data.size();
+        std_dev[j] /= train_data.size();
         std_dev[j] = std::pow(std_dev[j], 0.5);
     }
     
     // Normalizing
-    for (int i = 0; i < data.size(); i++){
-        std::vector <float> data_point = data[i];
+    for (int i = 0; i < train_data.size(); i++){
+        std::vector <float> data_point = train_data[i];
         for (int j = 0; j < num_features; j++){
             if (std_dev[j] != 0){
                 data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
             }
         }
 
-        normalized_data.push_back(data_point);
+        normalized_train_data.push_back(data_point);
     }
+
+    for (int i = 0; i < val_data.size(); i++){
+        std::vector <float> data_point = val_data[i];
+        for (int j = 0; j < num_features; j++){
+            if (std_dev[j] != 0){
+                data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
+            }
+        }
+
+        normalized_val_data.push_back(data_point);
+    }
+
+    for (int i = 0; i < test_data.size(); i++){
+        std::vector <float> data_point = test_data[i];
+        for (int j = 0; j < num_features; j++){
+            if (std_dev[j] != 0){
+                data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
+            }
+        }
+
+        normalized_test_data.push_back(data_point);
+    }
+
+    std::vector <std::vector <std::vector <float>>> normalized_data;
+    normalized_data.push_back(normalized_train_data);
+    normalized_data.push_back(normalized_val_data);
+    normalized_data.push_back(normalized_test_data);
 
     return normalized_data;
 }

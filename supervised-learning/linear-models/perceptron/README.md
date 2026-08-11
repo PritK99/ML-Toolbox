@@ -14,7 +14,7 @@
     - [Why does the update rule work?](#why-does-the-update-rule-work)
     - [Proof that the Perceptron will converge](#proof-that-the-perceptron-will-converge)
   - [Usage](#usage)
-  - [Demo](#demo)
+  - [Results & Demo](#results--demo)
 
 ## Introduction
 
@@ -65,7 +65,7 @@ The goal of this proof is to show that if the points are linearly separable, the
 g++ perceptron.cpp ../../../utils/csv.cpp 
 ```
 
-## Demo
+## Results & Demo
 
 We now build a perceptron for the task of gender prediction using first names. Given a name, the goal is to predict whether it is a boy's or a girl's name. To do this, we first construct features from the name using:
 
