@@ -210,6 +210,7 @@ int main(){
     //     }
     // }
 
+    // Testing
     std::string test_metric = "euclidean";
     int test_k = 15;
     std::cout << "Testing" << std::endl;
@@ -224,7 +225,9 @@ int main(){
     std::cout << "RMSE: " << test_regression_metrics.rmse << std::endl;
     std::cout << "R2: " << test_regression_metrics.r2 << std::endl << std::endl;
 
-    std::string my_essay1 = "This is a test essay. Lets see where it goes!";
+    // Now, we run the model on our essay
+    std::string my_essay1 = "This is a test essay. Lets see where it goes! This is a poem from the family guy. Oh, squiggly line in my eye fluid, I see you lurking there on the periphery of my vision. But when I try to look at you, you scurry away. Are you shy, squiggly line? Why only when I ignore you, do you return to the center of my eye? Oh, squiggly line, it's alright, you are forgiven.";
+
     float score = inference(my_essay1, normalized_train_data, train_labels, num_features, test_k, test_metric);
     std::cout << "Your essay score is: " << score << std::endl; 
 

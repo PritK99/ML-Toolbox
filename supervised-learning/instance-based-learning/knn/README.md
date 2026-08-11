@@ -29,7 +29,9 @@ Some commonly used metrics are as follows:-
 
 1. Minkowski Distance: This is a generalized distance metric that includes Manhattan (p=1), Euclidean (p=2), and Chebyshev (p=infinity) as special cases. It is defined as:
 
-<img src="../assets/img/minkowski-distance.png" alt="Minkowski Distance">
+<p align="center">
+  <img src = "../../../assets/img/knn/minkowski-distance.png" alt="KNN">
+</p>
 
 The choice of distance metric depends on the amount of penalty one wants to assign to differences in each dimension. If p is lower, say 1, then the metric is less sensitive to outliers and treats each dimension equally. If p is higher, say infinity, then it is sensitive to outliers in any single dimension.
 
@@ -55,6 +57,8 @@ However, it's essential to note that there are instances where datasets possess 
 
 ## Usage
 
+To compile the code, run the following command:
+
 ```
 g++ knn.cpp ../../../utils/csv.cpp ../../../utils/distances.cpp ../../../utils/metrics.cpp
 ```
@@ -69,5 +73,9 @@ RMSE: 0.708649
 R2: 0.530219
 ```
 
-Since essay scores range from 1 to 6, the MAE of `0.54` indicates that, on average, our model's predictions differ from the actual essay scores by approximately `0.54` points on the 1–6 scoring scale. The R² score of `0.53` is an okay score, which is surprisingly high since we never accounted for punctuations, flow, content etc.
+Since essay scores range from 1 to 6, the MAE of `0.54` indicates that, on average, our model's predictions differ from the actual essay scores by approximately 0.54 points on the 1–6 scoring scale. The R² score of `0.53` is an okay score, which is surprisingly high since we never accounted for punctuations, flow, content etc.
+
+We also run the model on our essay, which achieves a score of `4.73`: 
+
+`This is a test essay. Lets see where it goes! This is a poem from the family guy. Oh, squiggly line in my eye fluid, I see you lurking there on the periphery of my vision. But when I try to look at you, you scurry away. Are you shy, squiggly line? Why only when I ignore you, do you return to the center of my eye? Oh, squiggly line, it's alright, you are forgiven.`
 
