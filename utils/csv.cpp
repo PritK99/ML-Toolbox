@@ -47,6 +47,14 @@ std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> re
         }
         row.push_back(cell);    // This is for last column which doesnt have a comma
 
+        // We need to do this additional handling since windows uses \r\n instead of \n
+        // getline handles \n, but returns an extra \r in the end which made all the difference
+        for (auto& c : row) {
+            while (!c.empty() && (c.back() == '\r' || c.back() == '\n' || c.back() == ' ')) {
+                c.pop_back();
+            }
+        }
+
         data.push_back(row);
     }
 

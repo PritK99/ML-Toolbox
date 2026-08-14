@@ -20,37 +20,6 @@ There are many other statistical features we can think of, such as variance in w
 #include <utility>
 #include <algorithm>
 
-// For a given query feature vector, this function computes the score
-float predict(const int k, const std::vector <float> &query, const std::vector <std::vector <float>> &train_data, const std::vector<float> &train_labels, const std::string metric = "euclidean"){
-    std::vector <std::pair <float, int>> distances;
-
-    for (int i = 0; i < train_data.size(); i++){
-        float distance = 0;
-        if (metric == "manhattan"){
-            distance = manhattan_distance(query, train_data[i]);
-        }
-        else if (metric == "cosine"){
-            distance = cosine_distance(query, train_data[i]);
-        }
-        else{
-            distance = euclidean_distance(query, train_data[i]);
-        }
-
-        distances.push_back({distance, i});
-    }
-
-    std::sort(distances.begin(), distances.end());
-
-    float score = 0;
-    for (int i = 0; i < k; i++){
-        int neighbor_label = train_labels[distances[i].second];
-        score += neighbor_label;
-    }
-    score = score*1.0/k;
-
-    return score;
-}
-
 // Given a dataset of essay_id, essay and score, this function computes the feature vectors for each essay
 std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(std::vector<std::vector<std::string>>& raw_data, const int num_features){
     std::vector<std::vector<float>> data;
@@ -132,6 +101,37 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
     }
 
     return {data, labels};
+}
+
+// For a given query feature vector, this function computes the score
+float predict(const int k, const std::vector <float> &query, const std::vector <std::vector <float>> &train_data, const std::vector<float> &train_labels, const std::string metric = "euclidean"){
+    std::vector <std::pair <float, int>> distances;
+
+    for (int i = 0; i < train_data.size(); i++){
+        float distance = 0;
+        if (metric == "manhattan"){
+            distance = manhattan_distance(query, train_data[i]);
+        }
+        else if (metric == "cosine"){
+            distance = cosine_distance(query, train_data[i]);
+        }
+        else{
+            distance = euclidean_distance(query, train_data[i]);
+        }
+
+        distances.push_back({distance, i});
+    }
+
+    std::sort(distances.begin(), distances.end());
+
+    float score = 0;
+    for (int i = 0; i < k; i++){
+        int neighbor_label = train_labels[distances[i].second];
+        score += neighbor_label;
+    }
+    score = score*1.0/k;
+
+    return score;
 }
 
 float inference(const std::string &essay, const std::vector <std::vector <float>> &normalized_train_data, const std::vector<float> &train_labels, const int num_features, const int k, const std::string test_metric){

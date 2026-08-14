@@ -62,12 +62,12 @@ The goal of this proof is to show that if the points are linearly separable, the
 ## Usage
 
 ```
-g++ perceptron.cpp ../../../utils/csv.cpp 
+g++ perceptron.cpp ../../../utils/csv.cpp ../../../utils/metrics.cpp
 ```
 
 ## Results & Demo
 
-We now build a perceptron for the task of gender prediction using first names. Given a name, the goal is to predict whether it is a boy's or a girl's name. To do this, we first construct features from the name using:
+We use perceptron for the task of gender classification using first names. To do this, we first construct features from the name using:
 
 1) `26` unigrams
 2) `26*26` bigrams
@@ -75,24 +75,32 @@ We now build a perceptron for the task of gender prediction using first names. G
 4) `1` feature indicating whether the name ends with a vowel.
 5) `1` bias term
 
-For Indian names, especially North Indian names, many girl names end with a vowel, while for boy names, they do not. Hence, this feature can be useful for classification.
+For Indian names, some of typical female names end in vowels. We therefore include a binary feature indicating whether the last character is a vowel. This is an example of mixing knowledge with data. However, this is very specific to our dataset and may not generalize to names from other regions. We validate the importance of these features using the validation set.
 
-The perceptron converged after 80 iterations with 89.9% accuracy on the validation set. If we don't use trigram features, the algorithm does not converge on the training set. The results on the test set are:
+| Features                     | Validation Accuracy |
+| ---------------------------- | ------------------: |
+| All features                 |           **86.8%** |
+| Without trigrams             |               76.7% |
+| Without bigrams              |               83.7% |
+| Without unigrams             |               85.2% |
+| Without vowel-ending feature |               79.0% |
+
+We observe that all features are contributing and hence we use them all for test set. The results on the test set are:
 
 ```
-Confusion Matrix: 49 7 9 64
-Accuracy: 0.875969
-Precision: 0.875
-Recall: 0.844828
+Accuracy: 0.868217
+Precision: 0.847458
+Recall: 0.862069
+F1: 0.854701
 ```
 
-We can now try running the algorithm on a few sample names:
+We can now run the model on a few names that were not present in the dataset:
 
 ```
-I am sure Prit is a boy.
-I am sure Asin is a boy.    // This is wrong
+I am sure Asin is a boy.    # This is wrong
 I am sure Raavan is a boy.
 I am sure Mandodari is a girl.
+I am sure Prabhas is a boy.
 I am sure Zooni is a girl.
 I am sure Chandanbala is a girl.
 ```

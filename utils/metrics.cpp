@@ -32,3 +32,44 @@ RegressionMetrics get_regression_metrics(const std::vector <float> &predictions,
 
     return regression_metrics;
 }
+
+ClassificationMetrics get_classification_metrics(const std::vector <float> &predictions, const std::vector <float> &true_labels){
+    // We denote positive class as 1 and negative class as -1
+    // Hence, precison, recall and f1 are with respect to positive class
+    int tp = 0;
+    int fp = 0;
+    int fn = 0;
+    int tn = 0;
+
+    for (int i = 0; i < predictions.size(); i++){
+        if (predictions[i] == true_labels[i]){
+            if (predictions[i] == 1){
+                tp ++;
+            }
+            else{
+                tn ++;
+            }
+        }
+        else{
+            if (predictions[i] == 1){
+                fp ++;
+            }
+            else{
+                fn ++;
+            }
+        }
+    }
+
+    float accuracy = (tp + tn)*1.0 / (tp + tn + fp + fn);
+    float precision = (tp)*1.0 / (tp + fp);
+    float recall = (tp)*1.0 / (tp + fn);
+    float f1 = (2*precision*recall) / (precision + recall);
+
+    ClassificationMetrics classification_metrics;
+    classification_metrics.accuracy = accuracy;
+    classification_metrics.precision = precision;
+    classification_metrics.recall = recall;
+    classification_metrics.f1 = f1;
+
+    return classification_metrics;
+}

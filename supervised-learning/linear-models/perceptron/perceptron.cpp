@@ -1,4 +1,5 @@
 #include "../../../utils/csv.hpp"
+#include "../../../utils/metrics.hpp"
 
 bool is_vowel(const char c){
     const std::string vowels = "aeiou";
@@ -10,9 +11,9 @@ bool is_vowel(const char c){
     return false;
 }
 
-std::pair<std::vector<std::vector<float>>, std::vector<int>> extract_features(std::vector<std::vector<std::string>>& raw_data, const int num_features){
+std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(std::vector<std::vector<std::string>>& raw_data, const int num_features){
     std::vector<std::vector<float>> data;
-    std::vector<int> labels;
+    std::vector<float> labels;
 
     for (int i = 0; i < raw_data.size(); i++){
         std::vector<float> row (num_features);
@@ -72,7 +73,7 @@ std::pair<std::vector<std::vector<float>>, std::vector<int>> extract_features(st
     return {data, labels};
 }
 
-std::vector <int> fit(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, std::vector <float> &weights, const int max_iters){
+std::vector <int> fit(const std::vector<std::vector<float>> &data, const std::vector<float> &labels, std::vector <float> &weights, const int max_iters){
     std::vector <int> all_misclassifications;
     bool is_converged = false;
 
@@ -99,72 +100,29 @@ std::vector <int> fit(const std::vector<std::vector<float>> &data, const std::ve
         }
 
         if (misclassifications == 0){
-            std::cout << "Perceptron converged at iteration " << i << std::endl;
+            std::cout << "Perceptron converged at iteration " << i << std::endl << std::endl;
             is_converged = true;
             break;
         }
     }
 
     if (!is_converged){
-        std::cout << "Perceptron did not converge." << std::endl;
+        std::cout << "Perceptron did not converge." << std::endl << std::endl;
     }
 
     return all_misclassifications;
 }
 
-void evaluate(const std::vector<std::vector<float>> &data, const std::vector<int> &labels, const std::vector <float> &weights){
-    std::vector<int> preds;
+float predict(const std::vector<float> &query, const std::vector <float> &weights){
+    const std::vector<float>& data_point = query;
+    float dot = std::inner_product(weights.begin(), weights.end(), data_point.begin(), 0.0f);
 
-    for (int i = 0; i < data.size(); i++){
-        const std::vector<float>& data_point = data[i];
-        float dot = std::inner_product(weights.begin(), weights.end(), data_point.begin(), 0.0f);
-
-        if (dot >= 0){
-            preds.push_back(1);
-        }
-        else{
-            preds.push_back(-1);
-        }
+    if (dot >= 0){
+        return 1;
     }
-
-    std::array<std::array<int, 2>, 2> confusion_matrix{};    // This will be [[TP, FP], [FN, TN]]
-    int TP = 0;
-    int FP = 0;
-    int FN = 0;
-    int TN = 0;
-    for (int i = 0; i < labels.size(); i++){
-        if (labels[i] == 1){
-            if (preds[i] == 1){
-                TP += 1;
-            }
-            else{
-                FN += 1;
-            }
-        }
-        else{
-            if (preds[i] == -1){
-                TN += 1;
-            }
-            else{
-                FP += 1;
-            }
-        }
+    else{
+        return -1;
     }
-    confusion_matrix[0][0] = TP;
-    confusion_matrix[1][0] = FN;
-    confusion_matrix[0][1] = FP;
-    confusion_matrix[1][1] = TN;
-
-    float accuracy = (TP + TN)*1.0 / (TP + FP + FN + TN);
-    float precision = TP*1.0 / (TP + FP);
-    float recall = TP*1.0 / (TP + FN);
-    float f1 = 2*precision*recall / (precision + recall);
-
-    std::cout << "Confusion Matrix: " << confusion_matrix[0][0] << " " << confusion_matrix[0][1] << " " << confusion_matrix[1][0] << " " << confusion_matrix[1][1] << std::endl;
-    std::cout << "Accuracy: " << accuracy << std::endl;
-    std::cout << "Precision: " << precision << std::endl;
-    std::cout << "Recall: " << recall << std::endl;
-    std::cout << "F1: " << f1 << std::endl;
 }
 
 void inference(const std::vector<std::string> names, const std::vector <float> &weights, int num_features){
@@ -179,7 +137,7 @@ void inference(const std::vector<std::string> names, const std::vector <float> &
 
     auto feature_result = extract_features(dummy_data, num_features);
     std::vector<std::vector<float>> data = feature_result.first;
-    std::vector<int> labels = feature_result.second;
+    std::vector<float> labels = feature_result.second;
 
     for (int i = 0; i < data.size(); i++){
         const std::vector<float>& data_point = data[i];
@@ -207,7 +165,7 @@ int main(){
     // Extracting features from raw dataset
     auto feature_result = extract_features(raw_data, num_features);
     std::vector<std::vector<float>> data = feature_result.first;
-    std::vector<int> labels = feature_result.second;
+    std::vector<float> labels = feature_result.second;
     
     // // Printing a sample data point
     // for (int i = 0; i < data[0].size(); i++){
@@ -217,29 +175,47 @@ int main(){
 
     float val_ratio = 0.1;
     float test_ratio = 0.1;
-    std::vector<std::pair<std::vector <std::vector <float>>, std::vector<int>>> splits = split_data(data, labels, val_ratio, test_ratio);
+    std::vector<std::pair<std::vector <std::vector <float>>, std::vector<float>>> splits = split_data(data, labels, val_ratio, test_ratio);
 
     std::vector<std::vector<float>> train_data = splits[0].first;
-    std::vector<int> train_labels = splits[0].second;
+    std::vector<float> train_labels = splits[0].second;
     std::vector<std::vector<float>> val_data = splits[1].first;
-    std::vector<int> val_labels = splits[1].second;
+    std::vector<float> val_labels = splits[1].second;
     std::vector<std::vector<float>> test_data = splits[2].first;
-    std::vector<int> test_labels = splits[2].second;
+    std::vector<float> test_labels = splits[2].second;
 
     std::cout << "Train data: " << train_data.size() << std::endl;
     std::cout << "Val data: " << val_data.size() << std::endl;
-    std::cout << "Test data: " << test_data.size() << std::endl;
+    std::cout << "Test data: " << test_data.size() << std::endl << std::endl;
 
     int max_iters = 1000;
     std::vector <int> all_misclassifications = fit(train_data, train_labels, weights, max_iters);
 
-    std::cout << "Validating" << std::endl;
-    evaluate(val_data, val_labels, weights);    // Validation
+    // Validation for feature selection over val data
+    // For validating, we can simply comment out snippets of unigram, bigram, or trigram
+    // std::vector <float> predictions (val_data.size());
+    // for (int i = 0; i < predictions.size(); i++){
+    //     predictions[i] = predict(val_data[i], weights);
+    // }
+    // ClassificationMetrics val_classification_metrics = get_classification_metrics(predictions, val_labels);
+    // std::cout << "Accuracy: " << val_classification_metrics.accuracy << std::endl;
+    // std::cout << "Precision: " << val_classification_metrics.precision << std::endl;
+    // std::cout << "Recall: " << val_classification_metrics.recall << std::endl;
+    // std::cout << "F1: " << val_classification_metrics.f1 << std::endl << std::endl;
 
+    // Testing
     std::cout << "Testing" << std::endl;
-    evaluate(test_data, test_labels, weights);    // Testing
+    std::vector <float> predictions (test_data.size());
+    for (int i = 0; i < predictions.size(); i++){
+        predictions[i] = predict(test_data[i], weights);
+    }
+    ClassificationMetrics test_classification_metrics = get_classification_metrics(predictions, test_labels);
+    std::cout << "Accuracy: " << test_classification_metrics.accuracy << std::endl;
+    std::cout << "Precision: " << test_classification_metrics.precision << std::endl;
+    std::cout << "Recall: " << test_classification_metrics.recall << std::endl;
+    std::cout << "F1: " << test_classification_metrics.f1 << std::endl << std::endl;
 
-    std::vector <std::string> names = {"Prit", "Asin", "Raavan", "Mandodari", "Zooni", "Chandanbala"};
+    std::vector <std::string> names = {"Asin", "Raavan", "Mandodari", "Prabhas", "Zooni", "Chandanbala"};
     inference(names, weights, num_features);
 
     return 0;
