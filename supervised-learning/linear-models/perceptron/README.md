@@ -18,7 +18,7 @@
 
 ## Introduction
 
-The perceptron is one of the earliest linear classification algorithms. Linear classifiers assume that there exists a hyperplane that can separate the data into different classes. The goal of the perceptron is therefore to learn a hyperplane $w^T x + b = 0$ such that all the data points are correctly classified. The fact that the data can be separated using a linear hyperplane is the knowledge, while the parameters of the hyperplane are learned from the data.
+Perceptron is a linear classification algorithm. Linear classifiers assume that there exists a hyperplane that can separate the data into different classes. The goal of the perceptron is therefore to learn a hyperplane such that all the data points are correctly classified. 
 
 ## Algorithm
 
@@ -72,7 +72,7 @@ We use perceptron for the task of gender classification using first names. To do
 1) `26` unigrams
 2) `26*26` bigrams
 3) `26*26*26` trigrams
-4) `1` feature indicating whether the name ends with a vowel.
+4) `1` feature indicating whether the name ends with a vowel or not
 5) `1` bias term
 
 For Indian names, some of typical female names end in vowels. We therefore include a binary feature indicating whether the last character is a vowel. This is an example of mixing knowledge with data. However, this is very specific to our dataset and may not generalize to names from other regions. We validate the importance of these features using the validation set.

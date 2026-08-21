@@ -19,13 +19,11 @@
 
 KNN assumes that data points that are close to each other in the feature space are likely to have similar labels. So when we get a new point, we assign it a label similar to its nearest neighbors.
 
-But this assumption does not always work. In some datasets, the relationship between features and target values is not based on how close the points are. For example, in geopolitics, neighboring countries often do not share the same interests. They might even be opposed to each other. In this case, the KNN idea that countries in the same region have similar policies might not hold.
-
 ## Algorithm
 
-The KNN Algorithm simply looks for the K nearest neighbors, picks their label, and assigns it to the target point. For classification, we can use the majority. For regression, output can be average of all neighbor values. The KNN algorithm is only as good as its distance metric. The distance metric should be such that it captures the similarity between instances appropriately. 
+The KNN Algorithm simply looks for the K nearest neighbors, aggregates their label, and assigns it to the target point. 
 
-Some commonly used metrics are as follows:-
+he KNN algorithm is only as good as its distance metric. The distance metric should be such that it captures the similarity between instances appropriately. Some commonly used metrics are as follows:-
 
 1. Minkowski Distance: This is a generalized distance metric that includes Manhattan (p=1), Euclidean (p=2), and Chebyshev (p=infinity) as special cases. It is defined as:
 
@@ -35,21 +33,26 @@ Some commonly used metrics are as follows:-
 
 The choice of distance metric depends on the amount of penalty one wants to assign to differences in each dimension. If p is lower, say 1, then the metric is less sensitive to outliers and treats each dimension equally. If p is higher, say infinity, then it is sensitive to outliers in any single dimension.
 
-Consider analyzing user behavior on an e-learning platform, with features like number of quizzes taken, videos watched, time spent reading, and forum activity. These actions are independent and contribute additively to overall engagement. Manhattan distance is better here as it effectively captures similarity in such multi-faceted user behavior without letting one large difference dominate. Similarly, Chebyshev distance (p=infinity) can be used when one dimension is more important than others. For example, in medical diagnosis, a single severely abnormal symptom may be more significant than several marginally abnormal symptoms.
-
 2. Cosine Similarity: Cosine similarity measures the cosine of the angle between two vectors. It is a measure of orientation and not magnitude. Cosine similarity is commonly used as a similarity metric for text data.
 
-Once the similarity metric is defined, for any given test point, we look at its `k` nearest neighbors and take the majority vote of the classes of these neighbors for classification and average of the target values for regression. 
+Once the similarity metric is defined, for any given test point, we look at its `k` nearest neighbors and take the majority vote of the classes of these neighbors for classification or average of the target values for regression. 
 
-The choice of the parameter `k` (the number of neighbors) is crucial. A smaller ```k``` may result in a model that is sensitive to noise, while a larger ```k``` may lead to a model that is too generalized. The optimal `k` is often determined through validation methods.
+The choice of the parameter `k` (the number of neighbors) is crucial. A smaller ```k``` may result in a model that is sensitive to noise, while a larger ```k``` may lead to a model that just predicts the mean. The optimal `k` is often determined through validation methods.
+
+## Normalization
+
+KNN is a distance-based algorithm, so normalization is important. Without it, features with larger scales or variance can dominate the distance calculation. We use standardization so that each feature has approximately mean  of 0 and variance of 1.
+
+If we have prior knowledge that certain features should have more influence, we can assign them higher weights when calculating the distance.
+
 
 ## Curse of Dimensionality in KNNs
 
 <img src="../../../assets/img/knn/curseofdimensionality.png" alt="curse-of-dimensionality">
 
-KNNs are based on the assumption that data points close together in the feature space are more likely to belong to the same category. However, as the number of features increases, this assumption can break down due to the curse of dimensionality. In high-dimensional spaces with few data points (sparse data), identifying the true nearest neighbors becomes challenging.
+Distance-based algorithms like KNN are sensitive to the curse of dimensionality. As the number of features increases, the space grows exponentially, requiring exponentially more data to keep it sufficiently populated.
 
-One consequence of this challenge is that the nearest neighbor found by the algorithm might not truly be a neighbor in the meaningful sense. In reality, it could be far from the test point, appearing close only due to the sparseness of the data. Consequently, the core assumption of KNN that nearby points are similar becomes meaningless in such scenarios.
+In high dimensions, the nearest neighbor found by KNN may not be a meaningful neighbor. It could simply be an far unrelated point that was choosen because the data was sparse. This breaks the core assumption of KNN that nearby points are similar.
 
 In these cases, algorithms like the perceptron may be more suitable for classification tasks. The perceptron, for instance, can handle higher dimensions more gracefully and is less affected by the curse of dimensionality.
 

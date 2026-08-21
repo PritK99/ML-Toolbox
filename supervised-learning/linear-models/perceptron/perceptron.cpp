@@ -1,3 +1,11 @@
+/*
+We consider the following features from a name
+
+1. 26 unigrams
+2. 26*26 bigrams
+3. 26*26*26 trigrams
+4. 1 feature indicating whether the name ends with a vowel or not.
+*/
 #include "../../../utils/csv.hpp"
 #include "../../../utils/metrics.hpp"
 
