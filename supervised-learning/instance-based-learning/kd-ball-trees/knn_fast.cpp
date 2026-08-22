@@ -16,6 +16,7 @@ There are many other statistical features we can think of, such as variance in w
 #include "../../../utils/csv.hpp"
 #include "../../../utils/distances.hpp"
 #include "../../../utils/metrics.hpp"
+#include "kd.hpp"
 #include <cctype>
 #include <utility>
 #include <algorithm>
@@ -67,19 +68,21 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
 
             // Detecting sentence boundaries
             if (essay[j] == '.' || essay[j] == '?' || essay[j] == '!'){    // We only consider the common possibilities
-                num_sentences ++;
+                if (j == essay.size() - 1 || essay[j+1] == '"' || essay[j+1] == ' '){
+                    num_sentences ++; 
 
-                if (num_words_in_curr_sentence < 10){
-                    num_short_sentences ++;
-                }
-                else if (num_words_in_curr_sentence < 20){
-                    num_medium_sentences ++;
-                }
-                else{
-                    num_long_sentences ++;
-                }
+                    if (num_words_in_curr_sentence < 10){
+                        num_short_sentences ++;
+                    }
+                    else if (num_words_in_curr_sentence < 20){
+                        num_medium_sentences ++;
+                    }
+                    else{
+                        num_long_sentences ++;
+                    }
 
-                num_words_in_curr_sentence = 0;
+                    num_words_in_curr_sentence = 0;
+                }
             }
         }
 
@@ -88,19 +91,10 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
         row[1] = num_short_words;
         row[2] = num_medium_words;
         row[3] = num_long_words;
-
-        if (num_sentences == 0){
-            num_sentences = 1;
-            row[4] = 1;    // A few essays don't use punctuation at all
-        }
-        else{
-            row[4] = num_sentences;
-        }
-
+        row[4] = num_sentences;
         row[5] = num_short_sentences;
         row[6] = num_medium_sentences;
         row[7] = num_long_sentences;
-
         row[8] = num_words*1.0 / num_sentences;
 
         data.push_back(row);
@@ -110,56 +104,6 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
     return {data, labels};
 }
 
-// For a given query feature vector, this function computes the score
-float predict(const int k, const std::vector <float> &query, const std::vector <std::vector <float>> &train_data, const std::vector<float> &train_labels, const std::string metric = "euclidean"){
-    std::vector <std::pair <float, int>> distances;
-
-    for (int i = 0; i < train_data.size(); i++){
-        float distance = 0;
-        if (metric == "manhattan"){
-            distance = manhattan_distance(query, train_data[i]);
-        }
-        else if (metric == "cosine"){
-            distance = cosine_distance(query, train_data[i]);
-        }
-        else{
-            distance = euclidean_distance(query, train_data[i]);
-        }
-
-        distances.push_back({distance, i});
-    }
-
-    std::sort(distances.begin(), distances.end());
-
-    float score = 0;
-    for (int i = 0; i < k; i++){
-        int neighbor_label = train_labels[distances[i].second];
-        score += neighbor_label;
-    }
-    score = score*1.0/k;
-
-    return score;
-}
-
-float inference(const std::string &essay, const std::vector <std::vector <float>> &normalized_train_data, const std::vector<float> &train_labels, const std::vector <float> &mean, const std::vector <float> &std_dev, const int num_features, const int k, const std::string test_metric){
-    std::vector <std::vector <std::string>> inference_data;
-    
-    std::string dummy_essay1_id = "0";    // We need this dummy values because of the way extract_features is defined
-    std::string dummy_score = "0";
-
-    std::vector <std::string> inference_point = {dummy_essay1_id, essay, dummy_score};
-    inference_data.push_back(inference_point);
-
-    auto feature_result = extract_features(inference_data, num_features);
-    std::vector<std::vector<float>> data = feature_result.first;
-    std::vector<float> labels = feature_result.second;
-
-    std::vector<std::vector<float>> normalized_data = normalize_data(data, mean, std_dev);
-
-    float prediction = predict(k, normalized_data[0], normalized_train_data, train_labels, test_metric);
-
-    return prediction;
-}
 
 int main(){
     std::string csv_path = "../../../data/essays.csv";
@@ -201,48 +145,10 @@ int main(){
     std::cout << "Val data: " << normalized_val_data.size() << std::endl;
     std::cout << "Test data: " << normalized_test_data.size() << std::endl << std::endl;
 
-    // Validation for tuning K and distance metric
-    // int k_min = 21;
-    // int k_max = 41;
-    // std::vector <std::string> metrics = {"manhattan", "euclidean", "cosine"};
-
-    // for (int i = 0; i < metrics.size(); i++){
-    //     for (int k = k_min; k <= k_max; k += 2){    // This is just 3, 7, ... k_max
-    //         std::string metric = metrics[i];
-    //         std::cout << "Evaluating K = " << k << " using " << metric << "." << std::endl;
-
-    //         std::vector <float> predictions (normalized_val_data.size());
-    //         for (int j = 0; j < predictions.size(); j++){
-    //             predictions[j] = predict(k, normalized_val_data[j], normalized_train_data, train_labels, metric);
-    //         }
-
-    //         RegressionMetrics val_regression_metrics = get_regression_metrics(predictions, val_labels);
-    //         std::cout << "MAE: " << val_regression_metrics.mae << std::endl;
-    //         std::cout << "RMSE: " << val_regression_metrics.rmse << std::endl;
-    //         std::cout << "R2: " << val_regression_metrics.r2 << std::endl << std::endl;
-    //     }
-    // }
-
-    // Testing
-    std::string test_metric = "euclidean";
-    int test_k = 33;
-    std::cout << "Testing" << std::endl;
-
-    std::vector <float> predictions (normalized_test_data.size());
-    for (int j = 0; j < predictions.size(); j++){
-        predictions[j] = predict(test_k, normalized_test_data[j], normalized_train_data, train_labels, test_metric);
-    }
-
-    RegressionMetrics test_regression_metrics = get_regression_metrics(predictions, test_labels);
-    std::cout << "MAE: " << test_regression_metrics.mae << std::endl;
-    std::cout << "RMSE: " << test_regression_metrics.rmse << std::endl;
-    std::cout << "R2: " << test_regression_metrics.r2 << std::endl << std::endl;
-
-    // Now, we run the model on our essay
-    std::string my_essay1 = "This is a test essay. Lets see where it goes! This is a poem from the family guy. Oh, squiggly line in my eye fluid, I see you lurking there on the periphery of my vision. But when I try to look at you, you scurry away. Are you shy, squiggly line? Why only when I ignore you, do you return to the center of my eye? Oh, squiggly line, it's alright, you are forgiven.";
-
-    float score = inference(my_essay1, normalized_train_data, train_labels, mean, std_dev, num_features, test_k, test_metric);
-    std::cout << "Your essay score is: " << score << std::endl; 
+    int min_samples_per_node = 30;
+    Node* root = new Node();
+    root->data = normalized_train_data;
+    build_kd_tree(root, min_samples_per_node);
 
     return 0;
 }

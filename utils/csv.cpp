@@ -99,11 +99,8 @@ std::vector<std::pair<std::vector <std::vector <float>>, std::vector<float>>> sp
     return splits;
 }
 
-std::vector <std::vector <std::vector <float>>> normalize_data(const std::vector <std::vector <float>> &train_data, const std::vector <std::vector <float>> &val_data, const std::vector <std::vector <float>> &test_data){
-    std::vector <std::vector <float>> normalized_train_data;
-    std::vector <std::vector <float>> normalized_val_data;
-    std::vector <std::vector <float>> normalized_test_data;
-
+// This function returns the mean and standard deviation for all features in the dataset
+std::pair <std::vector <float>, std::vector <float>> compute_normalization_stats(const std::vector <std::vector <float>> &train_data){
     int num_features = train_data[0].size();
     std::vector <float> mean (num_features); 
     std::vector <float> std_dev (num_features);
@@ -130,45 +127,24 @@ std::vector <std::vector <std::vector <float>>> normalize_data(const std::vector
         std_dev[j] /= train_data.size();
         std_dev[j] = std::pow(std_dev[j], 0.5);
     }
-    
+
+    return {mean, std_dev};
+}
+
+std::vector <std::vector <float>> normalize_data(const std::vector <std::vector <float>> &unnormalized_data, const std::vector <float> &mean, const std::vector <float> &std_dev){
+    std::vector <std::vector <float>> normalized_data;
+
     // Normalizing
-    for (int i = 0; i < train_data.size(); i++){
-        std::vector <float> data_point = train_data[i];
-        for (int j = 0; j < num_features; j++){
+    for (int i = 0; i < unnormalized_data.size(); i++){
+        std::vector <float> data_point = unnormalized_data[i];
+        for (int j = 0; j < unnormalized_data[0].size(); j++){
             if (std_dev[j] != 0){
                 data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
             }
         }
 
-        normalized_train_data.push_back(data_point);
+        normalized_data.push_back(data_point);
     }
-
-    for (int i = 0; i < val_data.size(); i++){
-        std::vector <float> data_point = val_data[i];
-        for (int j = 0; j < num_features; j++){
-            if (std_dev[j] != 0){
-                data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
-            }
-        }
-
-        normalized_val_data.push_back(data_point);
-    }
-
-    for (int i = 0; i < test_data.size(); i++){
-        std::vector <float> data_point = test_data[i];
-        for (int j = 0; j < num_features; j++){
-            if (std_dev[j] != 0){
-                data_point[j] = (data_point[j]  - mean[j]) / std_dev[j];
-            }
-        }
-
-        normalized_test_data.push_back(data_point);
-    }
-
-    std::vector <std::vector <std::vector <float>>> normalized_data;
-    normalized_data.push_back(normalized_train_data);
-    normalized_data.push_back(normalized_val_data);
-    normalized_data.push_back(normalized_test_data);
 
     return normalized_data;
 }

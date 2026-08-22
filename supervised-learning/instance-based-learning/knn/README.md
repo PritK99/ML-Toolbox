@@ -48,7 +48,9 @@ If we have prior knowledge that certain features should have more influence, we 
 
 ## Curse of Dimensionality in KNNs
 
+<p align="center">
 <img src="../../../assets/img/knn/curseofdimensionality.png" alt="curse-of-dimensionality">
+</p>
 
 Distance-based algorithms like KNN are sensitive to the curse of dimensionality. As the number of features increases, the space grows exponentially, requiring exponentially more data to keep it sufficiently populated.
 
@@ -68,17 +70,17 @@ g++ knn.cpp ../../../utils/csv.cpp ../../../utils/distances.cpp ../../../utils/m
 
 ## Results & Demo
 
-We split the data in 80:10:10 ratio, and obtain the following results on the test set.
+We split the data in 80:10:10 ratio, and find `K = 33` with euclidean distance to be optimal for validation set. Using same configuration, we obtain the following results on the test set.
 
 ```
-MAE: 0.541427
-RMSE: 0.708649
-R2: 0.530219
+MAE: 0.523629
+RMSE: 0.685546
+R2: 0.5643
 ```
 
-Since essay scores range from 1 to 6, the MAE of `0.54` indicates that, on average, our model's predictions differ from the actual essay scores by approximately 0.54 points on the 1–6 scoring scale. The R² score of `0.53` is an okay score, which is surprisingly high since we never accounted for punctuations, flow, content etc.
+Since essay scores range from 1 to 6, the MAE of `0.52` indicates that, on average, our model's predictions differ from the actual essay scores by approximately `0.52` points on the 1–6 scoring scale. The R² score of `0.56` is an okay score, which is surprisingly high since we never accounted for punctuations, flow, content etc.
 
-We also run the model on our essay, which achieves a score of `4.73`: 
+We also run the model on our essay, which achieves a score of `1.82`: 
 
 `This is a test essay. Lets see where it goes! This is a poem from the family guy. Oh, squiggly line in my eye fluid, I see you lurking there on the periphery of my vision. But when I try to look at you, you scurry away. Are you shy, squiggly line? Why only when I ignore you, do you return to the center of my eye? Oh, squiggly line, it's alright, you are forgiven.`
 

@@ -13,6 +13,7 @@
 
 std::pair<std::vector <std::string>, std::vector <std::vector <std::string>>> read_csv(const std::string& csv_path);
 std::vector<std::pair<std::vector <std::vector <float>>, std::vector<float>>> split_data(std::vector <std::vector <float>>& data, std::vector<float> &labels, const float val_ratio, const float test_ratio);
-std::vector <std::vector <std::vector <float>>> normalize_data(const std::vector <std::vector <float>> &train_data, const std::vector <std::vector <float>> &val_data, const std::vector <std::vector <float>> &test_data);
+std::pair <std::vector <float>, std::vector <float>> compute_normalization_stats(const std::vector <std::vector <float>> &train_data);
+std::vector <std::vector <float>> normalize_data(const std::vector <std::vector <float>> &unnormalized_data, const std::vector <float> &mean, const std::vector <float> &std_dev);
 
 #endif
