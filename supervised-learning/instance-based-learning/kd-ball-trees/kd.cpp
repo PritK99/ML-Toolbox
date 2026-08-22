@@ -97,11 +97,19 @@ std::pair <Node*, Node*> split_node(Node* curr_node){
     right_node->parent = curr_node;
     curr_node->right = right_node;
 
+    if (left_node->data.empty() || right_node->data.empty()){
+        delete left_node;
+        delete right_node;
+        curr_node->left = NULL;
+        curr_node->right = NULL;
+        return {NULL, NULL};
+    }
+
     return {left_node, right_node};
 }
 
 void build_kd_tree(Node* curr_node, const int min_samples_per_node){
-    if (curr_node->data.size() <= min_samples_per_node){
+    if (curr_node == NULL || curr_node->data.size() <= min_samples_per_node){
         return;    // This is the stopping criteria
     }
 
@@ -111,4 +119,29 @@ void build_kd_tree(Node* curr_node, const int min_samples_per_node){
     
     build_kd_tree(left_child, min_samples_per_node);    // We recursively build the KD tree
     build_kd_tree(right_child, min_samples_per_node);
+}
+
+void traverse_tree(const std::vector <float> &query, const Node* curr_node, std::vector <std::vector <float>> &neighbors){
+    if (curr_node == NULL){    // If root itself is NULL
+        return;
+    }
+
+    if (curr_node->left == NULL || curr_node->right == NULL){    // This is a leaf node
+         
+    }
+    else{
+        if (query[curr_node->split_dim] >= curr_node->split_val){
+            traverse_tree(curr_node->right);
+        }
+    }
+
+    
+
+    if (curr_node->left != NULL){
+        traverse_tree(curr_node->left);
+        traverse_tree(curr_node->right);
+    }
+    else{    // It is a leaf node
+        std::cout << curr_node->data.size() << std::endl;
+    }
 }

@@ -68,21 +68,19 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
 
             // Detecting sentence boundaries
             if (essay[j] == '.' || essay[j] == '?' || essay[j] == '!'){    // We only consider the common possibilities
-                if (j == essay.size() - 1 || essay[j+1] == '"' || essay[j+1] == ' '){
-                    num_sentences ++; 
+                num_sentences ++;
 
-                    if (num_words_in_curr_sentence < 10){
-                        num_short_sentences ++;
-                    }
-                    else if (num_words_in_curr_sentence < 20){
-                        num_medium_sentences ++;
-                    }
-                    else{
-                        num_long_sentences ++;
-                    }
-
-                    num_words_in_curr_sentence = 0;
+                if (num_words_in_curr_sentence < 10){
+                    num_short_sentences ++;
                 }
+                else if (num_words_in_curr_sentence < 20){
+                    num_medium_sentences ++;
+                }
+                else{
+                    num_long_sentences ++;
+                }
+
+                num_words_in_curr_sentence = 0;
             }
         }
 
@@ -91,10 +89,19 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
         row[1] = num_short_words;
         row[2] = num_medium_words;
         row[3] = num_long_words;
-        row[4] = num_sentences;
+
+        if (num_sentences == 0){
+            num_sentences = 1;
+            row[4] = 1;    // A few essays don't use punctuation at all
+        }
+        else{
+            row[4] = num_sentences;
+        }
+
         row[5] = num_short_sentences;
         row[6] = num_medium_sentences;
         row[7] = num_long_sentences;
+
         row[8] = num_words*1.0 / num_sentences;
 
         data.push_back(row);
@@ -103,7 +110,6 @@ std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(
 
     return {data, labels};
 }
-
 
 int main(){
     std::string csv_path = "../../../data/essays.csv";
@@ -145,10 +151,12 @@ int main(){
     std::cout << "Val data: " << normalized_val_data.size() << std::endl;
     std::cout << "Test data: " << normalized_test_data.size() << std::endl << std::endl;
 
-    int min_samples_per_node = 30;
+    int min_samples_per_node = 100;
     Node* root = new Node();
     root->data = normalized_train_data;
     build_kd_tree(root, min_samples_per_node);
+
+    traverse_tree(root);
 
     return 0;
 }

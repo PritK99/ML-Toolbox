@@ -30,5 +30,6 @@ int find_split_dimension(const std::vector <std::vector <float>> &data);
 std::pair <std::vector <std::vector <float>>, std::vector <std::vector <float>>> split_data(const int split_dim, const float split_value, const std::vector <std::vector <float>> &data);
 std::pair <Node*, Node*> split_node(Node* curr_node);
 void build_kd_tree(Node* curr_node, const int min_samples_per_node);
+void traverse_tree(const Node* curr_node);
 
 #endif
