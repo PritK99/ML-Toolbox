@@ -73,6 +73,7 @@ g++ knn.cpp ../../../utils/csv.cpp ../../../utils/distances.cpp ../../../utils/m
 We split the data in 80:10:10 ratio, and find `K = 33` with euclidean distance to be optimal for validation set. Using same configuration, we obtain the following results on the test set.
 
 ```
+Time taken to run KNN over test set: 12065 ms
 MAE: 0.523629
 RMSE: 0.685546
 R2: 0.5643
@@ -83,4 +84,3 @@ Since essay scores range from 1 to 6, the MAE of `0.52` indicates that, on avera
 We also run the model on our essay, which achieves a score of `1.82`: 
 
 `This is a test essay. Lets see where it goes! This is a poem from the family guy. Oh, squiggly line in my eye fluid, I see you lurking there on the periphery of my vision. But when I try to look at you, you scurry away. Are you shy, squiggly line? Why only when I ignore you, do you return to the center of my eye? Oh, squiggly line, it's alright, you are forgiven.`
-

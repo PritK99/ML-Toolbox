@@ -6,13 +6,15 @@ We choose the 0th data point and find the index that has maximum difference in v
 Then we repeat the same for this newly found index
 We loosely get the extremas, and now subtracting them gives us spread 
 */
-int find_split_dimension(const std::vector <std::vector <float>> &data){
+namespace KD{
+
+int find_split_dimension(const std::vector <Point> &data){
     int split_dimension = 0;
     float spread = 0;
-    for (int i = 0; i < data[0].size(); i++){
+    for (int i = 0; i < data[0].feature_vector.size(); i++){
         std::vector <float> values;
         for (int j = 0; j < data.size(); j++){
-            values.push_back(data[j][i]);
+            values.push_back(data[j].feature_vector[i]);
         }
 
         float curr_value = values[0];
@@ -45,11 +47,11 @@ int find_split_dimension(const std::vector <std::vector <float>> &data){
     return split_dimension;
 }
 
-float find_split_value(const int feature_dimension, const std::vector <std::vector <float>> &data){
+float find_split_value(const int feature_dimension, const std::vector <Point> &data){
     std::vector <float> values;
 
     for (int i = 0; i < data.size(); i++){
-        values.push_back(data[i][feature_dimension]);
+        values.push_back(data[i].feature_vector[feature_dimension]);
     }
 
     std::sort(values.begin(), values.end());
@@ -60,16 +62,22 @@ float find_split_value(const int feature_dimension, const std::vector <std::vect
     return split_value;
 }
 
-std::pair <std::vector <std::vector <float>>, std::vector <std::vector <float>>> split_data(const int split_dim, const float split_value, const std::vector <std::vector <float>> &data){
-    std::vector <std::vector <float>> left;
-    std::vector <std::vector <float>> right;
+std::pair <std::vector <Point>, std::vector <Point>> split_data(const int split_dim, const float split_value, const std::vector <Point> &data){
+    std::vector <Point> left;
+    std::vector <Point> right;
 
     for (int i = 0; i < data.size(); i++){
-        if (data[i][split_dim] >= split_value){
-            right.push_back(data[i]);
+        if (data[i].feature_vector[split_dim] >= split_value){
+            Point p;
+            p.feature_vector = data[i].feature_vector;
+            p.label = data[i].label;
+            right.push_back(p);
         }
         else{
-            left.push_back(data[i]);
+            Point p;
+            p.feature_vector = data[i].feature_vector;
+            p.label = data[i].label;
+            left.push_back(p);
         }
     }
 
@@ -84,8 +92,8 @@ std::pair <Node*, Node*> split_node(Node* curr_node){
     curr_node->split_val = split_val;
 
     auto data_splits = split_data(split_dim, split_val, curr_node->data);
-    std::vector <std::vector <float>> left_data = data_splits.first;
-    std::vector <std::vector <float>> right_data = data_splits.second;
+    std::vector <Point> left_data = data_splits.first;
+    std::vector <Point> right_data = data_splits.second;
 
     Node* left_node = new Node();
     left_node->data = left_data;
@@ -108,7 +116,7 @@ std::pair <Node*, Node*> split_node(Node* curr_node){
     return {left_node, right_node};
 }
 
-void build_kd_tree(Node* curr_node, const int min_samples_per_node){
+void build_tree(Node* curr_node, const int min_samples_per_node){
     if (curr_node == NULL || curr_node->data.size() <= min_samples_per_node){
         return;    // This is the stopping criteria
     }
@@ -117,31 +125,64 @@ void build_kd_tree(Node* curr_node, const int min_samples_per_node){
     Node* left_child = children.first;
     Node* right_child = children.second;
     
-    build_kd_tree(left_child, min_samples_per_node);    // We recursively build the KD tree
-    build_kd_tree(right_child, min_samples_per_node);
+    build_tree(left_child, min_samples_per_node);    // We recursively build the KD tree
+    build_tree(right_child, min_samples_per_node);
 }
 
-void traverse_tree(const std::vector <float> &query, const Node* curr_node, std::vector <std::vector <float>> &neighbors){
+std::vector <Point> traverse_tree(const std::vector <float> &query, const Node* curr_node, std::vector <Point> &neighbors, int k){
     if (curr_node == NULL){    // If root itself is NULL
-        return;
+        return neighbors;
     }
 
     if (curr_node->left == NULL || curr_node->right == NULL){    // This is a leaf node
-         
+        std::vector <Point> new_neighbors;
+        std::vector <std::pair <float, Point>> new_points;
+        
+        // We need to consider each point in this leaf node
+        for (int i = 0; i < curr_node->data.size(); i++){
+            float distance = euclidean_distance(curr_node->data[i].feature_vector, query);
+            new_points.push_back({distance, curr_node->data[i]});
+        }
+        for (int i = 0; i < neighbors.size(); i++){
+            float distance = euclidean_distance(neighbors[i].feature_vector, query);
+            new_points.push_back({distance, neighbors[i]});
+        }
+
+        std::sort(new_points.begin(), new_points.end(), [](const auto& a, const auto& b){return a.first < b.first;});    // Turns out we need a comparator, otherwise the code tries to do tie breaking using Point
+
+        int limit = std::min((size_t)k, new_points.size());
+        for (int i = 0; i < limit; i++){
+            new_neighbors.push_back(new_points[i].second);
+        }
+
+        return new_neighbors;
     }
     else{
         if (query[curr_node->split_dim] >= curr_node->split_val){
-            traverse_tree(curr_node->right);
+            std::vector <Point> new_neighbors = traverse_tree(query, curr_node->right, neighbors, k);
+
+            float kth_neighbor_distance = euclidean_distance(query, new_neighbors[new_neighbors.size()-1].feature_vector);
+            float distance_to_plane = std::abs(query[curr_node->split_dim] - curr_node->split_val);
+
+            if (new_neighbors.size() < k || kth_neighbor_distance > distance_to_plane){
+                new_neighbors = traverse_tree(query, curr_node->left, new_neighbors, k);
+            }
+
+            return new_neighbors;
+        }
+        else{
+            std::vector <Point> new_neighbors = traverse_tree(query, curr_node->left, neighbors, k);
+
+            float kth_neighbor_distance = euclidean_distance(query, new_neighbors[new_neighbors.size()-1].feature_vector);
+            float distance_to_plane = std::abs(query[curr_node->split_dim] - curr_node->split_val);
+
+            if (new_neighbors.size() < k || kth_neighbor_distance > distance_to_plane){
+                new_neighbors = traverse_tree(query, curr_node->right, new_neighbors, k);
+            }
+
+            return new_neighbors;
         }
     }
+}
 
-    
-
-    if (curr_node->left != NULL){
-        traverse_tree(curr_node->left);
-        traverse_tree(curr_node->right);
-    }
-    else{    // It is a leaf node
-        std::cout << curr_node->data.size() << std::endl;
-    }
 }

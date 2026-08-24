@@ -19,6 +19,7 @@ There are many other statistical features we can think of, such as variance in w
 #include <cctype>
 #include <utility>
 #include <algorithm>
+#include <chrono>
 
 // Given a dataset of essay_id, essay and score, this function computes the feature vectors for each essay
 std::pair<std::vector<std::vector<float>>, std::vector<float>> extract_features(std::vector<std::vector<std::string>>& raw_data, const int num_features){
@@ -227,11 +228,15 @@ int main(){
     std::string test_metric = "euclidean";
     int test_k = 33;
     std::cout << "Testing" << std::endl;
-
+    auto start = std::chrono::steady_clock::now();
     std::vector <float> predictions (normalized_test_data.size());
     for (int j = 0; j < predictions.size(); j++){
         predictions[j] = predict(test_k, normalized_test_data[j], normalized_train_data, train_labels, test_metric);
     }
+    auto end = std::chrono::steady_clock::now();
+    auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+    std::cout << "Time taken to run KNN over test set: " << diff.count() << " ms" << std::endl;
 
     RegressionMetrics test_regression_metrics = get_regression_metrics(predictions, test_labels);
     std::cout << "MAE: " << test_regression_metrics.mae << std::endl;
