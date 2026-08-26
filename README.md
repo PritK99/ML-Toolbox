@@ -86,8 +86,7 @@ ML-Toolbox/
 │   │
 │   ├── 📂 instance-based-learning/
 │   │   ├── knn
-│   │   ├── kd-trees*
-│   │   └── ball-trees*
+│   │   └── kd-ball-trees
 │   │
 │   ├── 📂 tree-based-methods/
 │   │   ├── decision-trees*
@@ -106,12 +105,8 @@ ML-Toolbox/
 │       └── rnn*
 │
 ├── 📂 self-supervised-learning/     # Self Supervised Learning
-│   ├── 📂 representation-learning
-│   │    └── autoencoder
-│   │
-│   └──  📂 generative-models*
-│       ├── vae*
-│       └── diffusion*
+│   ├── autoencoder
+│   └── vae*
 │
 ├── 📂 unsupervised-learning/     # Unsupervised Learning
 │   ├── 📂 anomaly-detection*
