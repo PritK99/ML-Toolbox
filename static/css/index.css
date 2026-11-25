@@ -1,0 +1,283 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.content a { 
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 400px; Set a static height for the carousel */
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Match the static height of the carousel */
+}
+
+.carousel-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure the image fits without stretching */
+}
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.is-light { 
+  background-color: rgb(250, 250, 250) !important;
+}
+
+.zoom-container {
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.zoom-container img {
+  display: block;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.zoom-container.is-zoomed img {
+  transform: scale(2.5);
+}
+
+.subcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+/* Full-width divider + alternating tint, only on .divided sections */
+/* .section.divided {
+  border-top: 1px solid #e6e6e6;
+}
+
+.section.divided:nth-of-type(even) {
+  background-color: #f7f8fa;
+} */
+
+.footer {
+  background-color: #fff;
+  border-top: 1px solid #e6e6e6;
+}
+
+.rev {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.reveal-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.reveal-container img {
+  display: block;
+  width: 100%;
+  filter: blur(18px);
+  transform: scale(1.1);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+/* Mosaic grid overlay */
+.reveal-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+  background-size: 16px 16px;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+/* Centered label */
+.reveal-container::after {
+  content: "Hover to reveal";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.reveal-container:hover img,
+.reveal-container:focus img {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.reveal-container:hover::before,
+.reveal-container:hover::after,
+.reveal-container:focus::before,
+.reveal-container:focus::after {
+  opacity: 0;
+}
